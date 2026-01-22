@@ -31,7 +31,10 @@ This is an **educational learning workspace** for building a GPT-style Large Lan
 
 - Maintain modular structure (tokenization, model, training, evaluation)
 - Keep code clear and inspectable (educational priority)
-- Use type hints where appropriate
+- Use type hints where appropriate (strict typing in `src/` modules, relaxed in notebooks for exploration)
 - Follow PEP 8 style guide
+- Use meaningful variable names (descriptive, not abbreviated)
+- Code comments should explain the *why* of the operation, not just the *how* of the Python code
 - Document the "why" behind implementation choices
 - Prioritize clarity over performance optimizations
+- Separate reusable logic into `src/` modules where appropriate
