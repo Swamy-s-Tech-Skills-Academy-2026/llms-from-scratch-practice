@@ -9,13 +9,13 @@ on:
     branches: [main]
     paths:
       - 'src/**'
-      - 'requirements.txt'
+      - 'pyproject.toml'
       - '.github/workflows/ci-python.yml'
   pull_request:
     branches: [main]
     paths:
       - 'src/**'
-      - 'requirements.txt'
+      - 'pyproject.toml'
       - '.github/workflows/ci-python.yml'
 
 jobs:

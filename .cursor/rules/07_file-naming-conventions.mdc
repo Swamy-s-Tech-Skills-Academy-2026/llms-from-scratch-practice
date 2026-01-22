@@ -1,33 +1,32 @@
 # File Naming Conventions
 
-## Python Files (Backend)
+## Python Files
 
-- Use lowercase with underscores: `gemini_service.py`, `prompt_engine.py`
-- Keep names descriptive: `document_service.py`, `auth_routes.py`
+- Use lowercase with underscores: `tokenizer.py`, `attention.py`, `gpt.py`
+- Keep names descriptive: `model_config.py`, `training_config.py`
 - Follow existing patterns in codebase
-
-## TypeScript/React Files (Frontend)
-
-- **Components**: Use PascalCase: `EmailGenerator.tsx`, `Login.tsx`, `AdminDashboard.tsx`
-- **API Client**: Use camelCase: `apiClient.ts`
-- **Types/Interfaces**: Use PascalCase: `User.ts`, `Document.ts`
-- Keep names descriptive and clear
+- Organize by domain: `tokenization/`, `model/`, `training/`, `evaluation/`
 
 ## Documentation Files
 
-- Use descriptive names with numbering: `01_abstract.md`, `02_requirements.md`
+- Use descriptive names with numbering: `01_study_plan.md`, `01_repository-structure.md`
 - Number sequentially when order matters
 - Use hyphens for multi-word names in URLs
 
 ## Configuration Files
 
-- `config.py`: Backend configuration
-- `package.json`: Frontend dependencies
-- `requirements.txt`: Backend dependencies
+- `pyproject.toml`: Project dependencies and configuration (uv)
+- `.python-version`: Python version pin
 - `.env`: Environment variables (not committed)
-- `schema.sql`: Database schema
 
-## Database Files
+## Notebook Files
 
-- `schema.sql`: Database schema definition
-- Migration files: Use timestamp prefix: `20260108_initial_schema.sql`
+- Use descriptive names with chapter prefix: `01_ch02.ipynb`, `02_ch03.ipynb`
+- Include chapter number for organization
+- Keep notebook names clear about content
+
+## Test Files
+
+- Use `test_` prefix: `test_tokenizer.py`, `test_attention.py`
+- Mirror source structure: `tests/tokenization/test_tokenizer.py`
+- Keep test names descriptive

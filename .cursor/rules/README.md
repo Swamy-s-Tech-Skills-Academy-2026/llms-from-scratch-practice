@@ -1,8 +1,8 @@
 ---
 title: Cursor Rules Index
 version: 1.0
-last_updated: 2026-01-08
-project: GenAI Email & Report Drafting System
+last_updated: 2026-01-22
+project: LLMs From Scratch Practice (STSA 2026)
 ---
 
 # Cursor Rules

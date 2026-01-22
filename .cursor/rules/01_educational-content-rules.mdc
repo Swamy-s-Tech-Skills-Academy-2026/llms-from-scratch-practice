@@ -1,7 +1,7 @@
-# Project Rules for GenAI Email & Report Drafting System
+# Project Rules for LLMs From Scratch Practice
 
 **Version**: 1.0  
-**Last Updated**: January 8, 2026  
+**Last Updated**: January 22, 2026  
 **Priority**: MANDATORY
 
 ---
@@ -14,43 +14,42 @@
 - Ensure all references and naming match this project
 - Content must be transformative, not reformative
 - Even quotes and key principles must use original phrasing
+- Learning exercises should be independent re-implementations, not direct copies
 
 ### Code Quality
-- **Python (Backend)**: Follow PEP 8 style guide, use type hints, include comprehensive docstrings
-- **TypeScript/React (Frontend)**: Follow ESLint configuration, use strict type checking, maintain component structure
-- Maintain modular N-Tier architecture
-- Clear separation of concerns (Presentation, Application, Data, AI Service layers)
+- **Python**: Follow PEP 8 style guide, use type hints where appropriate, include comprehensive docstrings
+- Prioritize clarity and explainability over performance (educational focus)
+- Keep logic explicit and inspectable (avoid heavy abstractions)
+- Maintain modular structure as project grows
 
-### AI Integration Standards
-- Secure API key handling (environment variables only)
-- Proper error handling for Gemini API calls
-- Structured prompt engineering for consistent output
-- Input validation before API calls
+### Educational Focus
+- This is a learning workspace, not a production deployment
+- Code clarity is prioritized over raw performance
+- Every major component should be explainable
+- Document the "why" behind implementation choices
 
 ---
 
 ## 🔧 Development Guidelines
 
 ### When Adding Features
-1. Maintain N-Tier architecture separation (Frontend, Backend, Database, AI Service)
-2. Preserve type safety in TypeScript code
-3. Add comprehensive audit logging for document generation
-4. Write unit tests for both frontend and backend
-5. Update documentation in docs/ directory
+1. Maintain modular structure (tokenization, model, training, evaluation)
+2. Add comprehensive docstrings explaining concepts
+3. Write unit tests for core functionality
+4. Update documentation in docs/ directory
+5. Keep implementations inspectable and educational
 
 ### File Naming
-- **Python**: Use lowercase with underscores: gemini_service.py, prompt_engine.py
-- **TypeScript/React**: Use PascalCase for components: EmailGenerator.tsx, Login.tsx
-- **API Routes**: Use descriptive names: documents.py, auth.py
+- **Python**: Use lowercase with underscores: `tokenizer.py`, `attention.py`, `gpt.py`
 - Keep names descriptive and clear
-- Follow existing patterns
+- Follow existing patterns in the codebase
+- Organize by domain (tokenization/, model/, training/, evaluation/)
 
 ### Error Handling
 - Use proper exception handling
 - Log errors with context
-- Provide user-friendly error messages
-- Handle API failures gracefully
-- Validate all user inputs
+- Provide clear error messages for learning purposes
+- Validate inputs appropriately
 
 ---
 
@@ -60,5 +59,5 @@
 - Document all configuration options
 - Maintain usage guides in docs/ directory
 - Update technical documentation when code changes
-- Include API endpoint documentation
-- Document prompt engineering strategies
+- Include learning objectives and checkpoints
+- Document mathematical concepts and trade-offs

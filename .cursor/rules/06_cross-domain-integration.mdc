@@ -2,49 +2,51 @@
 
 ## Module Integration
 
-### Frontend → Backend
-- React components → REST API calls → Flask endpoints
-- TypeScript API client handles authentication and requests
-- JWT tokens stored in localStorage
+### Tokenization → Model
+- Tokenizer converts text to token IDs
+- Vocabulary maps tokens to integers
+- Token IDs fed into model embeddings
 
-### Backend → Database
-- Flask-SQLAlchemy ORM for database operations
-- PostgreSQL for persistent storage
-- User authentication and document history
+### Model Components
+- Embeddings (token + positional) → Transformer blocks
+- Transformer blocks (attention + feedforward) → LayerNorm
+- Stacked blocks → Output projection → Logits
 
-### Backend → AI Service
-- Flask services → Google Gemini API
-- Prompt engine constructs structured prompts
-- Error handling for API failures
+### Training → Evaluation
+- Training loop computes loss and updates weights
+- Evaluation computes metrics (perplexity, loss)
+- Generation uses trained model for text sampling
 
 ## External Dependencies
 
-### Frontend
-- React with TypeScript
-- API client libraries (fetch/axios)
+### Core Libraries
+- PyTorch: Deep learning framework
+- NumPy: Numerical computations
+- tiktoken: Tokenization utilities (optional, for reference)
 
-### Backend
-- Flask: Web framework
-- Flask-SQLAlchemy: ORM
-- Flask-JWT-Extended: JWT authentication
-- google-generativeai: Google Gemini API client
-- PostgreSQL: Database
+### Development Tools
+- pytest: Testing framework
+- black: Code formatting
+- isort: Import sorting
+- flake8: Linting
+- jupyter: Interactive notebooks
 
 ## Data Flow
 
-1. User submits email/report generation request (Frontend)
-2. Request authenticated via JWT (Backend)
-3. Prompt constructed from user input (Prompt Engine)
-4. Content generated via Google Gemini API (AI Service)
-5. Generated content stored in database (PostgreSQL)
-6. Response returned to frontend (Backend → Frontend)
-7. User views generated content (Frontend)
+1. Raw text loaded from files or datasets
+2. Text tokenized into token IDs
+3. Token IDs converted to embeddings
+4. Embeddings processed through transformer blocks
+5. Output logits computed
+6. Loss calculated (cross-entropy)
+7. Gradients computed and weights updated
+8. Model evaluated on validation set
+9. Text generated using trained model
 
-## API Integration Points
+## Learning Path Integration
 
-- `/api/auth/login`: User authentication
-- `/api/auth/register`: User registration
-- `/api/documents/email:generate`: Email generation
-- `/api/documents/report:generate`: Report generation
-- `/api/history`: Document history retrieval
-- `/api/admin/*`: Admin operations
+- **Phase 1**: Language modeling foundations
+- **Phase 2**: Tokenization (current focus)
+- **Phase 3**: Transformer architecture
+- **Phase 4**: Training loops
+- **Phase 5**: Pretraining and finetuning

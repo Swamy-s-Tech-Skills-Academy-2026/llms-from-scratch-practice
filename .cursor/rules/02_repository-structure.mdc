@@ -1,19 +1,24 @@
 # Repository Structure
 
-**Project**: GenAI Email & Report Drafting System
+**Project**: LLMs From Scratch Practice (STSA 2026)
 
-> **📖 Single Source of Truth**: For complete and up-to-date repository structure, see [docs/08_repository_structure.md](../../docs/08_repository_structure.md)
+> **📖 Single Source of Truth**: For complete and up-to-date repository structure, see [docs/01_repository-structure.md](../../docs/01_repository-structure.md)
 
 ## Quick Reference
 
 **Key Directories:**
-- `src/frontend/` - React.js with TypeScript (Presentation Layer)
-- `src/backend/` - Flask REST API (Application Layer)
-- `infra/database/` - PostgreSQL schema (Data Layer)
-- `infra/docker-compose.yml` - Docker Compose configuration
-- `docs/` - Project documentation
+- `src/` - Core implementation code (Python modules)
+- `notebooks/` - Jupyter notebooks for interactive learning
+- `docs/` - Study notes and planning documentation
+- `tests/` - Unit tests (to be created)
 
 **Key Entry Points:**
-- `src/frontend/src/main.tsx` - Frontend entry point
-- `src/backend/app.py` - Backend entry point
-- `infra/database/schema.sql` - Database initialization
+- `src/main.py` - Main entry point
+- `notebooks/ch02/01_ch02.ipynb` - Chapter 2 learning notebook
+- `pyproject.toml` - Project dependencies (uv)
+
+**Planned Structure** (as project grows):
+- `src/tokenization/` - Tokenizer implementations
+- `src/model/` - GPT/Transformer architecture
+- `src/training/` - Training loops and optimization
+- `src/evaluation/` - Metrics and analysis
