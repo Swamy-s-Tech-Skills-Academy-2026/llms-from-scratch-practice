@@ -1,3 +1,7 @@
+---
+description: Rules for creating educational content and notes
+globs: *.md, *.ipynb
+---
 # Project Rules for LLMs From Scratch Practice
 
 **Version**: 1.0  
@@ -30,6 +34,13 @@
 - Code clarity is prioritized over raw performance
 - Every major component should be explainable
 - Document the "why" behind implementation choices
+
+### Academic Integrity (Zero-Copy)
+- **Original Synthesis**: Do not copy-paste directly from textbooks or source material
+- **Citation**: If referencing a specific definition, theorem, or concept, cite the source
+- **Review Strictness**: Reviewers must reject content that appears to be direct copies or close paraphrases
+- **Concept First**: Explain the concept in Markdown before writing code
+- **Math Notation**: Use LaTeX for all mathematical expressions in notebooks (e.g., $P(x|y) = \frac{P(y|x)P(x)}{P(y)}$)
 
 ---
 

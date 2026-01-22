@@ -1,34 +1,45 @@
+---
+description: Quality assurance standards for code and notebooks
+globs: *.py, *.ipynb
+---
 # Quality Assurance
 
 ## Code Quality Checklist
 
-### Backend (Python)
+### Python Scripts (`src/`)
 - [ ] Follows PEP 8 style guide
-- [ ] Type hints where appropriate
-- [ ] Comprehensive docstrings
+- [ ] Type hints used for function arguments and return types
+- [ ] Docstrings included for all functions and classes
+- [ ] No hardcoded paths (use `pathlib` or relative paths)
 - [ ] Proper error handling
-- [ ] Unit tests written
 - [ ] No linting errors
 
-### Frontend (TypeScript/React)
-- [ ] Follows ESLint configuration
-- [ ] Strict type checking enabled
-- [ ] Component structure maintained
-- [ ] Proper error handling
-- [ ] Unit tests written
-- [ ] No TypeScript errors
+### Jupyter Notebooks (`notebooks/`)
+- [ ] **Kernel Restart & Run All** passes without errors
+- [ ] Logical flow: Import → Load Data → Process → Analyze → Visualize → Conclusion
+- [ ] No hidden state (variables defined in deleted cells)
+- [ ] Markdown cells clearly explain the steps and concepts
+- [ ] Visualizations have titles, labels, and legends
+- [ ] All cells run sequentially without errors
+- [ ] Reproducibility: Set random seeds where applicable (`np.random.seed(42)`, `torch.manual_seed(42)`)
 
 ## Testing Requirements
 
-- All modules must have unit tests (both frontend and backend)
+- All modules must have unit tests
 - Test coverage should be comprehensive
-- Integration tests for end-to-end flow
-- Backend: Run tests before committing: `pytest tests/`
-- Frontend: Run tests before committing: `npm test`
+- Run tests before committing: `uv run pytest`
+- Notebooks should be tested by running "Restart Kernel & Run All"
+
+## Content Review Checklist (Zero-Copy)
+
+- [ ] **Originality Check**: Verify that text is not a direct copy from source material
+- [ ] **Synthesis**: Ensure content represents a synthesized understanding, not just rephrasing
+- [ ] **Citations**: Check that definitions and specific claims are cited when referencing sources
 
 ## Documentation Quality
 
 - README.md must match actual implementation
 - Usage guides must be accurate
-- Code comments explain complex logic
+- Code comments explain complex logic and concepts
 - Configuration options documented
+- Mathematical formulas correctly formatted (LaTeX in notebooks)

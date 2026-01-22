@@ -1,3 +1,7 @@
+---
+description: Rules for handling the source-material folder
+globs: source-material/*
+---
 # Source Material Rules
 
 **Version**: 1.0  
@@ -61,6 +65,14 @@ When working with content from `source-material/`, follow this workflow:
 - Add proper citations to the original source
 - Use format: `[Reference: Book Title, Author, Chapter/Section]`
 - Include page numbers or section references when applicable
+
+## 🔄 Workflow Trigger
+
+When the user asks to "bring content from Author" or "migrate from source-material" or similar:
+1. Look for the file in `source-material/`
+2. Read the content thoroughly
+3. Draft the new content in the appropriate educational folder (`notebooks/`, `docs/reading-notes/`, etc.)
+4. Ensure the new content is an original synthesis, not a copy-paste
 
 ---
 

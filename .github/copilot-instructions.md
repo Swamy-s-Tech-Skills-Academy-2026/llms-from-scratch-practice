@@ -11,6 +11,16 @@ Please follow these guidelines when generating or modifying code and docs:
 - **Respect attribution**: Keep references to the book where appropriate.
 - **Simple stack**: Prefer plain Python and PyTorch fundamentals.
 
+## Notebook Guidelines
+
+- **Structure**: Use clear headers and logical flow (Import → Load Data → Process → Analyze → Visualize)
+- **Markdown Cells**: Explain the concept before writing code
+- **Math Notation**: Use LaTeX for mathematical expressions (e.g., `$P(x|y) = \frac{P(y|x)P(x)}{P(y)}$`)
+- **Reproducibility**: Set random seeds for reproducible results (`np.random.seed(42)`, `torch.manual_seed(42)`)
+- **Visualizations**: Include titles, labels, and legends for all plots
+- **Testing**: Ensure "Restart Kernel & Run All" passes without errors
+- **No Hidden State**: Avoid variables defined in deleted cells
+
 ## Source Material Handling (CRITICAL)
 
 The `source-material/` folder is a **READ-ONLY staging area** for raw author content:

@@ -441,3 +441,6 @@ share/python-wheels/
 MANIFEST
 .venv
 uv.lock
+
+# Source Material
+source-material/
