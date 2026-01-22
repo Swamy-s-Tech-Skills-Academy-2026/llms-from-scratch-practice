@@ -1,0 +1,38 @@
+# Cursor Rules for LLMs From Scratch Practice
+
+## Documentation Location Standards
+
+**CRITICAL**: All review reports, notebook reviews, and fix summaries MUST be created in `docs/reviews/`:
+- ✅ `docs/reviews/REVIEW_REPORT_*.md`
+- ✅ `docs/reviews/FIXES_SUMMARY_*.md`
+- ✅ `docs/reviews/NOTEBOOK_*.md`
+- ❌ Never create review docs in root directory
+- ❌ Never create review docs directly in `docs/`
+
+## Project Context
+
+This is a **learning workspace** for building a GPT-style LLM from scratch based on the book "Build a Large Language Model (From Scratch)".
+
+### Core Principles
+- **Educational first**: Prioritize clarity, correctness, and explainability over performance
+- **From scratch mindset**: Avoid heavy abstractions; keep logic explicit and inspectable
+- **Small, focused changes**: Make minimal edits that are easy to review
+- **Document intent**: Update docs when structure, behavior, or learning flow changes
+- **Zero-copy policy**: Always check for local files before downloading from external sources
+
+### Directory Structure
+- `notebooks/` - Jupyter notebooks organized by chapter
+- `src/` - Python source modules
+- `docs/` - Documentation
+  - `docs/reviews/` - All review reports
+  - `docs/reference/` - Reference materials
+- `tests/` - Unit tests (to be created)
+
+### Tech Stack
+- Python 3.13+
+- PyTorch
+- tiktoken
+- Jupyter notebooks
+- uv for dependency management
+
+For detailed rules, see `.cursor/rules/` directory.

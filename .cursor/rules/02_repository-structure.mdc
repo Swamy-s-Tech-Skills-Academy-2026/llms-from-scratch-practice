@@ -10,6 +10,8 @@
 - `src/` - Core implementation code (Python modules)
 - `notebooks/` - Jupyter notebooks for interactive learning
 - `docs/` - Study notes and planning documentation
+  - `docs/reviews/` - **All review reports MUST go here**
+  - `docs/reference/` - Reference materials (git, PowerShell, Python commands)
 - `tests/` - Unit tests (to be created)
 
 **Key Entry Points:**
@@ -22,3 +24,12 @@
 - `src/model/` - GPT/Transformer architecture
 - `src/training/` - Training loops and optimization
 - `src/evaluation/` - Metrics and analysis
+
+## Documentation Location Standards
+
+**CRITICAL**: All review reports, notebook reviews, and fix summaries MUST be created in `docs/reviews/`:
+- ✅ `docs/reviews/REVIEW_REPORT_2026-01-22.md`
+- ✅ `docs/reviews/FIXES_SUMMARY_2026-01-22.md`
+- ✅ `docs/reviews/NOTEBOOK_ZERO_COPY_FIXES.md`
+- ❌ Never create review docs in root directory
+- ❌ Never create review docs in `docs/` directly
