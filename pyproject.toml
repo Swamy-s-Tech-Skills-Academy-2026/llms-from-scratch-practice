@@ -1,0 +1,24 @@
+[project]
+name = "llms-from-scratch-practice"
+version = "0.1.0"
+description = "Swamy's hands-on learning workspace for building a GPT-style LLM from scratch."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.26.0",
+    "torch>=2.2.0",
+    "tiktoken>=0.7.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+    "flake8>=7.0.0",
+    "isort>=5.13.0",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.29.0",
+]
+
+[tool.uv]
+package = true

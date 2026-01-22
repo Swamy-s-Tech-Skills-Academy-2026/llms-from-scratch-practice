@@ -1,0 +1,40 @@
+# Primary Directives
+
+## Project Focus
+
+This is an **educational learning workspace** for building a GPT-style Large Language Model from scratch that:
+- Implements tokenization (BPE, vocabulary handling)
+- Builds transformer architecture (attention, feedforward, GPT blocks)
+- Trains models using PyTorch
+- Evaluates model performance and generates text
+- Focuses on deep conceptual understanding, not production deployment
+
+## Current State
+
+- ✅ Project structure established
+- ✅ Dependencies configured (pyproject.toml with uv)
+- ✅ Basic source code structure in place
+- ✅ Chapter 2 notebook started (tokenization)
+- ⏳ Model architecture implementation (in progress)
+- ⏳ Training loop implementation (planned)
+- ⏳ Evaluation and generation (planned)
+
+## Documentation Accuracy
+
+- Documentation must accurately reflect the learning objectives
+- Code examples must be runnable and educational
+- Mathematical concepts should be clearly explained
+- No misleading technology descriptions
+- Learning checkpoints should be documented
+
+## Code Maintenance
+
+- Maintain modular structure (tokenization, model, training, evaluation)
+- Keep code clear and inspectable (educational priority)
+- Use type hints where appropriate (strict typing in `src/` modules, relaxed in notebooks for exploration)
+- Follow PEP 8 style guide
+- Use meaningful variable names (descriptive, not abbreviated)
+- Code comments should explain the *why* of the operation, not just the *how* of the Python code
+- Document the "why" behind implementation choices
+- Prioritize clarity over performance optimizations
+- Separate reusable logic into `src/` modules where appropriate

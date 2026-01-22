@@ -1,0 +1,52 @@
+# Integration Guidelines
+
+## Module Integration
+
+### Tokenization → Model
+- Tokenizer converts text to token IDs
+- Vocabulary maps tokens to integers
+- Token IDs fed into model embeddings
+
+### Model Components
+- Embeddings (token + positional) → Transformer blocks
+- Transformer blocks (attention + feedforward) → LayerNorm
+- Stacked blocks → Output projection → Logits
+
+### Training → Evaluation
+- Training loop computes loss and updates weights
+- Evaluation computes metrics (perplexity, loss)
+- Generation uses trained model for text sampling
+
+## External Dependencies
+
+### Core Libraries
+- PyTorch: Deep learning framework
+- NumPy: Numerical computations
+- tiktoken: Tokenization utilities (optional, for reference)
+
+### Development Tools
+- pytest: Testing framework
+- black: Code formatting
+- isort: Import sorting
+- flake8: Linting
+- jupyter: Interactive notebooks
+
+## Data Flow
+
+1. Raw text loaded from files or datasets
+2. Text tokenized into token IDs
+3. Token IDs converted to embeddings
+4. Embeddings processed through transformer blocks
+5. Output logits computed
+6. Loss calculated (cross-entropy)
+7. Gradients computed and weights updated
+8. Model evaluated on validation set
+9. Text generated using trained model
+
+## Learning Path Integration
+
+- **Phase 1**: Language modeling foundations
+- **Phase 2**: Tokenization (current focus)
+- **Phase 3**: Transformer architecture
+- **Phase 4**: Training loops
+- **Phase 5**: Pretraining and finetuning

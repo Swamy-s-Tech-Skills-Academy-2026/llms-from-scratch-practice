@@ -1,0 +1,39 @@
+---
+description: Naming conventions for notebooks, scripts, and notes
+globs: *
+---
+# File Naming Conventions
+
+## Python Files
+
+- Use lowercase with underscores: `tokenizer.py`, `attention.py`, `gpt.py`
+- Keep names descriptive: `model_config.py`, `training_config.py`
+- Follow existing patterns in codebase
+- Organize by domain: `tokenization/`, `model/`, `training/`, `evaluation/`
+
+## Documentation Files
+
+- Use descriptive names with numbering: `01_study_plan.md`, `01_repository-structure.md`
+- Number sequentially when order matters
+- Use hyphens for multi-word names in URLs
+
+## Configuration Files
+
+- `pyproject.toml`: Project dependencies and configuration (uv)
+- `.python-version`: Python version pin
+- `.env`: Environment variables (not committed)
+
+## Notebook Files
+
+- Start with a two-digit number sequence: `01-`, `02-`, etc.
+- Use descriptive names with chapter/topic: `01_ch02.ipynb`, `02_ch03.ipynb`
+- Alternative pattern: `01-tokenization-basics.ipynb`, `02-attention-mechanism.ipynb`
+- Include chapter/topic number for organization
+- Keep notebook names clear about content
+- **Example**: `01_ch02.ipynb`, `04-bayes-theorem-practice.ipynb`
+
+## Test Files
+
+- Use `test_` prefix: `test_tokenizer.py`, `test_attention.py`
+- Mirror source structure: `tests/tokenization/test_tokenizer.py`
+- Keep test names descriptive

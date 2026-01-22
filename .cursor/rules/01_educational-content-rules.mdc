@@ -1,0 +1,83 @@
+---
+description: Rules for creating educational content and notes
+globs: *.md, *.ipynb
+---
+# Project Rules for LLMs From Scratch Practice
+
+**Version**: 1.0  
+**Last Updated**: January 22, 2026  
+**Priority**: MANDATORY
+
+---
+
+## 📋 Core Principles
+
+### Zero-Copy Policy
+- All code must be original and properly customized for this project
+- No copy-paste artifacts from other projects
+- Ensure all references and naming match this project
+- Content must be transformative, not reformative
+- Even quotes and key principles must use original phrasing
+- Learning exercises should be independent re-implementations, not direct copies
+- **Source Material Workflow**: Read from `source-material/`, synthesize in your own words, publish to educational folders
+- **Never copy-paste** from `source-material/` - it's a staging area for reference only
+- See `08_source-material-rules.mdc` for detailed source material handling guidelines
+
+### Code Quality
+- **Python**: Follow PEP 8 style guide, use type hints where appropriate, include comprehensive docstrings
+- **Meaningful Variable Names**: Use descriptive names (e.g., `token_embeddings` instead of `te`, `attention_weights` instead of `aw`)
+- **Comments Philosophy**: 
+  - Explain the **conceptual reason** for the operation (e.g., "We normalize here to prevent gradient explosion")
+  - Explain the **mathematical mapping** (e.g., "`mu` represents the population mean in this distribution")
+  - Avoid just syntax explanation (e.g., don't write "This creates a list")
+- **No Hardcoded Paths**: Use `pathlib` or relative paths
+- Prioritize clarity and explainability over performance (educational focus)
+- Keep logic explicit and inspectable (avoid heavy abstractions)
+- Maintain modular structure as project grows
+
+### Educational Focus
+- This is a learning workspace, not a production deployment
+- Code clarity is prioritized over raw performance
+- Every major component should be explainable
+- Document the "why" behind implementation choices
+
+### Academic Integrity (Zero-Copy)
+- **Original Synthesis**: Do not copy-paste directly from textbooks or source material
+- **Citation**: If referencing a specific definition, theorem, or concept, cite the source
+- **Review Strictness**: Reviewers must reject content that appears to be direct copies or close paraphrases
+- **Concept First**: Explain the concept in Markdown before writing code
+- **Math Notation**: Use LaTeX for all mathematical expressions in notebooks (e.g., $P(x|y) = \frac{P(y|x)P(x)}{P(y)}$)
+
+---
+
+## 🔧 Development Guidelines
+
+### When Adding Features
+1. Maintain modular structure (tokenization, model, training, evaluation)
+2. Add comprehensive docstrings explaining concepts
+3. Write unit tests for core functionality
+4. Update documentation in docs/ directory
+5. Keep implementations inspectable and educational
+
+### File Naming
+- **Python**: Use lowercase with underscores: `tokenizer.py`, `attention.py`, `gpt.py`
+- Keep names descriptive and clear
+- Follow existing patterns in the codebase
+- Organize by domain (tokenization/, model/, training/, evaluation/)
+
+### Error Handling
+- Use proper exception handling
+- Log errors with context
+- Provide clear error messages for learning purposes
+- Validate inputs appropriately
+
+---
+
+## 📝 Documentation Standards
+
+- Keep README.md accurate and up-to-date
+- Document all configuration options
+- Maintain usage guides in docs/ directory
+- Update technical documentation when code changes
+- Include learning objectives and checkpoints
+- Document mathematical concepts and trade-offs

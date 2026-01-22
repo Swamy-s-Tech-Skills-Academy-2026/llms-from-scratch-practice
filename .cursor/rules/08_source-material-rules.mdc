@@ -1,0 +1,176 @@
+---
+description: Rules for handling the source-material folder
+globs: source-material/*
+---
+# Source Material Rules
+
+**Version**: 1.0  
+**Last Updated**: January 22, 2026  
+**Priority**: MANDATORY
+
+---
+
+## 📚 Purpose
+
+The `source-material/` folder is a **staging area** for raw author content, reference materials, and original sources. This includes:
+- Book transcripts and excerpts
+- PDF extracts
+- Scratch notes from reading
+- Original code examples from references
+- Any raw content that needs to be synthesized
+
+---
+
+## 🚫 Critical Restrictions
+
+### Read-Only Policy
+- **NEVER modify** any file inside `source-material/`
+- **NEVER overwrite** any file inside `source-material/`
+- **NEVER edit** content in `source-material/` even if it contains errors
+- Files in `source-material/` are **permanent reference materials**
+
+### No Deletion Policy
+- **NEVER delete** anything from `source-material/`
+- Content remains in `source-material/` even after migration
+- It serves as a permanent historical reference
+- Deletion is **strictly forbidden**
+
+---
+
+## 🔄 Migration Workflow
+
+When working with content from `source-material/`, follow this workflow:
+
+### Step 1: Read from Source
+- Read and understand the content in `source-material/`
+- Study the concepts, examples, and explanations
+- Take notes on key ideas
+
+### Step 2: Synthesize (Write in Your Own Words)
+- **DO NOT copy-paste** from `source-material/`
+- Rewrite concepts using your own phrasing
+- Transform the content, don't reform it
+- Explain concepts from your own understanding
+
+### Step 3: Publish to Educational Folders
+- Create content in appropriate educational folders:
+  - `notebooks/` - Interactive learning notebooks
+  - `docs/reading-notes/` - Study notes and summaries
+  - `docs/` - General documentation
+  - `src/` - Implementation code
+- Ensure published content is original and synthesized
+
+### Step 4: Add Citations
+- When relying on specific definitions, theorems, or concepts
+- Add proper citations to the original source
+- Use format: `[Reference: Book Title, Author, Chapter/Section]`
+- Include page numbers or section references when applicable
+
+## 🔄 Workflow Trigger
+
+When the user asks to "bring content from Author" or "migrate from source-material" or similar:
+1. Look for the file in `source-material/`
+2. Read the content thoroughly
+3. Draft the new content in the appropriate educational folder (`notebooks/`, `docs/reading-notes/`, etc.)
+4. Ensure the new content is an original synthesis, not a copy-paste
+
+---
+
+## ✅ Zero-Copy Policy Application
+
+The zero-copy policy applies **both during creation and during review**:
+
+### During Creation
+- Read from `source-material/` to understand concepts
+- Write your own explanations and implementations
+- Use original phrasing, not copied text
+- Transform ideas into your own learning materials
+
+### During Review
+- Reject content that looks like direct copying
+- Reject content that is close paraphrase
+- Flag any text that appears copied from `source-material/`
+- Ensure all content is synthesized and original
+
+---
+
+## ✅ Good Synthesis Example
+
+**Source Material** (hypothetical):
+> "The attention mechanism computes a weighted sum of values, where weights are derived from query-key similarity scores."
+
+**Good Synthesis**:
+> "Attention works by calculating how relevant each value is to a query. It does this by comparing the query with keys, then uses those comparison scores as weights to combine the values."
+
+**Why it's good**: Demonstrates understanding, uses different vocabulary, explains the concept rather than restating it.
+
+## ❌ Bad Examples
+
+**Direct Copy**:
+> "The attention mechanism computes a weighted sum of values, where weights are derived from query-key similarity scores."
+
+**Why it's bad**: Word-for-word copy from source.
+
+**Minor Rephrasing** (still too close):
+> "Attention computes weighted sums of values using weights from query-key similarity."
+
+**Why it's bad**: Just rearranged words, doesn't demonstrate understanding.
+
+---
+
+## 📁 Folder Structure
+
+```
+source-material/
+├── book-excerpts/          # Extracts from reference books
+├── transcripts/            # Transcripts of lectures or videos
+├── pdf-extracts/          # Extracted content from PDFs
+├── scratch-notes/         # Raw notes from reading sessions
+├── reference-code/        # Original code examples (for reference only)
+└── README.md              # Explanation of source-material purpose
+```
+
+---
+
+## 🎯 Examples
+
+### ✅ CORRECT Workflow
+
+1. Read `source-material/book-excerpts/ch02-tokenization.txt`
+2. Understand the concept of tokenization
+3. Write your own explanation in `notebooks/ch02/01_ch02.ipynb`:
+   ```markdown
+   ## Tokenization
+   
+   Tokenization involves splitting text into discrete units that can be 
+   processed by language models. These units become the basic building blocks...
+   ```
+4. Add citation: `[Reference: Build a Large Language Model (From Scratch), Raschka, Chapter 2]`
+
+### ❌ INCORRECT Workflow
+
+1. Copy text directly from `source-material/book-excerpts/ch02-tokenization.txt`
+2. Paste into `notebooks/ch02/01_ch02.ipynb`
+3. This violates zero-copy policy
+
+---
+
+## 🔍 Review Checklist
+
+When reviewing content, check:
+- [ ] No direct copy-paste from `source-material/`
+- [ ] Content uses original phrasing
+- [ ] Concepts are explained in own words
+- [ ] Citations are included when referencing specific sources
+- [ ] Content is transformative, not reformative
+- [ ] `source-material/` files remain untouched
+
+---
+
+## ⚠️ Important Notes
+
+- `source-material/` is for **reference only**, not for direct use
+- All published content must be **synthesized and original**
+- The folder serves as a **permanent archive** of source materials
+- Never treat `source-material/` as a working directory
+- Always maintain clear separation between source and synthesized content

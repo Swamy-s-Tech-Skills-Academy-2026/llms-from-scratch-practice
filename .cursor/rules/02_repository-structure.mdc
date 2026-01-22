@@ -1,0 +1,47 @@
+# Repository Structure
+
+**Project**: LLMs From Scratch Practice (STSA 2026)
+
+> **📖 Single Source of Truth**: For complete and up-to-date repository structure, see [docs/01_repository-structure.md](../../docs/01_repository-structure.md)
+
+## Quick Reference
+
+**Key Directories:**
+- `src/` - Core implementation code (Python modules)
+- `notebooks/` - Jupyter notebooks for interactive learning
+- `docs/` - Study notes and planning documentation
+  - `docs/reviews/` - **All review reports MUST go here**
+  - `docs/reference/` - Reference materials (git, PowerShell, Python commands)
+  - `docs/reading-notes/` - Synthesized study notes and summaries
+- `source-material/` - **READ-ONLY** staging area for raw author content (transcripts, PDFs, scratch notes)
+- `tests/` - Unit tests (to be created)
+
+**Key Entry Points:**
+- `src/main.py` - Main entry point
+- `notebooks/ch02/01_ch02.ipynb` - Chapter 2 learning notebook
+- `pyproject.toml` - Project dependencies (uv)
+
+**Planned Structure** (as project grows):
+- `src/tokenization/` - Tokenizer implementations
+- `src/model/` - GPT/Transformer architecture
+- `src/training/` - Training loops and optimization
+- `src/evaluation/` - Metrics and analysis
+
+## Documentation Location Standards
+
+**CRITICAL**: All review reports, notebook reviews, and fix summaries MUST be created in `docs/reviews/`:
+- ✅ `docs/reviews/REVIEW_REPORT_2026-01-22.md`
+- ✅ `docs/reviews/FIXES_SUMMARY_2026-01-22.md`
+- ✅ `docs/reviews/NOTEBOOK_ZERO_COPY_FIXES.md`
+- ❌ Never create review docs in root directory
+- ❌ Never create review docs in `docs/` directly
+
+## Source Material Standards
+
+**CRITICAL**: The `source-material/` folder is READ-ONLY and serves as a staging area:
+- ✅ Read from `source-material/` to understand concepts
+- ✅ Synthesize content in your own words
+- ✅ Publish synthesized content to `notebooks/`, `docs/reading-notes/`, or `docs/`
+- ❌ NEVER modify, overwrite, or delete files in `source-material/`
+- ❌ NEVER copy-paste directly from `source-material/`
+- See `08_source-material-rules.mdc` for complete guidelines
