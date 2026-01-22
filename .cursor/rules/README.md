@@ -34,6 +34,9 @@ Planned N-Tier integration and data flow (frontend/backend/database)
 ### `07_file-naming-conventions.mdc`
 File naming conventions for this repository
 
+### `08_source-material-rules.mdc`
+Rules for handling source material staging folder (read-only, migration workflow, zero-copy compliance)
+
 ---
 
 **Note**: Cursor automatically loads all `.mdc` files in `.cursor/rules/`.

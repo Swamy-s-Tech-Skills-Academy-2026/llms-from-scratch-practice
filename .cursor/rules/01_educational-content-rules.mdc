@@ -15,6 +15,9 @@
 - Content must be transformative, not reformative
 - Even quotes and key principles must use original phrasing
 - Learning exercises should be independent re-implementations, not direct copies
+- **Source Material Workflow**: Read from `source-material/`, synthesize in your own words, publish to educational folders
+- **Never copy-paste** from `source-material/` - it's a staging area for reference only
+- See `08_source-material-rules.mdc` for detailed source material handling guidelines
 
 ### Code Quality
 - **Python**: Follow PEP 8 style guide, use type hints where appropriate, include comprehensive docstrings

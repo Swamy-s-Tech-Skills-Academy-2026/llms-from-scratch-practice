@@ -12,6 +12,8 @@
 - `docs/` - Study notes and planning documentation
   - `docs/reviews/` - **All review reports MUST go here**
   - `docs/reference/` - Reference materials (git, PowerShell, Python commands)
+  - `docs/reading-notes/` - Synthesized study notes and summaries
+- `source-material/` - **READ-ONLY** staging area for raw author content (transcripts, PDFs, scratch notes)
 - `tests/` - Unit tests (to be created)
 
 **Key Entry Points:**
@@ -33,3 +35,13 @@
 - ✅ `docs/reviews/NOTEBOOK_ZERO_COPY_FIXES.md`
 - ❌ Never create review docs in root directory
 - ❌ Never create review docs in `docs/` directly
+
+## Source Material Standards
+
+**CRITICAL**: The `source-material/` folder is READ-ONLY and serves as a staging area:
+- ✅ Read from `source-material/` to understand concepts
+- ✅ Synthesize content in your own words
+- ✅ Publish synthesized content to `notebooks/`, `docs/reading-notes/`, or `docs/`
+- ❌ NEVER modify, overwrite, or delete files in `source-material/`
+- ❌ NEVER copy-paste directly from `source-material/`
+- See `08_source-material-rules.mdc` for complete guidelines
