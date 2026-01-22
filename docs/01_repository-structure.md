@@ -1,15 +1,29 @@
 # Repository Structure & Design Philosophy
 
-The repository follows a clean, modular structure designed to separate the distinct phases of building an LLM.
+This document captures the **current layout** of the repo and the **target structure** we will grow into as implementation work starts.
 
 ---
 
-## 🗂️ Repository Layout (High-Level)
+## 🗂️ Current Repository Layout
+
+```text
+.
+├── docs/               # Study notes and planning docs
+├── src/                # Implementation code (currently empty)
+├── README.md           # Entry point for the repo
+└── LICENSE
+```
+
+---
+
+## 🎯 Target Layout (Planned)
+
+As the code evolves, we will introduce a modular `src/` layout similar to:
 
 ```text
 .
 ├── data/               # Datasets and preprocessing artifacts
-├── src/                # Core implementation code (Engine Room)
+├── src/                # Core implementation code (engine room)
 │   ├── config/         # Configuration files
 │   ├── tokenization/   # Tokenizer implementations
 │   ├── model/          # GPT / Transformer architecture code
@@ -23,7 +37,7 @@ The repository follows a clean, modular structure designed to separate the disti
 
 ---
 
-## Folder Guide
+## Folder Guide (Planned)
 
 | Folder | Purpose |
 | :--- | :--- |
@@ -31,7 +45,7 @@ The repository follows a clean, modular structure designed to separate the disti
 | **`notebooks/`** | Jupyter notebooks for interactive learning, data inspection, and visual debugging. |
 | **`data/`** | Stores raw text data and processed `.bin` files. |
 
-### `src/` Detailed Structure
+### `src/` Detailed Structure (Planned)
 
 ```text
 src/
@@ -76,10 +90,8 @@ src/
 
 ## Design Principles
 
-1.  **Modularity**: Each folder encapsulates a specific domain of the problem.
-2.  **Traceability**: The structure mirrors the learning path.
-3.  **Simplicity**: Modules are organized to support reuse.
+1. **Modularity**: Each folder encapsulates a specific domain of the problem.
+2. **Traceability**: The structure mirrors the learning path.
+3. **Simplicity**: Modules are organized to support reuse.
 
-
-As the project grows, this structure may evolve (e.g., moving core logic into a `src/` package).
-
+As the project grows, this structure may evolve.

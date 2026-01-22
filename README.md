@@ -1,7 +1,7 @@
-# Build a Large Language Model (From Scratch) — Learning Repository
+# LLMs From Scratch Practice (STSA 2026)
 
-This repository documents my **hands-on learning journey** of building a GPT-style Large Language Model (LLM) from first principles.  
-The work follows a *from-scratch, implementation-driven* approach to understand how modern LLMs are designed, trained, and evaluated—without relying on high-level abstractions or hosted APIs.
+This repository is **Swamy's hands-on learning workspace** for building a GPT-style Large Language Model (LLM) from first principles.  
+The content was migrated from a separate learning repo and customized here for the STSA 2026 cohort.
 
 The primary goal is **deep conceptual and practical understanding**, not production deployment.
 
@@ -15,7 +15,7 @@ The primary goal is **deep conceptual and practical understanding**, not product
   - Be simplified for clarity
   - Omit optimizations required for large-scale or distributed training
   - Differ from industry-grade or research-grade LLM systems
-- Any mistakes, deviations, or interpretations are **entirely my own** and do not reflect the original author’s views, intent, or guarantees.
+- Any mistakes, deviations, or interpretations are **entirely my own**.
 
 This repository is **not affiliated with or endorsed by the author or publisher** of the referenced book.
 
@@ -167,21 +167,17 @@ A solid foundation will significantly improve comprehension of:
 
 ---
 
-## 🗂️ Repository Structure (High-Level)
+## 🗂️ Repository Structure (Current)
 
 ```text
 .
-├── data/               # Datasets and preprocessing artifacts
-├── tokenization/       # Tokenizer implementations and experiments
-├── model/              # GPT / Transformer architecture code
-├── training/           # Training loops, loss functions, optimization
-├── finetuning/         # Task-specific adaptation experiments
-├── evaluation/         # Metrics, validation, and analysis
-├── notebooks/          # Exploratory notebooks and experiments
-└── README.md           # This file
-````
+├── docs/               # Study notes and structure docs
+├── src/                # Implementation code (currently empty)
+├── README.md           # This file
+└── LICENSE
+```
 
-> The structure may evolve as learning progresses.
+For a detailed breakdown and the target layout, see [docs/01_repository-structure.md](docs/01_repository-structure.md).
 
 ---
 
@@ -194,34 +190,10 @@ By completing this repository, I expect to be able to:
 - Diagnose and reason about training failures and instabilities
 - Make informed architectural and optimization decisions
 - Confidently transition to advanced topics such as:
-
   - Scaling laws
   - Efficient training techniques
   - Model compression
   - Inference optimization
-
----
-
-## 🗂️ Repository Structure (High-Level)
-
-```text
-.
-├── data/               # Datasets and preprocessing artifacts
-├── src/                # Core implementation code (Engine Room)
-│   ├── config/         # Configuration files
-│   ├── tokenization/   # Tokenizer implementations
-│   ├── model/          # GPT / Transformer architecture code
-│   ├── training/       # Training loops, loss functions
-│   ├── evaluation/     # Metrics and analysis
-│   ├── utils/          # Logging, seeding, checkpoints
-│   └── main.py         # Entry point
-├── notebooks/          # Exploratory notebooks and experiments
-└── README.md           # This file
-```
-
-The structure may evolve as learning progresses.
-
-For a detailed breakdown of the directory layout and design philosophy, see [docs/01_repository-structure.md](docs/01_repository-structure.md).
 
 ---
 
