@@ -94,6 +94,30 @@ The zero-copy policy applies **both during creation and during review**:
 
 ---
 
+## ✅ Good Synthesis Example
+
+**Source Material** (hypothetical):
+> "The attention mechanism computes a weighted sum of values, where weights are derived from query-key similarity scores."
+
+**Good Synthesis**:
+> "Attention works by calculating how relevant each value is to a query. It does this by comparing the query with keys, then uses those comparison scores as weights to combine the values."
+
+**Why it's good**: Demonstrates understanding, uses different vocabulary, explains the concept rather than restating it.
+
+## ❌ Bad Examples
+
+**Direct Copy**:
+> "The attention mechanism computes a weighted sum of values, where weights are derived from query-key similarity scores."
+
+**Why it's bad**: Word-for-word copy from source.
+
+**Minor Rephrasing** (still too close):
+> "Attention computes weighted sums of values using weights from query-key similarity."
+
+**Why it's bad**: Just rearranged words, doesn't demonstrate understanding.
+
+---
+
 ## 📁 Folder Structure
 
 ```

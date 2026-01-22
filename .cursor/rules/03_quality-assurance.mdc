@@ -11,8 +11,9 @@ globs: *.py, *.ipynb
 - [ ] Type hints used for function arguments and return types
 - [ ] Docstrings included for all functions and classes
 - [ ] No hardcoded paths (use `pathlib` or relative paths)
+- [ ] All imports properly organized (stdlib → third-party → local)
 - [ ] Proper error handling
-- [ ] No linting errors
+- [ ] No linting errors (flake8, pylint)
 
 ### Jupyter Notebooks (`notebooks/`)
 - [ ] **Kernel Restart & Run All** passes without errors

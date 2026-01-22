@@ -73,6 +73,28 @@ See `.cursor/rules/08_source-material-rules.mdc` for complete guidelines.
 - **Reading notes**: Synthesized study notes go in `docs/reading-notes/`
 - **Never create review documentation in the root directory**
 
+## Quality Assurance Checklist
+
+### Python Scripts (`src/`)
+- [ ] Follows PEP 8 style guide
+- [ ] Type hints used for function arguments and return types
+- [ ] Docstrings included for all functions and classes
+- [ ] No hardcoded paths (use `pathlib` or relative paths)
+- [ ] All imports properly organized (stdlib → third-party → local)
+
+### Jupyter Notebooks (`notebooks/`)
+- [ ] **"Restart Kernel & Run All"** passes without errors
+- [ ] Logical flow: Import → Load Data → Process → Analyze → Visualize → Conclusion
+- [ ] No hidden state (all variables defined in currently existing cells)
+- [ ] Markdown cells clearly explain concepts before code
+- [ ] All visualizations have titles, axis labels, and legends
+- [ ] Random seeds set for reproducibility (`torch.manual_seed(42)`, `np.random.seed(42)`)
+
+### Content Review (Zero-Copy Policy)
+- [ ] **Originality Check**: Content is synthesized, not copied from source material
+- [ ] **Citation**: Specific definitions, theorems, and formulas are cited
+- [ ] **Understanding**: Content demonstrates comprehension, not just rephrasing
+
 ## 🚀 Environment Setup
 
 **Python Environment (Windows PowerShell):**

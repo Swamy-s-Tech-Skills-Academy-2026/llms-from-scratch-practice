@@ -26,7 +26,10 @@ globs: *.md, *.ipynb
 ### Code Quality
 - **Python**: Follow PEP 8 style guide, use type hints where appropriate, include comprehensive docstrings
 - **Meaningful Variable Names**: Use descriptive names (e.g., `token_embeddings` instead of `te`, `attention_weights` instead of `aw`)
-- **Comments**: Comment liberally to explain the *why* of the operation, not just the *how* of the Python code
+- **Comments Philosophy**: 
+  - Explain the **conceptual reason** for the operation (e.g., "We normalize here to prevent gradient explosion")
+  - Explain the **mathematical mapping** (e.g., "`mu` represents the population mean in this distribution")
+  - Avoid just syntax explanation (e.g., don't write "This creates a list")
 - **No Hardcoded Paths**: Use `pathlib` or relative paths
 - Prioritize clarity and explainability over performance (educational focus)
 - Keep logic explicit and inspectable (avoid heavy abstractions)
