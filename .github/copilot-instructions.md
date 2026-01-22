@@ -16,6 +16,18 @@ Please follow these guidelines when generating or modifying code and docs:
 - **Respect attribution**: Keep references to the book where appropriate.
 - **Simple stack**: Prefer plain Python and PyTorch fundamentals.
 
+## 🎯 Repository Purpose
+
+This repo is for building intuition by implementing a GPT-style model step-by-step:
+- **Study notes** in `docs/` (including `docs/reading-notes/`)
+- **Hands-on notebooks** in `notebooks/` (chapter-by-chapter)
+- **Reusable implementations** in `src/`
+
+## Target Audience
+
+- Learners practicing LLM fundamentals (tokenization → embeddings → attention → training loops)
+- Anyone prioritizing correctness and clarity over production optimizations
+
 ## Code Style Guidelines
 
 ### Python Code

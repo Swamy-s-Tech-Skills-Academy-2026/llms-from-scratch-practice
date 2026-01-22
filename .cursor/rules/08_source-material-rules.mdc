@@ -1,6 +1,6 @@
 ---
 description: Rules for handling the source-material folder
-globs: source-material/*
+globs: source-material/**/*
 ---
 # Source Material Rules
 
