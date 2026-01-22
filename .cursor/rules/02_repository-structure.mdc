@@ -1,0 +1,19 @@
+# Repository Structure
+
+**Project**: GenAI Email & Report Drafting System
+
+> **📖 Single Source of Truth**: For complete and up-to-date repository structure, see [docs/08_repository_structure.md](../../docs/08_repository_structure.md)
+
+## Quick Reference
+
+**Key Directories:**
+- `src/frontend/` - React.js with TypeScript (Presentation Layer)
+- `src/backend/` - Flask REST API (Application Layer)
+- `infra/database/` - PostgreSQL schema (Data Layer)
+- `infra/docker-compose.yml` - Docker Compose configuration
+- `docs/` - Project documentation
+
+**Key Entry Points:**
+- `src/frontend/src/main.tsx` - Frontend entry point
+- `src/backend/app.py` - Backend entry point
+- `infra/database/schema.sql` - Database initialization

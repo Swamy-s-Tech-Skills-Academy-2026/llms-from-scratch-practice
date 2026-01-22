@@ -1,0 +1,38 @@
+# Primary Directives
+
+## Project Focus
+
+This is an **N-Tier web application** that:
+- Generates professional emails using Google Gemini AI
+- Generates professional reports using Google Gemini AI
+- Uses React.js with TypeScript for frontend
+- Uses Flask REST API for backend
+- Uses PostgreSQL for data persistence
+- Implements JWT authentication with role-based access control
+
+## Current State
+
+- ✅ Implementation Complete (Phase 08)
+- ✅ N-Tier architecture fully implemented
+- ✅ Backend: Flask REST API with JWT authentication
+- ✅ Frontend: React.js with TypeScript and Redux
+- ✅ Database: PostgreSQL with SQLAlchemy ORM
+- ✅ AI Integration: Google Gemini API with prompt engineering
+- ✅ Testing: Comprehensive test suite (127+ tests)
+- ✅ Architecture documentation complete
+- ✅ Requirements specification complete
+
+## Documentation Accuracy
+
+- Documentation must accurately reflect planned implementation
+- Architecture diagrams must match actual system design
+- API endpoints must be documented correctly
+- No misleading technology descriptions
+
+## Code Maintenance
+
+- Maintain N-Tier architecture separation
+- Keep frontend and backend decoupled
+- Use TypeScript for type safety
+- Follow RESTful API design principles
+- Ensure secure API key handling

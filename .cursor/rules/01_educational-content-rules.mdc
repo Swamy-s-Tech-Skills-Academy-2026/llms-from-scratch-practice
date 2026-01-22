@@ -1,0 +1,64 @@
+# Project Rules for GenAI Email & Report Drafting System
+
+**Version**: 1.0  
+**Last Updated**: January 8, 2026  
+**Priority**: MANDATORY
+
+---
+
+## 📋 Core Principles
+
+### Zero-Copy Policy
+- All code must be original and properly customized for this project
+- No copy-paste artifacts from other projects
+- Ensure all references and naming match this project
+- Content must be transformative, not reformative
+- Even quotes and key principles must use original phrasing
+
+### Code Quality
+- **Python (Backend)**: Follow PEP 8 style guide, use type hints, include comprehensive docstrings
+- **TypeScript/React (Frontend)**: Follow ESLint configuration, use strict type checking, maintain component structure
+- Maintain modular N-Tier architecture
+- Clear separation of concerns (Presentation, Application, Data, AI Service layers)
+
+### AI Integration Standards
+- Secure API key handling (environment variables only)
+- Proper error handling for Gemini API calls
+- Structured prompt engineering for consistent output
+- Input validation before API calls
+
+---
+
+## 🔧 Development Guidelines
+
+### When Adding Features
+1. Maintain N-Tier architecture separation (Frontend, Backend, Database, AI Service)
+2. Preserve type safety in TypeScript code
+3. Add comprehensive audit logging for document generation
+4. Write unit tests for both frontend and backend
+5. Update documentation in docs/ directory
+
+### File Naming
+- **Python**: Use lowercase with underscores: gemini_service.py, prompt_engine.py
+- **TypeScript/React**: Use PascalCase for components: EmailGenerator.tsx, Login.tsx
+- **API Routes**: Use descriptive names: documents.py, auth.py
+- Keep names descriptive and clear
+- Follow existing patterns
+
+### Error Handling
+- Use proper exception handling
+- Log errors with context
+- Provide user-friendly error messages
+- Handle API failures gracefully
+- Validate all user inputs
+
+---
+
+## 📝 Documentation Standards
+
+- Keep README.md accurate and up-to-date
+- Document all configuration options
+- Maintain usage guides in docs/ directory
+- Update technical documentation when code changes
+- Include API endpoint documentation
+- Document prompt engineering strategies

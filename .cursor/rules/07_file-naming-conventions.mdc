@@ -1,0 +1,33 @@
+# File Naming Conventions
+
+## Python Files (Backend)
+
+- Use lowercase with underscores: `gemini_service.py`, `prompt_engine.py`
+- Keep names descriptive: `document_service.py`, `auth_routes.py`
+- Follow existing patterns in codebase
+
+## TypeScript/React Files (Frontend)
+
+- **Components**: Use PascalCase: `EmailGenerator.tsx`, `Login.tsx`, `AdminDashboard.tsx`
+- **API Client**: Use camelCase: `apiClient.ts`
+- **Types/Interfaces**: Use PascalCase: `User.ts`, `Document.ts`
+- Keep names descriptive and clear
+
+## Documentation Files
+
+- Use descriptive names with numbering: `01_abstract.md`, `02_requirements.md`
+- Number sequentially when order matters
+- Use hyphens for multi-word names in URLs
+
+## Configuration Files
+
+- `config.py`: Backend configuration
+- `package.json`: Frontend dependencies
+- `requirements.txt`: Backend dependencies
+- `.env`: Environment variables (not committed)
+- `schema.sql`: Database schema
+
+## Database Files
+
+- `schema.sql`: Database schema definition
+- Migration files: Use timestamp prefix: `20260108_initial_schema.sql`

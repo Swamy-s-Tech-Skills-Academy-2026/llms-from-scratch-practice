@@ -1,0 +1,50 @@
+# Integration Guidelines
+
+## Module Integration
+
+### Frontend → Backend
+- React components → REST API calls → Flask endpoints
+- TypeScript API client handles authentication and requests
+- JWT tokens stored in localStorage
+
+### Backend → Database
+- Flask-SQLAlchemy ORM for database operations
+- PostgreSQL for persistent storage
+- User authentication and document history
+
+### Backend → AI Service
+- Flask services → Google Gemini API
+- Prompt engine constructs structured prompts
+- Error handling for API failures
+
+## External Dependencies
+
+### Frontend
+- React with TypeScript
+- API client libraries (fetch/axios)
+
+### Backend
+- Flask: Web framework
+- Flask-SQLAlchemy: ORM
+- Flask-JWT-Extended: JWT authentication
+- google-generativeai: Google Gemini API client
+- PostgreSQL: Database
+
+## Data Flow
+
+1. User submits email/report generation request (Frontend)
+2. Request authenticated via JWT (Backend)
+3. Prompt constructed from user input (Prompt Engine)
+4. Content generated via Google Gemini API (AI Service)
+5. Generated content stored in database (PostgreSQL)
+6. Response returned to frontend (Backend → Frontend)
+7. User views generated content (Frontend)
+
+## API Integration Points
+
+- `/api/auth/login`: User authentication
+- `/api/auth/register`: User registration
+- `/api/documents/email:generate`: Email generation
+- `/api/documents/report:generate`: Report generation
+- `/api/history`: Document history retrieval
+- `/api/admin/*`: Admin operations

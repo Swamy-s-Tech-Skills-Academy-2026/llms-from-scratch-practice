@@ -1,0 +1,34 @@
+# Quality Assurance
+
+## Code Quality Checklist
+
+### Backend (Python)
+- [ ] Follows PEP 8 style guide
+- [ ] Type hints where appropriate
+- [ ] Comprehensive docstrings
+- [ ] Proper error handling
+- [ ] Unit tests written
+- [ ] No linting errors
+
+### Frontend (TypeScript/React)
+- [ ] Follows ESLint configuration
+- [ ] Strict type checking enabled
+- [ ] Component structure maintained
+- [ ] Proper error handling
+- [ ] Unit tests written
+- [ ] No TypeScript errors
+
+## Testing Requirements
+
+- All modules must have unit tests (both frontend and backend)
+- Test coverage should be comprehensive
+- Integration tests for end-to-end flow
+- Backend: Run tests before committing: `pytest tests/`
+- Frontend: Run tests before committing: `npm test`
+
+## Documentation Quality
+
+- README.md must match actual implementation
+- Usage guides must be accurate
+- Code comments explain complex logic
+- Configuration options documented
