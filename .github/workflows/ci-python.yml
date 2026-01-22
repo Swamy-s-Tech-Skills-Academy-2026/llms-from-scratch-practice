@@ -32,33 +32,31 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          # Install pytorch (CPU version for CI speed) and dev tools
-          pip install torch --index-url https://download.pytorch.org/whl/cpu
-          pip install numpy pytest flake8 black isort
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        run: uv sync
 
       - name: Check formatting with Black
         run: |
           if [ -d "src" ] && [ "$(ls -A src)" ]; then
-             black --check --diff src
+             uv run black --check --diff src
           fi
 
       - name: Check import sorting with isort
         run: |
           if [ -d "src" ] && [ "$(ls -A src)" ]; then
-             isort --check-only --diff src
+             uv run isort --check-only --diff src
           fi
 
       - name: Lint with flake8
         run: |
           if [ -d "src" ] && [ "$(ls -A src)" ]; then
              # Stop the build if there are Python syntax errors or undefined names
-             flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics
+             uv run flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics
              # Check for style violations
-             flake8 src --count --max-complexity=10 --max-line-length=100 --statistics
+             uv run flake8 src --count --max-complexity=10 --max-line-length=100 --statistics
           fi
 
       - name: Run tests with pytest
@@ -66,5 +64,5 @@ jobs:
           # Run tests if src or tests folder exists
           # Allow exit code 5 (no tests found) for early stage
           if [ -d "src" ] || [ -d "tests" ]; then
-             pytest || ( [ $? = 5 ] && exit 0 || exit $? )
+             uv run pytest || ( [ $? = 5 ] && exit 0 || exit $? )
           fi
