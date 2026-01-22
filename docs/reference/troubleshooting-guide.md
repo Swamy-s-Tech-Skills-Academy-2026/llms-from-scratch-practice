@@ -704,10 +704,10 @@ uv --version
 # Add to PATH if needed
 $env:PATH += ";$env:USERPROFILE\.cargo\bin"
 
-# Use uv to create venv and install dependencies
-cd D:\SrivariHSSPL-2026\genai-email-report-drafting\src\backend
-uv venv
-uv pip install -r requirements.txt --link-mode=copy
+# Use uv to create .venv and install dependencies
+cd D:\STSA-2026\llms-from-scratch-practice
+uv sync
+uv sync --group dev
 ```
 
 ---

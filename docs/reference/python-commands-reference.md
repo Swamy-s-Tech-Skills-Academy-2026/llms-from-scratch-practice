@@ -66,17 +66,25 @@ google-generativeai==0.8.3
 ### Using uv (Faster Alternative)
 
 ```powershell
-# Create virtual environment with uv
-uv venv
+# Initialize a new project (creates pyproject.toml)
+uv init
+
+# Create .venv and install dependencies
+uv sync
+
+# Optional: include dev dependencies
+uv sync --group dev
+
+# Run a command without activating the venv
+uv run pytest
 
 # Activate virtual environment (Windows)
 .venv\Scripts\Activate.ps1
 
-# Install dependencies with uv
-uv pip install -r requirements.txt --link-mode=copy
-
-# Install specific package
-uv pip install flask
+# Add or remove dependencies
+uv add numpy
+uv add --group dev pytest
+uv remove numpy
 ```
 
 ### List & Inspect Packages

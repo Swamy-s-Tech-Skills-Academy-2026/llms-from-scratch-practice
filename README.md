@@ -73,13 +73,28 @@ This project uses **[uv](https://github.com/astral-sh/uv)** for fast Python pack
 ### 1. Install `uv`
 Follow the [official installation guide](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already.
 
-### 2. Initialize Environment
+### 2. Initialize Project (Only If Starting Fresh)
+If you are creating a brand-new repo, initialize `pyproject.toml` with:
 ```bash
-# Sync dependencies and create virtual environment
+uv init
+```
+This repository already includes `pyproject.toml`, so you can skip this step here.
+
+### 3. Sync Dependencies
+```bash
+# Create .venv and install runtime dependencies
 uv sync
+
+# Optional: include dev tools (pytest, black, etc.)
+uv sync --group dev
 ```
 
-### 3. Activate Environment
+### 4. Run Commands (No Activation Needed)
+```bash
+uv run pytest
+```
+
+### 5. Activate Environment (Optional)
 ```bash
 # Windows (PowerShell)
 .venv\Scripts\activate
@@ -88,9 +103,16 @@ uv sync
 source .venv/bin/activate
 ```
 
-### 4. Running Tests
+### 6. Useful `uv` Commands
 ```bash
-uv run pytest
+# Add a runtime dependency
+uv add numpy
+
+# Add a dev dependency
+uv add --group dev pytest
+
+# Remove a dependency
+uv remove numpy
 ```
 
 ---
