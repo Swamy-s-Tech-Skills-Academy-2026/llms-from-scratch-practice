@@ -9,7 +9,10 @@ This document captures the **current layout** of the repo and the **target struc
 ```text
 .
 ├── docs/               # Study notes and planning docs
-├── src/                # Implementation code (currently empty)
+├── src/                # Implementation code
+├── notebooks/          # Exploratory notebooks
+├── pyproject.toml      # Project dependencies (uv)
+├── .python-version     # Python version pin
 ├── README.md           # Entry point for the repo
 └── LICENSE
 ```

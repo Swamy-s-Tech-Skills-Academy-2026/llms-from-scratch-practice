@@ -66,6 +66,35 @@ While the learning flow, architectural ideas, and concepts follow the book, the 
 
 ---
 
+## 🛠️ Setup & Installation
+
+This project uses **[uv](https://github.com/astral-sh/uv)** for fast Python package management.
+
+### 1. Install `uv`
+Follow the [official installation guide](https://docs.astral.sh/uv/getting-started/installation/) if you haven't already.
+
+### 2. Initialize Environment
+```bash
+# Sync dependencies and create virtual environment
+uv sync
+```
+
+### 3. Activate Environment
+```bash
+# Windows (PowerShell)
+.venv\Scripts\activate
+
+# Linux/macOS
+source .venv/bin/activate
+```
+
+### 4. Running Tests
+```bash
+uv run pytest
+```
+
+---
+
 ## Prerequisites (Be Honest With Yourself)
 
 This repository assumes **foundational competency** in mathematics and programming.  
