@@ -31,6 +31,13 @@ globs: *.py, *.ipynb
 - Run tests before committing: `uv run pytest`
 - Notebooks should be tested by running "Restart Kernel & Run All"
 
+## Data Validation (When Working with Datasets)
+
+- [ ] Check for missing values in datasets
+- [ ] Verify data types and shapes are as expected
+- [ ] Validate tokenization outputs (no empty tokens, proper encoding)
+- [ ] Ensure data preprocessing is reproducible
+
 ## Content Review Checklist (Zero-Copy)
 
 - [ ] **Originality Check**: Verify that text is not a direct copy from source material

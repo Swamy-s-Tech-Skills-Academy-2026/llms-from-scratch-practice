@@ -18,10 +18,21 @@ Please follow these guidelines when generating or modifying code and docs:
 
 ## 🎯 Repository Purpose
 
-This repo is for building intuition by implementing a GPT-style model step-by-step:
-- **Study notes** in `docs/` (including `docs/reading-notes/`)
-- **Hands-on notebooks** in `notebooks/` (chapter-by-chapter)
-- **Reusable implementations** in `src/`
+This repo is for building intuition by implementing a GPT-style model step-by-step.
+
+### What This Repository Provides
+
+- **Structured Learning Material**: Notes on tokenization, attention, transformers, and training
+- **Python Implementations**: LLM concepts implemented using PyTorch from scratch
+- **Hands-on Practice**: Chapter-by-chapter notebooks for interactive learning
+- **Reusable Code**: Modular implementations in `src/` for building components
+
+### Repository Structure by Purpose
+
+- **`docs/reading-notes/`**: Theory (Textbook style) - Synthesized study notes
+- **`notebooks/`**: Simulation (Lab style) - Hands-on experiments chapter-by-chapter
+- **`src/`**: Reusable Code - Modular implementations (tokenization, model, training)
+- **`source-material/`**: Staging area for raw content (Read-Only)
 
 ## Target Audience
 
