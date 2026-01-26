@@ -14,7 +14,7 @@ This folder contains the Cursor rule files (`.mdc`) used to guide edits in this 
 ## 📋 Rule Files
 
 ### `01_educational-content-rules.mdc`
-Core principles and the mandatory zero-copy policy
+Core principles, mandatory zero-copy policy, and Swamy's learning tone guidelines
 
 ### `02_repository-structure.mdc`
 Repository structure expectations and key files
@@ -23,7 +23,7 @@ Repository structure expectations and key files
 Quality checklist and testing/verification expectations
 
 ### `04_markdown-standards.mdc`
-Markdown and documentation standards
+Markdown and documentation standards, including learning tone for notebooks
 
 ### `05_primary-directives.mdc`
 Project focus and documentation accuracy rules

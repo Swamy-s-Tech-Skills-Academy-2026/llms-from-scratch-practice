@@ -33,3 +33,13 @@ globs: *.md, *.ipynb
 - Use relative paths for internal references
 - Verify all file references point to existing files
 - Update references when files are moved/renamed
+
+## Learning Tone (Notebooks & Notes)
+
+When writing markdown cells in notebooks or study notes:
+- Use **first-person voice**: "I'm learning...", "I noticed...", "My takeaway..."
+- Be **reflection-oriented**: Include intent, confusion, or realizations
+- Write as **personal journey**: "my notes", "my understanding", not formal instruction
+- **Avoid lecturer tone**: Never say "this course" or "the instructor"
+- Keep it **concise and honest**: Acknowledge gaps or next steps
+- Use **simple, clear language**: Avoid formal teaching tone
