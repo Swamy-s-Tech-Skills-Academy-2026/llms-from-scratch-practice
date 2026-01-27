@@ -1,4 +1,4 @@
-# Chapter 3: Cording Attention Mechanisms
+# Chapter 3: Coding Attention Mechanisms
 
 **Phase 3: Transformer Architecture**
 
@@ -7,7 +7,7 @@ This chapter focuses on the core mechanism that makes Transformers work: **Self-
 
 ## Learning Goals
 - Understand the difference between Self-Attention and Causal Self-Attention.
-- Implement the "Scale Dot-Product Attention" mechanism from scratch.
+- Implement the "Scaled Dot-Product Attention" mechanism from scratch.
 - Build Multi-Head Attention modules.
 - Visualize attention weights to understand what the model is "looking at".
 
