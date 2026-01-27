@@ -39,8 +39,8 @@ Why is this improvement valuable?
 
 ## Additional Context
 
-- **Content Type**: [Frontend / Backend / Database / Documentation / API / Other]
-- **Component**: [React Components / Flask Routes / Database Schema / Documentation / Other]
+- **Content Type**: [Notebook / Source Code / Documentation / Configuration / Other]
+- **Component**: [Tokenization / Model / Training / Evaluation / Docs / Other]
 - **Related Files**: Any related files or components
 
 ## Examples (Optional)
@@ -48,6 +48,4 @@ Why is this improvement valuable?
 If you have examples, diagrams, or code snippets that would help, please include them.
 
 ---
-
-**Note**: This repository is for the GenAI Email & Report Drafting System. Your suggestions help improve the system for everyone.
 

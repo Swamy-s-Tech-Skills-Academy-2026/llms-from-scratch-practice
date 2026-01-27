@@ -1,6 +1,8 @@
 # S.M.A.R.T. Prompt Framework for GitHub Copilot Coding Agents
 
-**GenAI Email & Report Drafting System Edition** - Framework for creating high-quality coding agent instructions aligned with prompt engineering best practices and Google Gemini integration patterns.
+**LLMs From Scratch Practice Edition** - Framework for creating high-quality coding agent instructions aligned with this repo’s educational goals.
+
+> **Note**: This guide is for the LLM-from-scratch learning workspace. Any references to other stacks or products below are legacy and should be ignored when working in this repository.
 
 ---
 

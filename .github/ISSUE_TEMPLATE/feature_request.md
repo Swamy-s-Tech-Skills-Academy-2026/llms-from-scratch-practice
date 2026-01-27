@@ -12,13 +12,11 @@ A clear description of the feature you'd like to see added.
 
 ## Feature Type
 
-- [ ] Frontend feature (React with TypeScript)
-- [ ] Backend feature (Flask API)
-- [ ] Database enhancement
-- [ ] AI/ML improvement (Gemini integration, prompt engineering)
-- [ ] Authentication/Authorization enhancement
-- [ ] New tool or script
+- [ ] Notebook improvement
+- [ ] Source code feature
 - [ ] Documentation improvement
+- [ ] Tooling/scripts
+- [ ] Configuration update
 - [ ] Other (please describe)
 
 ## Motivation
@@ -31,38 +29,23 @@ Why is this feature valuable?
 
 ## Detailed Description
 
-### If it's a frontend feature
+### If it's a notebook improvement
 
-- What UI components are needed?
-- What user interactions are required?
-- How does it integrate with the backend API?
+- What concepts or experiments should be added?
+- Which chapter or topic does it align with?
 
-### If it's a backend feature
+### If it's a source code feature
 
-- What API endpoints are needed?
-- What business logic is required?
-- How does it integrate with Gemini API or database?
-
-### If it's a database enhancement
-
-- What schema changes are needed?
-- What migrations are required?
-- How does it affect existing data?
-
-### If it's an AI/ML improvement
-
-- What prompt engineering changes are needed?
-- How does it improve content generation?
-- What Gemini API features are used?
+- What module(s) are involved (tokenization, model, training, evaluation)?
+- What is the expected API or behavior?
 
 ## Proposed Location
 
 Where should this feature be implemented?
 
-- `frontend/src/pages/` (for UI features)
-- `backend/routes/` (for API endpoints)
-- `backend/services/` (for business logic)
-- `database/` (for schema changes)
+- `notebooks/` (learning experiments)
+- `src/` (reusable code)
+- `docs/` (reading notes or guidance)
 - Specific file or folder
 
 ## Related Content
@@ -76,6 +59,4 @@ Where should this feature be implemented?
 Any other information, examples, or references that would help.
 
 ---
-
-**Note**: This repository is for the GenAI Email & Report Drafting System. Feature requests help improve the system for all users.
 
