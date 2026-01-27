@@ -16,6 +16,29 @@ Please follow these guidelines when generating or modifying code and docs:
 - **Respect attribution**: Keep references to the book where appropriate.
 - **Simple stack**: Prefer plain Python and PyTorch fundamentals.
 
+## 🎯 Repository Purpose
+
+This repo is for building intuition by implementing a GPT-style model step-by-step.
+
+### What This Repository Provides
+
+- **Structured Learning Material**: Notes on tokenization, attention, transformers, and training
+- **Python Implementations**: LLM concepts implemented using PyTorch from scratch
+- **Hands-on Practice**: Chapter-by-chapter notebooks for interactive learning
+- **Reusable Code**: Modular implementations in `src/` for building components
+
+### Repository Structure by Purpose
+
+- **`docs/reading-notes/`**: Theory (Textbook style) - Synthesized study notes
+- **`notebooks/`**: Simulation (Lab style) - Hands-on experiments chapter-by-chapter
+- **`src/`**: Reusable Code - Modular implementations (tokenization, model, training)
+- **`source-material/`**: Staging area for raw content (Read-Only)
+
+## Target Audience
+
+- Learners practicing LLM fundamentals (tokenization → embeddings → attention → training loops)
+- Anyone prioritizing correctness and clarity over production optimizations
+
 ## Code Style Guidelines
 
 ### Python Code
@@ -40,6 +63,42 @@ Please follow these guidelines when generating or modifying code and docs:
 - **Testing**: Ensure "Restart Kernel & Run All" passes without errors
 - **No Hidden State**: Avoid variables defined in deleted cells
 - **Sequential Execution**: Ensure all cells run sequentially without errors
+
+## 🎓 Learning Tone & Voice (Swamy's Style)
+
+When writing notebooks and learning notes, use **Swamy's personal learning tone**:
+
+### First-Person Voice
+- Use "I'm learning...", "I'm revising...", "I want to be able to..."
+- Write as personal notes, not formal instruction
+- Example: "I'm building intuition for attention by working through this example"
+
+### Reflection-Oriented
+- Include intent, confusion, or takeaways
+- Use phrases like "I noticed...", "I still need to...", "My takeaway:..."
+- Acknowledge gaps or areas needing more practice
+- Example: "I noticed I confuse embeddings with encodings, so I'm writing this down"
+
+### Personal Journey, Not Instruction
+- Prefer "my notes", "my understanding", "my revision"
+- **Avoid lecturer/course framing**: Never say "this course" or "the instructor"
+- Write as if documenting your own learning process
+- Example: "My understanding: tokenization splits text, but I need to practice BPE more"
+
+### Style Guidelines
+- **Keep it concise and honest**: Acknowledge what you don't know yet
+- **Use simple, clear language**: Avoid formal teaching tone
+- **Show learning process**: Include confusion, realizations, and next steps
+- **Be authentic**: Write as you're actually learning, not teaching
+
+### Example Phrasing
+- ✅ "I'm building intuition for self-attention by implementing it step-by-step"
+- ✅ "I noticed I mix up query and key roles, so I'm clarifying this here"
+- ✅ "My takeaway: layer normalization stabilizes training, but I need to understand why"
+- ✅ "I still need to practice backpropagation through attention - adding this to my revision list"
+- ❌ "This course teaches attention mechanisms" (too formal, lecturer tone)
+- ❌ "The instructor explains that..." (course framing)
+- ❌ "We will learn about..." (instructional, not personal)
 
 ## Source Material Handling (CRITICAL)
 

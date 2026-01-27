@@ -7,14 +7,20 @@
 ## Quick Reference
 
 **Key Directories:**
-- `src/` - Core implementation code (Python modules)
-- `notebooks/` - Jupyter notebooks for interactive learning
-- `docs/` - Study notes and planning documentation
+- `src/` - Core implementation code (Python modules) - **Reusable Code**
+- `notebooks/` - Jupyter notebooks for interactive learning - **Simulation (Lab style)**
+- `docs/` - Study notes and planning documentation - **Theory (Textbook style)**
   - `docs/reviews/` - **All review reports MUST go here**
   - `docs/reference/` - Reference materials (git, PowerShell, Python commands)
-  - `docs/reading-notes/` - Synthesized study notes and summaries
+  - `docs/reading-notes/` - Synthesized study notes and summaries - **Theory**
 - `source-material/` - **READ-ONLY** staging area for raw author content (transcripts, PDFs, scratch notes)
 - `tests/` - Unit tests (to be created)
+
+**Quick Summary by Purpose:**
+- **`docs/reading-notes/`**: Theory (Textbook style) - Synthesized learning notes
+- **`notebooks/`**: Simulation (Lab style) - Hands-on experiments and practice
+- **`src/`**: Reusable Code - Modular implementations
+- **`source-material/`**: Staging area for raw content (Read-Only)
 
 **Key Entry Points:**
 - `src/main.py` - Main entry point
