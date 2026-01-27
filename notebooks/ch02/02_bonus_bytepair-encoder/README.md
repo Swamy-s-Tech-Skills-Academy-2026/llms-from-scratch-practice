@@ -66,18 +66,17 @@ I recommend following this order:
 - torch, numpy - Standard deps
 
 ### Optional dependencies (for comparisons)
-
-If you want to run transformers comparisons, install:
-
+If you want to run transformers comparisons, install the `bpe-experiments` group:
 ```powershell
-uv pip install transformers requests tqdm
+uv sync --group bpe-experiments
 ```
 
-Or use the requirements file from source-material:
+This will install:
+- transformers>=4.33.2
+- requests>=2.31.0
+- tqdm>=4.66.0
 
-```powershell
-uv pip install -r ../../source-material/ch02_bonus_bpe_from_author/requirements-extra.txt
-```
+**Note**: Using `uv sync` with dependency groups is the recommended approach for this repository, ensuring proper environment management.
 
 ## My Learning Status
 
