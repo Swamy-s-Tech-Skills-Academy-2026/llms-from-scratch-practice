@@ -19,11 +19,9 @@ A clear and concise description of what this PR does.
 
 ## Content Type
 
-- [ ] Frontend (React with TypeScript)
-- [ ] Backend (Flask API)
-- [ ] Database (PostgreSQL schema/migrations)
+- [ ] Notebook (`notebooks/`)
+- [ ] Source code (`src/`)
 - [ ] Documentation (`docs/`, `README.md`)
-- [ ] Tooling/scripts (`tools/`)
 - [ ] Configuration (`.github/`, `.cursor/`, etc.)
 
 ## Changes Made
@@ -46,7 +44,7 @@ Brief summary of what was changed and why.
 - [ ] My changes follow the repository's [content rules](../.cursor/rules/01_educational-content-rules.mdc)
 - [ ] I have checked for broken file references
 - [ ] I have verified YAML frontmatter (if applicable)
-- [ ] Code follows project standards (PEP 8 for Python, ESLint for TypeScript)
+- [ ] Code follows project standards (PEP 8 for Python)
 - [ ] I have verified file naming conventions
 - [ ] I have run markdownlint (if applicable)
 - [ ] I have tested my changes locally
@@ -78,8 +76,4 @@ Add screenshots, diagrams, or examples to help reviewers understand your changes
 ## Additional Notes
 
 Any additional information, context, or notes for reviewers.
-
----
-
-**Note**: This repository is for the GenAI Email & Report Drafting System. Your contributions help improve the system for everyone.
 

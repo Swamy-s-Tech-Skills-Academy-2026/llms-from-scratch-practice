@@ -41,7 +41,7 @@ If applicable, add screenshots to help explain your problem.
 
 ## Additional Context
 
-- **Component**: [Frontend / Backend / Database / Documentation / Other]
+- **Component**: [Notebooks / Source Code / Documentation / Configuration / Other]
 - **Severity**: [Low / Medium / High]
 - **Impact**: How does this affect the system functionality?
 
@@ -50,6 +50,4 @@ If applicable, add screenshots to help explain your problem.
 If you have a suggestion for how to fix this, please describe it here.
 
 ---
-
-**Note**: This repository is for the GenAI Email & Report Drafting System. Bug reports help improve the system quality for everyone.
 

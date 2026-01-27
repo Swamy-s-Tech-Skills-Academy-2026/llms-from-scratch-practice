@@ -223,7 +223,7 @@ A solid foundation will significantly improve comprehension of:
 ```text
 .
 ├── docs/               # Study notes and structure docs
-├── src/                # Implementation code (currently empty)
+├── src/                # Implementation code
 ├── README.md           # This file
 └── LICENSE
 ```
