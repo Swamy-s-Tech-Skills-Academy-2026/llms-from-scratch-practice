@@ -1,8 +1,10 @@
-# GenAI Email & Report Drafting System Repository Verification and Content Enhancement
+# LLMs From Scratch Practice Repository Verification and Content Enhancement
 
 ## Context
 
-You are working with **GenAI Email & Report Drafting System**, an N-Tier web application that generates professional emails and reports using Google Gemini Large Language Models. The repository implements a React.js with TypeScript frontend, Flask REST API backend, PostgreSQL database, and Google Gemini API integration.
+You are working with **LLMs From Scratch Practice**, a learning workspace for building a GPT-style model step-by-step in Python. The repository focuses on notebooks, reusable `src/` modules, and study notes.
+
+> **Note**: Any references to other stacks (React, Flask, PostgreSQL, Gemini, N‑Tier) below are legacy and should be ignored for this repository.
 
 **Repository Structure:**
 

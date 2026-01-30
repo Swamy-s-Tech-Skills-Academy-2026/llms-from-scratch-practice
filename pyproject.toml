@@ -19,6 +19,11 @@ dev = [
     "jupyter>=1.0.0",
     "ipykernel>=6.29.0",
 ]
+bpe-experiments = [
+    "transformers>=4.33.2",
+    "requests>=2.31.0",
+    "tqdm>=4.66.0",
+]
 
 [tool.uv]
 package = true

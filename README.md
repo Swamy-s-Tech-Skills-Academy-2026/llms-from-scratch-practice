@@ -81,12 +81,18 @@ uv init
 This repository already includes `pyproject.toml`, so you can skip this step here.
 
 ### 3. Sync Dependencies
-```bash
-# Create .venv and install runtime dependencies
+```powershell
+# 1. Install base runtime dependencies
 uv sync
 
-# Optional: include dev tools (pytest, black, etc.)
+# 2. Install dev tools (recommended for this repo)
 uv sync --group dev
+
+# 3. Install all groups (including BPE experiments)
+uv sync --group dev --group bpe-experiments
+
+# 4. Troubleshooting: Use copy mode if you see "Failed to hardlink files"
+uv sync --link-mode=copy
 ```
 
 ### 4. Run Commands (No Activation Needed)
@@ -223,7 +229,7 @@ A solid foundation will significantly improve comprehension of:
 ```text
 .
 ├── docs/               # Study notes and structure docs
-├── src/                # Implementation code (currently empty)
+├── src/                # Implementation code
 ├── README.md           # This file
 └── LICENSE
 ```

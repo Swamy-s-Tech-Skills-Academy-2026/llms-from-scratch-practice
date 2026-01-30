@@ -29,7 +29,7 @@ This is a **learning workspace** for building a GPT-style LLM from scratch based
 - `tests/` - Unit tests (to be created)
 
 ### Tech Stack
-- Python 3.13+
+- Python 3.12+
 - PyTorch
 - tiktoken
 - Jupyter notebooks

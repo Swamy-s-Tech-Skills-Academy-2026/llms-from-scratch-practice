@@ -45,7 +45,7 @@ As the code evolves, we will introduce a modular `src/` layout similar to:
 | Folder | Purpose |
 | :--- | :--- |
 | **`src/`** | The "engine room". Contains pure, reusable Python modules. |
-| **`notebooks/`** | Jupyter notebooks for interactive learning, data inspection, and visual debugging. |
+| **`notebooks/`** | Jupyter notebooks for interactive learning, data inspection, and visual debugging (organized by chapter, e.g. `notebooks/ch02`, `notebooks/ch03`). |
 | **`data/`** | Stores raw text data and processed `.bin` files. |
 
 ### `src/` Detailed Structure (Planned)
