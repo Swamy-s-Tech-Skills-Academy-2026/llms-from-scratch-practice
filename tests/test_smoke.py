@@ -6,7 +6,7 @@ dependencies are available. They serve as a CI health check.
 """
 
 import sys
-from pathlib import Path
+
 
 
 def test_python_version():
