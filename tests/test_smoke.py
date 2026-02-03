@@ -8,7 +8,6 @@ dependencies are available. They serve as a CI health check.
 import sys
 
 
-
 def test_python_version():
     """Verify Python version is 3.12+."""
     assert sys.version_info >= (3, 12), "Python 3.12+ required"
