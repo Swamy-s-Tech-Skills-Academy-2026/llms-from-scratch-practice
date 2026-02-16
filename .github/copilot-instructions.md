@@ -20,6 +20,16 @@ Please follow these guidelines when generating or modifying code and docs:
 
 This repo is for building intuition by implementing a GPT-style model step-by-step.
 
+## 🧱 Three-Layer Learning Architecture (REQUIRED)
+
+For each topic/algorithm, create and keep three aligned artifacts:
+
+- **Theory**: Reading notes in `docs/reading-notes/` with local numbering and the algorithm name.
+- **Implementation**: Notebook in `notebooks/` with the matching algorithm name and a `-implementation` suffix.
+- **Practice**: Examples in `examples/` with the matching algorithm name and a `-examples` suffix.
+
+**Numbering rule**: Use local sequence numbering (`01`, `02`, …) within each folder, and keep the three files aligned per topic.
+
 ### What This Repository Provides
 
 - **Structured Learning Material**: Notes on tokenization, attention, transformers, and training
