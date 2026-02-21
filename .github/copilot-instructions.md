@@ -24,7 +24,7 @@ This repo is for building intuition by implementing a GPT-style model step-by-st
 
 For each topic/algorithm, create and keep three aligned artifacts:
 
-- **Theory**: Reading notes in `docs/reading-notes/` with local numbering and the algorithm name.
+- **Theory**: Reading notes in `reading-notes/` with local numbering and the algorithm name.
 - **Implementation**: Notebook in `notebooks/` with the matching algorithm name and a `-implementation` suffix.
 - **Practice**: Examples in `examples/` with the matching algorithm name and a `-examples` suffix.
 
@@ -39,7 +39,7 @@ For each topic/algorithm, create and keep three aligned artifacts:
 
 ### Repository Structure by Purpose
 
-- **`docs/reading-notes/`**: Theory (Textbook style) - Synthesized study notes
+- **`reading-notes/`**: Theory (Textbook style) - Synthesized study notes
 - **`notebooks/`**: Simulation (Lab style) - Hands-on experiments chapter-by-chapter
 - **`src/`**: Reusable Code - Modular implementations (tokenization, model, training)
 - **`source-material/`**: Staging area for raw content (Read-Only)
@@ -139,7 +139,7 @@ See `.cursor/rules/08_source-material-rules.mdc` for complete guidelines.
 - **Review reports**: All code review, notebook review, and fix summary reports MUST be created in `docs/reviews/`
 - **Reference materials**: General reference docs (git, PowerShell, Python commands) go in `docs/reference/`
 - **Study plans**: Learning roadmaps and study guides go in `docs/`
-- **Reading notes**: Synthesized study notes go in `docs/reading-notes/`
+- **Reading notes**: Synthesized study notes go in `reading-notes/`
 - **Never create review documentation in the root directory**
 
 ## Quality Assurance Checklist

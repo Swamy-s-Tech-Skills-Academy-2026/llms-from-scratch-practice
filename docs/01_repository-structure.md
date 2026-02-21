@@ -8,12 +8,7 @@ This document captures the **current layout** of the repo and the **target struc
 
 ```text
 .
-├── docs/                          # Study notes, planning docs, and reviews
-│   ├── reading-notes/             # Synthesized theory notes (Swamy's voice)
-│   ├── reference/                 # Git, PowerShell, Python command references
-│   ├── reviews/                   # Code/notebook review reports
-│   ├── 01_repository-structure.md
-│   └── 01_study_plan.md
+├── examples/                      # Synthesized practice examples (Three-Layer Architecture)
 ├── notebooks/                     # Synthesized, hands-on learning notebooks
 │   ├── ch02/                      # Chapter 2: Working with Text Data
 │   │   ├── 01_main-chapter-code/  # Core tokenization + dataloader
@@ -23,6 +18,12 @@ This document captures the **current layout** of the repo and the **target struc
 │   │   └── 05_bpe-from-scratch/
 │   └── ch03/                      # Chapter 3: Attention Mechanisms
 │       └── 01_attention_mechanisms.ipynb
+├── reading-notes/                 # Synthesized theory notes (Swamy's voice)
+├── docs/                          # Study plans, structure docs, and reviews
+│   ├── reference/                 # Git, PowerShell, Python command references
+│   ├── reviews/                   # Code/notebook review reports
+│   ├── 01_repository-structure.md
+│   └── 01_study_plan.md
 ├── source-material/               # READ-ONLY staging area (raw author content)
 │   ├── ch01/
 │   ├── ch02/
