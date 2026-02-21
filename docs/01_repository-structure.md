@@ -17,8 +17,19 @@ This document captures the **current layout** of the repo and the **target struc
 │   │   ├── 04_bonus_dataloader-intuition/
 │   │   └── 05_bpe-from-scratch/
 │   └── ch03/                      # Chapter 3: Attention Mechanisms
-│       └── 01_attention_mechanisms.ipynb
+│       ├── 01_attention_mechanisms.ipynb   # Main: §3.3 simple → §3.6 MHA
+│       ├── 02_multihead-attention.ipynb    # MHA + data-loading quick reference
+│       ├── exercise-solutions.ipynb        # Ex 3.1, 3.2, 3.3
+│       ├── small-text-sample.txt           # Sample text for dataloader demos
+│       ├── 02_bonus_efficient-multihead-attention/
+│       │   ├── mha-implementations.ipynb  # Wrapper vs weight-split comparison
+│       │   └── README.md
+│       └── 03_understanding-buffers/
+│           ├── understanding-buffers.ipynb # Plain attr vs register_buffer demo
+│           └── README.md
 ├── reading-notes/                 # Synthesized theory notes (Swamy's voice)
+│   ├── ch01_reading-strategy.md           # Ch01: personal reading strategy
+│   └── ch02_decoder_only_transformer_flow.md  # Ch02: decoder-only data flow
 ├── docs/                          # Study plans, structure docs, and reviews
 │   ├── reference/                 # Git, PowerShell, Python command references
 │   ├── reviews/                   # Code/notebook review reports
