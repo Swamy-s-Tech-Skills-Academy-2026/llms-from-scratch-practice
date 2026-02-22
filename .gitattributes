@@ -1,0 +1,11 @@
+# Mermaid diagram source files (text)
+*.mmd text
+*.mmd diff
+
+# PNG diagram exports (binary)
+*.png binary
+*.png diff=image
+
+# Markdown files
+*.md text
+*.md diff
