@@ -36,7 +36,7 @@ This bonus section is where I'm exploring different BPE implementations to under
 This educational content was synthesized from:
 
 - **Book**: *Build a Large Language Model From Scratch* by Sebastian Raschka
-- **Reference**: Author's BPE comparison code in `../../source-material/ch02_bonus_bpe_from_author/`
+- **Reference**: Author's BPE comparison code in `../../source-material/ch02/02_bonus_bytepair-encoder/`
 - **Original implementation**: OpenAI's GPT-2 encoder.py (Modified MIT License)
 
 **Important**: Following the repository's zero-copy policy, all content here is written in my own words to demonstrate understanding, not copied from sources.

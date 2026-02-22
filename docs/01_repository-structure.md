@@ -8,12 +8,45 @@ This document captures the **current layout** of the repo and the **target struc
 
 ```text
 .
-├── docs/               # Study notes and planning docs
-├── src/                # Implementation code
-├── notebooks/          # Exploratory notebooks
-├── pyproject.toml      # Project dependencies (uv)
-├── .python-version     # Python version pin
-├── README.md           # Entry point for the repo
+├── examples/                      # Synthesized practice examples (Three-Layer Architecture)
+├── notebooks/                     # Synthesized, hands-on learning notebooks
+│   ├── ch02/                      # Chapter 2: Working with Text Data
+│   │   ├── 01_main-chapter-code/  # Core tokenization + dataloader
+│   │   ├── 02_bonus_bytepair-encoder/
+│   │   ├── 03_bonus_embedding-vs-matmul/
+│   │   ├── 04_bonus_dataloader-intuition/
+│   │   └── 05_bpe-from-scratch/
+│   └── ch03/                      # Chapter 3: Attention Mechanisms
+│       ├── 01_attention_mechanisms.ipynb   # Main: §3.3 simple → §3.6 MHA
+│       ├── 02_multihead-attention.ipynb    # MHA + data-loading quick reference
+│       ├── exercise-solutions.ipynb        # Ex 3.1, 3.2, 3.3
+│       ├── small-text-sample.txt           # Sample text for dataloader demos
+│       ├── 02_bonus_efficient-multihead-attention/
+│       │   ├── mha-implementations.ipynb  # Wrapper vs weight-split comparison
+│       │   └── README.md
+│       └── 03_understanding-buffers/
+│           ├── understanding-buffers.ipynb # Plain attr vs register_buffer demo
+│           └── README.md
+├── reading-notes/                 # Synthesized theory notes (Swamy's voice)
+│   ├── ch01_reading-strategy.md           # Ch01: personal reading strategy
+│   └── ch02_decoder_only_transformer_flow.md  # Ch02: decoder-only data flow
+├── docs/                          # Study plans, structure docs, and reviews
+│   ├── reference/                 # Git, PowerShell, Python command references
+│   ├── reviews/                   # Code/notebook review reports
+│   ├── 01_repository-structure.md
+│   └── 01_study_plan.md
+├── source-material/               # READ-ONLY staging area (raw author content)
+│   ├── ch01/
+│   ├── ch02/
+│   └── ch03/
+├── src/                           # Reusable Python modules (engine room)
+│   ├── __init__.py
+│   └── main.py
+├── tests/                         # CI smoke tests
+│   └── test_smoke.py
+├── pyproject.toml                 # Project dependencies (uv)
+├── .python-version                # Python version pin (3.12)
+├── README.md                      # Entry point for the repo
 └── LICENSE
 ```
 
