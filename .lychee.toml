@@ -1,0 +1,35 @@
+# Lychee link-checker configuration
+# https://lycheeverse.github.io/lychee/configuration/
+
+# ── Scope ────────────────────────────────────────────────────────────────────
+# Check all markdown files; exclude source-material (read-only staging area)
+exclude_path = ["source-material"]
+
+# ── Accepted HTTP status codes ────────────────────────────────────────────────
+# 200 is always accepted. Also accept 206 (partial), 429 (rate-limited)
+accept = [200, 206, 429]
+
+# ── Timeout & retries ─────────────────────────────────────────────────────────
+timeout = 20
+max_retries = 3
+
+# ── Exclude patterns ──────────────────────────────────────────────────────────
+exclude = [
+    # Localhost / loopback
+    "^https?://localhost",
+    "^https?://127\\.0\\.0\\.1",
+
+    # GitHub rate-limits heavily — skip raw GitHub API / avatar URLs
+    "^https://api\\.github\\.com",
+    "^https://avatars\\.githubusercontent\\.com",
+
+    # Example / placeholder domains
+    "^https?://example\\.com",
+
+    # mailto links
+    "^mailto:",
+]
+
+# ── Output ────────────────────────────────────────────────────────────────────
+format = "detailed"
+no_progress = false

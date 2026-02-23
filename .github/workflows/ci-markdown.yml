@@ -1,0 +1,47 @@
+# Markdown Link Check - lychee
+# Checks all internal and external links in *.md files (excluding source-material/)
+
+name: Markdown Link Check
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - '.lychee.toml'
+      - '.github/workflows/ci-markdown.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - '.lychee.toml'
+      - '.github/workflows/ci-markdown.yml'
+  schedule:
+    # Run weekly on Monday at 06:00 UTC to catch link rot
+    - cron: '0 6 * * 1'
+
+jobs:
+  linkcheck:
+    name: lychee link check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run lychee link checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Enumerate markdown files explicitly (avoids glob artefacts).
+          # source-material/ is excluded via .lychee.toml exclude_path.
+          args: >-
+            --config .lychee.toml
+            --no-progress
+            --format detailed
+            "**/*.md"
+          # Exit with non-zero on broken links (fail the build)
+          fail: true
+        env:
+          # Provide GITHUB_TOKEN to avoid rate-limiting on github.com links
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
