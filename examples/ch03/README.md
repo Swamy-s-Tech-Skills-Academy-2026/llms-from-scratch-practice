@@ -1,6 +1,6 @@
 # Practice Examples: Chapter 3 — Attention Mechanisms
 
-**Three-Layer Architecture — Layer 3: Practice**
+## Three-Layer Architecture — Layer 3: Practice
 
 ## What's Here
 

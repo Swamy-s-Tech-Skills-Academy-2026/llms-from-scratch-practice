@@ -74,7 +74,7 @@ You will learn:
 
 ---
 
-# 4. How You Should Study This Book (Very Important)
+## 4. How You Should Study This Book (Very Important)
 
 **Do NOT:**
 
@@ -95,7 +95,7 @@ You will learn:
 
 ---
 
-# 5. Suggested Weekly Study Plan (Realistic)
+## 5. Suggested Weekly Study Plan (Realistic)
 
 | Week | Focus |
 | :--- | :--- |

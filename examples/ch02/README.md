@@ -1,6 +1,6 @@
 # Practice Examples: Chapter 2 — Working with Text Data
 
-**Three-Layer Architecture — Layer 3: Practice**
+## Three-Layer Architecture — Layer 3: Practice
 
 ## What's Here
 
