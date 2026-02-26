@@ -28,8 +28,9 @@ This document captures the **current layout** of the repo and the **target struc
 │           ├── understanding-buffers.ipynb # Plain attr vs register_buffer demo
 │           └── README.md
 ├── reading-notes/                 # Synthesized theory notes (Swamy's voice)
-│   ├── ch01_reading-strategy.md           # Ch01: personal reading strategy
-│   └── ch02_decoder_only_transformer_flow.md  # Ch02: decoder-only data flow
+│   ├── ch01_reading-strategy.md              # Ch01: personal reading strategy
+│   ├── ch02_decoder_only_transformer_flow.md # Ch02: decoder-only data flow
+│   └── ch03_attention_mechanisms.md          # Ch03: self-attention, causal mask, MHA
 ├── docs/                          # Study plans, structure docs, and reviews
 │   ├── reference/                 # Git, PowerShell, Python command references
 │   ├── reviews/                   # Code/notebook review reports

@@ -1,3 +1,7 @@
+# ⚠️  LEGACY FILE — maintained for reference only.
+# The authoritative lychee configuration is `.lychee.toml` (referenced by CI).
+# This file is NOT loaded by GitHub Actions.  Delete when convenient.
+#
 # https://raw.githubusercontent.com/lycheeverse/lychee/master/lychee.example.toml
 # Lychee link checker configuration
 verbose = "info"
