@@ -1,0 +1,12 @@
+[flake8]
+# Match Black's line-length so there are no style conflicts
+max-line-length = 100
+
+# E203: whitespace before ':' — Black formats slice notation with spaces, flake8 flags it.
+# W503/W504: line break before/after binary operator — Black-style continuation.
+extend-ignore = E203, W503, W504
+
+# Per-file suppressions for tool scripts that wrap CLI/system-level code
+per-file-ignores =
+    # Utility tool scripts are exempt from strict line-length
+    tools/pyscripts/*.py: E501

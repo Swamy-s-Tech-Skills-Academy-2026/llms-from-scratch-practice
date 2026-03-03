@@ -78,7 +78,7 @@ def pdf_to_markdown(pdf_path: str, output_path: str | None = None) -> str:
     # Add header
     header = f"# {pdf_file.stem}\n\n"
     header += f"**Source**: {pdf_file.name}\n"
-    header += f"**Extracted**: Auto-generated from PDF\n\n"
+    header += "**Extracted**: Auto-generated from PDF\n\n"
     header += "---\n"
     
     full_content = header + content
