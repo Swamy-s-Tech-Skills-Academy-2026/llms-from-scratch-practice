@@ -23,13 +23,13 @@ def extract_with_pymupdf(pdf_path: Path) -> str:
     """Extract text using PyMuPDF (preferred for better formatting)."""
     doc = pymupdf.open(pdf_path)
     markdown_content = []
-    
+
     for page_num, page in enumerate(doc, 1):
         markdown_content.append(f"\n## Slide {page_num}\n")
         text = page.get_text()
         markdown_content.append(text.strip())
         markdown_content.append("\n")
-    
+
     doc.close()
     return "\n".join(markdown_content)
 
@@ -38,13 +38,13 @@ def extract_with_pypdf(pdf_path: Path) -> str:
     """Extract text using pypdf as fallback."""
     reader = PdfReader(pdf_path)
     markdown_content = []
-    
+
     for page_num, page in enumerate(reader.pages, 1):
         markdown_content.append(f"\n## Slide {page_num}\n")
         text = page.extract_text()
         markdown_content.append(text.strip())
         markdown_content.append("\n")
-    
+
     return "\n".join(markdown_content)
 
 
@@ -61,10 +61,10 @@ def pdf_to_markdown(pdf_path: str, output_path: str | None = None) -> str:
         Markdown content as string
     """
     pdf_file = Path(pdf_path)
-    
+
     if not pdf_file.exists():
         raise FileNotFoundError(f"PDF file not found: {pdf_path}")
-    
+
     # Try PyMuPDF first, fallback to pypdf
     if HAS_PYMUPDF:
         print(f"Extracting with PyMuPDF: {pdf_file.name}")
@@ -74,13 +74,13 @@ def pdf_to_markdown(pdf_path: str, output_path: str | None = None) -> str:
         content = extract_with_pypdf(pdf_file)
     else:
         raise ImportError("No PDF library available. Install pymupdf or pypdf: pip install pymupdf")
-    
+
     # Add header
     header = f"# {pdf_file.stem}\n\n"
     header += f"**Source**: {pdf_file.name}\n"
     header += "**Extracted**: Auto-generated from PDF\n\n"
     header += "---\n"
-    
+
     full_content = header + content
 
     # Output path: use provided path, or same folder as PDF with .md extension
