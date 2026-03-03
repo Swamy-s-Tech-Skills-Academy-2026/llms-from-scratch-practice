@@ -9,20 +9,26 @@ These are my personal practice scripts for Chapter 3. I rebuild each attention v
 | # | File | Topic |
 | :--- | :--- | :--- |
 | 01 | `01_attention-examples.py` | Scaled dot-product, simple self-attention, causal attention, MHA wrapper, shape cheat sheet |
+| 02 | `02_efficient_attention_examples.py` | Naive loop vs vectorised MHA vs PyTorch SDPA — timing and shape walkthrough |
+| 03 | `03_buffers_examples.py` | `register_buffer` vs plain attribute — device-awareness, state_dict visibility |
 
 ## How to Run
 
 ```powershell
 # From repo root, with venv active:
 uv run python examples/ch03/01_attention-examples.py
+uv run python examples/ch03/02_efficient_attention_examples.py
+uv run python examples/ch03/03_buffers_examples.py
 ```
 
 ## Alignment with Other Layers
 
-| Layer | File |
+| Layer | Location |
 | :--- | :--- |
 | Theory      | `reading-notes/ch03_attention_mechanisms.md` |
-| Implementation | `notebooks/ch03/01_attention_mechanisms.ipynb` |
+| Implementation (main)  | `notebooks/ch03/01_attention_mechanisms.ipynb` |
+| Implementation (bonus) | `notebooks/ch03/02_bonus_efficient-multihead-attention/` |
+| Implementation (bonus) | `notebooks/ch03/03_understanding-buffers/` |
 | Practice    | This folder |
 
 ## Source Attribution
