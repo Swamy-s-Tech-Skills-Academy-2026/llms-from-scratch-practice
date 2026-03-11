@@ -8,7 +8,10 @@ This document captures the **current layout** of the repo and the **target struc
 
 ```text
 .
-├── examples/                      # Synthesized practice examples (Three-Layer Architecture)
+├── examples/                      # Synthesized practice examples (ch02, ch03, ch04)
+│   ├── ch02/                      # Tokenization, dataloader
+│   ├── ch03/                      # Attention, efficient MHA, buffers
+│   └── ch04/                      # GPT, performance, KV-cache, GQA, MLA, SWA, MoE, DeltaNet
 ├── notebooks/                     # Synthesized, hands-on learning notebooks
 │   ├── ch02/                      # Chapter 2: Working with Text Data
 │   │   ├── 01_main-chapter-code/  # Core tokenization + dataloader
@@ -16,21 +19,28 @@ This document captures the **current layout** of the repo and the **target struc
 │   │   ├── 03_bonus_embedding-vs-matmul/
 │   │   ├── 04_bonus_dataloader-intuition/
 │   │   └── 05_bpe-from-scratch/
-│   └── ch03/                      # Chapter 3: Attention Mechanisms
-│       ├── 01_attention_mechanisms.ipynb   # Main: §3.3 simple → §3.6 MHA
-│       ├── 02_multihead-attention.ipynb    # MHA + data-loading quick reference
-│       ├── exercise-solutions.ipynb        # Ex 3.1, 3.2, 3.3
-│       ├── small-text-sample.txt           # Sample text for dataloader demos
-│       ├── 02_bonus_efficient-multihead-attention/
-│       │   ├── mha-implementations.ipynb  # Wrapper vs weight-split comparison
-│       │   └── README.md
-│       └── 03_understanding-buffers/
-│           ├── understanding-buffers.ipynb # Plain attr vs register_buffer demo
-│           └── README.md
+│   ├── ch03/                      # Chapter 3: Attention Mechanisms
+│   │   ├── 01_attention_mechanisms.ipynb   # Main: §3.3 simple → §3.6 MHA
+│   │   ├── 02_multihead-attention.ipynb    # MHA + data-loading quick reference
+│   │   ├── exercise-solutions.ipynb        # Ex 3.1, 3.2, 3.3
+│   │   ├── small-text-sample.txt           # Sample text for dataloader demos
+│   │   ├── 02_bonus_efficient-multihead-attention/
+│   │   └── 03_understanding-buffers/
+│   └── ch04/                      # Chapter 4: Building a GPT
+│       ├── 01_gpt-model-implementation.ipynb through 08_deltanet-implementation.ipynb
+│       └── exercise-solutions.ipynb
 ├── reading-notes/                 # Synthesized theory notes (Swamy's voice)
 │   ├── ch01_reading-strategy.md              # Ch01: personal reading strategy
 │   ├── ch02_decoder_only_transformer_flow.md # Ch02: decoder-only data flow
-│   └── ch03_attention_mechanisms.md          # Ch03: self-attention, causal mask, MHA
+│   ├── ch03_attention_mechanisms.md          # Ch03: self-attention, causal mask, MHA
+│   ├── ch04_01_gpt_model_architecture.md    # Ch04: GPT architecture
+│   ├── ch04_02_performance_analysis.md      # Ch04: performance
+│   ├── ch04_03_kv_cache.md                  # Ch04: KV-cache
+│   ├── ch04_04_grouped_query_attention.md   # Ch04: GQA
+│   ├── ch04_05_multi_head_latent_attention.md # Ch04: MLA
+│   ├── ch04_06_sliding_window_attention.md  # Ch04: SWA
+│   ├── ch04_07_mixture_of_experts.md       # Ch04: MoE
+│   └── ch04_08_deltanet.md                 # Ch04: DeltaNet
 ├── docs/                          # Study plans, structure docs, and reviews
 │   ├── reference/                 # Git, PowerShell, Python command references
 │   ├── reviews/                   # Code/notebook review reports
@@ -39,7 +49,8 @@ This document captures the **current layout** of the repo and the **target struc
 ├── source-material/               # READ-ONLY staging area (raw author content)
 │   ├── ch01/
 │   ├── ch02/
-│   └── ch03/
+│   ├── ch03/
+│   └── ch04/
 ├── src/                           # Reusable Python modules (engine room)
 │   ├── __init__.py
 │   └── main.py
