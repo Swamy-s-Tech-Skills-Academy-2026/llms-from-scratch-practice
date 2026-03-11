@@ -49,10 +49,28 @@ if ($sourceFiles.Count -eq 0) {
 }
 
 # Get content files to check
-$contentFiles = Get-ChildItem -Path (Join-Path $RepoRoot "src") -Filter "*.md" -Recurse -ErrorAction SilentlyContinue |
-    Where-Object { $_.FullName -notmatch '\\resources\\' }
+# Scan learning/content destinations, excluding source-material (read-only input corpus).
+$contentSearchRoots = @(
+    $RepoRoot,
+    (Join-Path $RepoRoot "docs"),
+    (Join-Path $RepoRoot "reading-notes"),
+    (Join-Path $RepoRoot "notebooks"),
+    (Join-Path $RepoRoot "examples"),
+    (Join-Path $RepoRoot "src")
+) | Where-Object { Test-Path -LiteralPath $_ } | Sort-Object -Unique
 
-$contentFiles = @($contentFiles)
+$contentFiles = foreach ($root in $contentSearchRoots) {
+    Get-ChildItem -Path $root -Filter "*.md" -Recurse -ErrorAction SilentlyContinue |
+        Where-Object {
+            $_.FullName -notmatch '\\source-material\\' -and
+            $_.FullName -notmatch '\\resources\\' -and
+            $_.FullName -notmatch '\\.git\\' -and
+            $_.FullName -notmatch '\\node_modules\\' -and
+            $_.FullName -notmatch '\\.venv\\'
+        }
+}
+
+$contentFiles = @($contentFiles | Sort-Object FullName -Unique)
 
 Write-Host "Zero-Copy Policy Verification" -ForegroundColor Cyan
 Write-Host "=" * 60 -ForegroundColor Cyan
