@@ -13,6 +13,78 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+function Get-NotebookMarkdownText {
+    param([string]$Path)
+
+    $raw = Get-Content -LiteralPath $Path -Raw -ErrorAction Stop
+    $notebook = $raw | ConvertFrom-Json -ErrorAction Stop
+    if (-not $notebook.cells) {
+        return ""
+    }
+
+    $markdownChunks = foreach ($cell in $notebook.cells) {
+        if ($cell.cell_type -ne 'markdown') {
+            continue
+        }
+
+        if ($cell.source -is [System.Array]) {
+            ($cell.source -join "")
+        }
+        elseif ($cell.source) {
+            [string]$cell.source
+        }
+    }
+
+    return (($markdownChunks | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) -join "`n")
+}
+
+function Get-PythonNarrativeText {
+    param([string]$Path)
+
+    $raw = Get-Content -LiteralPath $Path -Raw -ErrorAction Stop
+    $commentMatches = [regex]::Matches($raw, '(?m)^\s*#\s*(.+)$')
+    $docstringMatches = [regex]::Matches($raw, '(?s)("""|'''''')(.*?)(\1)')
+
+    $snippets = @()
+    foreach ($match in $commentMatches) {
+        $text = $match.Groups[1].Value.Trim()
+        if ($text.Length -gt 0) {
+            $snippets += $text
+        }
+    }
+    foreach ($match in $docstringMatches) {
+        $text = $match.Groups[2].Value.Trim()
+        if ($text.Length -gt 0) {
+            $snippets += $text
+        }
+    }
+
+    return ($snippets -join "`n")
+}
+
+function Get-SourceText {
+    param([System.IO.FileInfo]$File)
+
+    switch ($File.Extension.ToLowerInvariant()) {
+        '.md' { return Get-Content -LiteralPath $File.FullName -Raw -ErrorAction Stop }
+        '.txt' { return Get-Content -LiteralPath $File.FullName -Raw -ErrorAction Stop }
+        '.py' { return Get-PythonNarrativeText -Path $File.FullName }
+        '.ipynb' { return Get-NotebookMarkdownText -Path $File.FullName }
+        default { return "" }
+    }
+}
+
+function Get-ContentText {
+    param([System.IO.FileInfo]$File)
+
+    switch ($File.Extension.ToLowerInvariant()) {
+        '.md' { return Get-Content -LiteralPath $File.FullName -Raw -ErrorAction Stop }
+        '.py' { return Get-Content -LiteralPath $File.FullName -Raw -ErrorAction Stop }
+        '.ipynb' { return Get-NotebookMarkdownText -Path $File.FullName }
+        default { return "" }
+    }
+}
+
 function Write-ZeroCopyWarning {
     param([string]$Message)
     Write-Host "⚠️  ZERO-COPY WARNING: $Message" -ForegroundColor Yellow
@@ -33,7 +105,10 @@ $sourceMaterialPath = Join-Path $RepoRoot "source-material"
 $sourceFiles = @()
 
 if (Test-Path $sourceMaterialPath) {
-    $sourceFiles = @(Get-ChildItem -Path $sourceMaterialPath -Filter "*.md" -Recurse -ErrorAction SilentlyContinue)
+    $sourceFiles = @(
+        Get-ChildItem -Path $sourceMaterialPath -Recurse -File -ErrorAction SilentlyContinue |
+            Where-Object { $_.Extension.ToLowerInvariant() -in @('.md', '.txt', '.py', '.ipynb') }
+    )
 }
 
 if ($AdditionalSourceFiles.Count -gt 0) {
@@ -49,28 +124,43 @@ if ($sourceFiles.Count -eq 0) {
 }
 
 # Get content files to check
-# Scan learning/content destinations, excluding source-material (read-only input corpus).
-$contentSearchRoots = @(
-    $RepoRoot,
-    (Join-Path $RepoRoot "docs"),
-    (Join-Path $RepoRoot "reading-notes"),
-    (Join-Path $RepoRoot "notebooks"),
-    (Join-Path $RepoRoot "examples"),
-    (Join-Path $RepoRoot "src")
-) | Where-Object { Test-Path -LiteralPath $_ } | Sort-Object -Unique
+# Scan learner-owned markdown, notebook markdown cells, and selected Python files.
+$contentFiles = @()
 
-$contentFiles = foreach ($root in $contentSearchRoots) {
-    Get-ChildItem -Path $root -Filter "*.md" -Recurse -ErrorAction SilentlyContinue |
+$rootMarkdown = Get-ChildItem -Path $RepoRoot -File -Filter '*.md' -ErrorAction SilentlyContinue |
+    Where-Object { $_.FullName -notmatch '\\.git\\' }
+$contentFiles += $rootMarkdown
+
+foreach ($folder in @('docs', 'reading-notes')) {
+    $path = Join-Path $RepoRoot $folder
+    if (Test-Path -LiteralPath $path) {
+        $contentFiles += Get-ChildItem -Path $path -Recurse -File -Filter '*.md' -ErrorAction SilentlyContinue
+    }
+}
+
+$notebooksPath = Join-Path $RepoRoot 'notebooks'
+if (Test-Path -LiteralPath $notebooksPath) {
+    $contentFiles += Get-ChildItem -Path $notebooksPath -Recurse -File -Include '*.md', '*.ipynb' -ErrorAction SilentlyContinue
+}
+
+foreach ($folder in @('examples', 'src')) {
+    $path = Join-Path $RepoRoot $folder
+    if (Test-Path -LiteralPath $path) {
+        $contentFiles += Get-ChildItem -Path $path -Recurse -File -Include '*.md', '*.py' -ErrorAction SilentlyContinue
+    }
+}
+
+$contentFiles = @(
+    $contentFiles |
         Where-Object {
             $_.FullName -notmatch '\\source-material\\' -and
             $_.FullName -notmatch '\\resources\\' -and
             $_.FullName -notmatch '\\.git\\' -and
             $_.FullName -notmatch '\\node_modules\\' -and
             $_.FullName -notmatch '\\.venv\\'
-        }
-}
-
-$contentFiles = @($contentFiles | Sort-Object FullName -Unique)
+        } |
+        Sort-Object FullName -Unique
+)
 
 Write-Host "Zero-Copy Policy Verification" -ForegroundColor Cyan
 Write-Host "=" * 60 -ForegroundColor Cyan
@@ -85,7 +175,10 @@ $sourcePhrases = @()
 
 foreach ($sourceFile in $sourceFiles) {
     try {
-        $content = Get-Content -LiteralPath $sourceFile.FullName -Raw -ErrorAction Stop
+        $content = Get-SourceText -File $sourceFile
+        if ([string]::IsNullOrWhiteSpace($content)) {
+            continue
+        }
         
         # Extract quoted text (lines starting with >)
         $quoteMatches = [regex]::Matches($content, '(?m)^>\s*"([^"]+)"')
@@ -114,6 +207,16 @@ foreach ($sourceFile in $sourceFiles) {
                 }
             }
         }
+
+        $longLines = $content -split "`r?`n" |
+            ForEach-Object { $_.Trim(' ', "`t", '#', '*', '-') } |
+            Where-Object { $_.Length -ge 80 -and $_ -match '\s' }
+        foreach ($line in $longLines) {
+            $sourceQuotes += [PSCustomObject]@{
+                Quote = $line
+                Source = $sourceFile.Name
+            }
+        }
     }
     catch {
         Write-ZeroCopyWarning "Failed to read source file: $($sourceFile.FullName)"
@@ -132,7 +235,10 @@ $warnings = @()
 
 foreach ($contentFile in $contentFiles) {
     try {
-        $content = Get-Content -LiteralPath $contentFile.FullName -Raw -ErrorAction Stop
+        $content = Get-ContentText -File $contentFile
+        if ([string]::IsNullOrWhiteSpace($content)) {
+            continue
+        }
         
         # Check for quote matches
         foreach ($sourceQuote in $sourceQuotes) {
