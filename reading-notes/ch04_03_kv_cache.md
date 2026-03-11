@@ -1,5 +1,5 @@
 # Chapter 4: Implementing the KV Cache for Faster Inference
-*Reflection Date: March 3, 2026*
+## Reflection Date: March 3, 2026
 
 I noticed a massive bottleneck in how we generate text autoregressively. Generating text token-by-token using my standard Multi-Head Attention implementation is incredibly slow, and I finally understand *why*. I'm going to implement a **KV (Key-Value) Cache** to fix it.
 

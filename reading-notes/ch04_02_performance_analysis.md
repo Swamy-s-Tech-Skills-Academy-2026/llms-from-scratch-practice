@@ -1,5 +1,5 @@
 # Chapter 4: Performance Analysis of the GPT Model (FLOPs & Parameters)
-*Reflection Date: March 3, 2026*
+## Reflection Date: March 3, 2026
 
 I'm taking a brief detour to understand how to measure the performance and memory footprint of my GPT model. While I've implemented the `GPTModel` architecture, it's crucial for me to grasp its computational demands before I actually try to train it or deploy it.
 

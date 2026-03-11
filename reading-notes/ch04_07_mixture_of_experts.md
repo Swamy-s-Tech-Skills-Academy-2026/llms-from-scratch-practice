@@ -1,5 +1,5 @@
 # Chapter 4: Mixture of Experts (MoE)
-*Reflection Date: March 3, 2026*
+## Reflection Date: March 3, 2026
 
 Every optimization I've learned so far has been about shrinking the Attention mechanism. But **Mixture of Experts (MoE)** targets the other massive block in the transformer: the Feed-Forward Network (FFN).
 
