@@ -76,8 +76,7 @@ $script:results = @()
 function Invoke-Script {
   param(
     [Parameter(Mandatory)]
-    [System.IO.FileInfo]$ScriptFile,
-    [string[]]$ScriptArguments = @()
+    [System.IO.FileInfo]$ScriptFile
   )
 
   $name = $ScriptFile.Name
@@ -89,7 +88,7 @@ function Invoke-Script {
   $sw = [System.Diagnostics.Stopwatch]::StartNew()
   try {
     Push-Location $repoRootPath
-    & $path @ScriptArguments
+    & $path
     # Note: $LASTEXITCODE is only set for native executables. For PowerShell scripts,
     # rely on $? (success of last operation) and exceptions.
     $ok = $?
