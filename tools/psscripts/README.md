@@ -55,7 +55,7 @@ Repository content-policy checks (rules vary by repo via `RepoConfig.psd1`).
 
 #### `Verify-ZeroCopy.ps1`
 
-Zero-copy policy verification for content in `src/` (see .cursor rules and copilot-instructions for policy).
+Zero-copy policy verification for markdown content across the learning workspace (for example `README.md`, `docs/`, `reading-notes/`, `notebooks/`, `examples/`, and `src/`).
 
 **Usage:**
 
@@ -70,7 +70,7 @@ Zero-copy policy verification for content in `src/` (see .cursor rules and copil
 
 #### `Run-MarkdownLintAndLychee.ps1`
 
-Runs Markdown lint (`markdownlint-cli2`) and link checking (Lychee) using repo `lychee.toml`.
+Runs Markdown lint (`markdownlint-cli2`) and link checking (Lychee) using repo `.lychee.toml`.
 
 **Usage:**
 

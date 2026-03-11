@@ -5,7 +5,11 @@ last_updated: 2026-01-22
 project: LLMs From Scratch Practice (STSA 2026)
 ---
 
-# Cursor Rules
+# Cursor Rules — Single Source of Truth
+
+**This directory (`.cursor/rules/`) is the single source of truth for all Cursor project rules.**
+
+Do not maintain a separate `.cursorrules` file at the project root. All rules live here so they stay consistent and version-controlled in one place.
 
 This folder contains the Cursor rule files (`.mdc`) used to guide edits in this repository.
 

@@ -1,5 +1,5 @@
 # Chapter 4: Multi-Head Latent Attention (MLA)
-*Reflection Date: March 3, 2026*
+## Reflection Date: March 3, 2026
 
 I've learned about Grouped-Query Attention (GQA) to save memory, but I just discovered a newer, fascinating alternative used in models like DeepSeek V2/V3/R1: **Multi-Head Latent Attention (MLA)**.
 

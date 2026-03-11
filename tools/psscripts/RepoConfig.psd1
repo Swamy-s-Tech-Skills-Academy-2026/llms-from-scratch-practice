@@ -1,5 +1,5 @@
 @{
-  RepoName = 'ml-algorithms-from-scratch'
+  RepoName = 'llms-from-scratch-practice'
 
   ExpectedFolders = @(
     '.copilot'

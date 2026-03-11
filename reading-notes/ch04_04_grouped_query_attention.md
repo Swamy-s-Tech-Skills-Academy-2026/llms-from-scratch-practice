@@ -1,5 +1,5 @@
 # Chapter 4: Grouped-Query Attention (GQA) Memory Savings
-*Reflection Date: March 3, 2026*
+## Reflection Date: March 3, 2026
 
 I'm continuing to refine the architecture of my GPT model. While the standard Multi-Head Attention (MHA) model with a KV Cache dramatically speeds up inference, the KV Cache itself consumes an enormous amount of GPU memory. I'm learning about **Grouped-Query Attention (GQA)** as a highly effective optimization used in models like Llama.
 

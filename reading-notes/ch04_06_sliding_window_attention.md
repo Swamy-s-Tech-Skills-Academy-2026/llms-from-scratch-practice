@@ -1,5 +1,5 @@
 # Chapter 4: Sliding Window Attention (SWA)
-*Reflection Date: March 3, 2026*
+## Reflection Date: March 3, 2026
 
 I'm continuing my journey through attention optimization. I just reviewed Grouped-Query and Latent Attention, but **Sliding Window Attention (SWA)** explores a completely different approach. Instead of compressing the matrices, it compresses the *context*.
 

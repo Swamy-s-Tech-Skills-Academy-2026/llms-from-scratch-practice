@@ -1,5 +1,5 @@
 # Chapter 4: Implementing a GPT Model from Scratch - Architecture Notes
-*Reflection Date: March 3, 2026*
+## Reflection Date: March 3, 2026
 
 I'm building intuition for the complete GPT architecture by assembling the pieces I learned in previous chapters (tokenization and attention) into a functional cohesive model. My goal here is to bridge the gap between individual components and the full generative loop.
 

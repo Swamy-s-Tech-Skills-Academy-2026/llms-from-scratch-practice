@@ -1,6 +1,5 @@
-# Lychee link-checker configuration  (canonical — referenced by CI)
+# Lychee link-checker configuration (canonical — referenced by CI and local tooling)
 # https://lycheeverse.github.io/lychee/configuration/
-# NOTE: lychee.toml at the repo root is a legacy duplicate — this file is authoritative.
 
 # ── Scope ────────────────────────────────────────────────────────────────────
 # Check all markdown files; exclude source-material (read-only staging area)

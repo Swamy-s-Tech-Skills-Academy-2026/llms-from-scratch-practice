@@ -1,5 +1,5 @@
 # Chapter 4: Gated DeltaNet and Linear Attention
-*Reflection Date: March 3, 2026*
+## Reflection Date: March 3, 2026
 
 I've finally reached the limits of modifying standard attention. To solve the $\mathcal{O}(N^2)$ context-length scaling problem once and for all, I'm reviewing **Linear Attention mechanisms**, specifically the **Gated DeltaNet** and **Kimi Linear** architectures.
 

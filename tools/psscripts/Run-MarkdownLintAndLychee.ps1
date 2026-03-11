@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   - Markdown lint: Uses `npx markdownlint-cli2` over README/docs/src/tools by default.
-  - Lychee: Uses the repository `lychee.toml` configuration.
+  - Lychee: Uses the repository `.lychee.toml` configuration.
 
   This script intentionally excludes `source-material/` by default (it is a staging area).
 
@@ -124,7 +124,7 @@ $lycheeExitCode = 0
 if (-not $SkipLychee) {
   Write-Host "==> Running lychee" -ForegroundColor Yellow
 
-  $lycheeConfigPath = Join-Path $repoRoot "lychee.toml"
+  $lycheeConfigPath = Join-Path $repoRoot ".lychee.toml"
   if (-not (Test-Path $lycheeConfigPath)) {
     throw "Missing lychee config: $lycheeConfigPath"
   }
@@ -147,7 +147,7 @@ if (-not $SkipLychee) {
     }
 
     # Mount repo into /workspace and run lychee against that folder.
-    & $containerCmd run --rm -v "${repoRoot}:/workspace" lycheeverse/lychee --config /workspace/lychee.toml @LycheeArgs /workspace
+    & $containerCmd run --rm -v "${repoRoot}:/workspace" lycheeverse/lychee --config /workspace/.lychee.toml @LycheeArgs /workspace
     $lycheeExitCode = $LASTEXITCODE
   }
 
