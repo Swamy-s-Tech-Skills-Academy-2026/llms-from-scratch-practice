@@ -199,8 +199,9 @@ foreach ($sourceFile in $sourceFiles) {
             foreach ($sentence in $sentences) {
                 $words = $sentence.Trim() -split '\s+' | Where-Object { $_.Length -gt 3 }
                 if ($words.Count -ge 5) {
-                    # Take first 5-7 words as a potential phrase
-                    $phrase = ($words[0..6] -join ' ').Trim()
+                    # Take first 5-7 words as a potential phrase without indexing past array bounds.
+                    $maxIndex = [Math]::Min(6, $words.Count - 1)
+                    $phrase = ($words[0..$maxIndex] -join ' ').Trim()
                     if ($phrase.Length -gt 20) {
                         $sourcePhrases += $phrase
                     }
@@ -219,7 +220,7 @@ foreach ($sourceFile in $sourceFiles) {
         }
     }
     catch {
-        Write-ZeroCopyWarning "Failed to read source file: $($sourceFile.FullName)"
+        Write-ZeroCopyWarning "Failed to read source file: $($sourceFile.FullName) | $($_.Exception.Message)"
     }
 }
 
@@ -279,7 +280,7 @@ foreach ($contentFile in $contentFiles) {
         }
     }
     catch {
-        Write-ZeroCopyWarning "Failed to read content file: $($contentFile.FullName)"
+        Write-ZeroCopyWarning "Failed to read content file: $($contentFile.FullName) | $($_.Exception.Message)"
     }
 }
 
