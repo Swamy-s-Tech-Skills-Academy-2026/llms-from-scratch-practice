@@ -1,9 +1,9 @@
 """Reusable Chapter 4 model components."""
 
 from .ch04_core import (
+    GELU,
     CausalSelfAttention,
     FeedForward,
-    GELU,
     GPTConfig,
     GPTModel,
     LayerNorm,
