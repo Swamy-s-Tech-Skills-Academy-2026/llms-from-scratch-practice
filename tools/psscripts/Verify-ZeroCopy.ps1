@@ -85,6 +85,36 @@ function Get-ContentText {
     }
 }
 
+function Test-InformativeSnippet {
+    param([string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) {
+        return $false
+    }
+
+    $trimmed = $Text.Trim()
+    if ($trimmed.Length -lt 20) {
+        return $false
+    }
+
+    $letterMatches = [regex]::Matches($trimmed, '[A-Za-z]')
+    if ($letterMatches.Count -lt 12) {
+        return $false
+    }
+
+    $tokens = @($trimmed -split '\s+' | Where-Object { $_.Length -gt 0 })
+    if ($tokens.Count -lt 4) {
+        return $false
+    }
+
+    $wordLikeTokens = @($tokens | Where-Object { $_ -match '[A-Za-z]{3,}' })
+    if ($wordLikeTokens.Count -lt 3) {
+        return $false
+    }
+
+    return $true
+}
+
 function Write-ZeroCopyWarning {
     param([string]$Message)
     Write-Host "⚠️  ZERO-COPY WARNING: $Message" -ForegroundColor Yellow
@@ -184,7 +214,7 @@ foreach ($sourceFile in $sourceFiles) {
         $quoteMatches = [regex]::Matches($content, '(?m)^>\s*"([^"]+)"')
         foreach ($match in $quoteMatches) {
             $quote = $match.Groups[1].Value.Trim()
-            if ($quote.Length -gt 20) {  # Only check substantial quotes
+            if ((Test-InformativeSnippet -Text $quote)) {
                 $sourceQuotes += [PSCustomObject]@{
                     Quote = $quote
                     Source = $sourceFile.Name
@@ -202,7 +232,7 @@ foreach ($sourceFile in $sourceFiles) {
                     # Take first 5-7 words as a potential phrase without indexing past array bounds.
                     $maxIndex = [Math]::Min(6, $words.Count - 1)
                     $phrase = ($words[0..$maxIndex] -join ' ').Trim()
-                    if ($phrase.Length -gt 20) {
+                    if ((Test-InformativeSnippet -Text $phrase)) {
                         $sourcePhrases += $phrase
                     }
                 }
@@ -213,6 +243,9 @@ foreach ($sourceFile in $sourceFiles) {
             ForEach-Object { $_.Trim(' ', "`t", '#', '*', '-') } |
             Where-Object { $_.Length -ge 80 -and $_ -match '\s' }
         foreach ($line in $longLines) {
+            if (-not (Test-InformativeSnippet -Text $line)) {
+                continue
+            }
             $sourceQuotes += [PSCustomObject]@{
                 Quote = $line
                 Source = $sourceFile.Name
