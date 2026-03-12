@@ -190,10 +190,14 @@ class GroupedQueryAttention(nn.Module):
     def forward(self, x: Tensor) -> Tensor:
         batch_size, seq_len, _ = x.shape
         queries = (
-            self.query(x).view(batch_size, seq_len, self.n_heads, self.head_dim).transpose(1, 2)
+            self.query(x)
+            .view(batch_size, seq_len, self.n_heads, self.head_dim)
+            .transpose(1, 2)
         )
         keys = (
-            self.key(x).view(batch_size, seq_len, self.n_kv_groups, self.head_dim).transpose(1, 2)
+            self.key(x)
+            .view(batch_size, seq_len, self.n_kv_groups, self.head_dim)
+            .transpose(1, 2)
         )
         values = (
             self.value(x)
