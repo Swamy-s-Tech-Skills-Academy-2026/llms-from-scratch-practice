@@ -3,13 +3,13 @@
 **Phase 3: Transformer Architecture**
 
 ## Focus
-This chapter focuses on the core mechanism that makes Transformers work: **Self-Attention**.
+This chapter is where I'm building intuition for the core mechanism that makes Transformers work: **self-attention**.
 
 ## Learning Goals
-- Understand the difference between Self-Attention and Causal Self-Attention.
-- Implement the "Scaled Dot-Product Attention" mechanism from scratch.
-- Build Multi-Head Attention modules.
-- Visualize attention weights to understand what the model is "looking at".
+- Understand the difference between self-attention and causal self-attention.
+- Implement scaled dot-product attention from scratch.
+- Build multi-head attention modules.
+- Visualize attention weights so I can see what the model is focusing on.
 
 ## Notebooks
 
