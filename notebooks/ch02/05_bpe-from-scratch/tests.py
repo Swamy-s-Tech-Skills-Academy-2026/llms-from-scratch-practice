@@ -1,252 +1,279 @@
-import os
-import sys
-import io
-import nbformat
-import types
-import pytest
+from __future__ import annotations
 
+from pathlib import Path
+from types import ModuleType
+import sys
+
+import nbformat
+import pytest
 import tiktoken
 
 
-def import_definitions_from_notebook(fullname, names):
-    """Loads function definitions from a Jupyter notebook file into a module."""
-    path = os.path.join(os.path.dirname(__file__), fullname + ".ipynb")
-    path = os.path.normpath(path)
+NOTEBOOK_STEM = "bpe-from-scratch"
+REQUIRED_SYMBOLS = ("BPETokenizerSimple", "download_file_if_absent")
+VERDICT_URL = (
+    "https://raw.githubusercontent.com/rasbt/"
+    "LLMs-from-scratch/main/ch02/01_main-chapter-code/the-verdict.txt"
+)
+GPT2_ASSET_URLS = {
+    "vocab.bpe": "https://openaipublic.blob.core.windows.net/gpt-2/models/124M/vocab.bpe",
+    "encoder.json": "https://openaipublic.blob.core.windows.net/gpt-2/models/124M/encoder.json",
+}
+VERDICT_SEARCH_DIRS = ["ch02/01_main-chapter-code/", "../01_main-chapter-code/", "."]
+GPT2_SEARCH_DIRS = [
+    "ch02/02_bonus_bytepair-encoder/gpt2_model/",
+    "../02_bonus_bytepair-encoder/gpt2_model/",
+    ".",
+]
 
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Notebook file not found at: {path}")
 
-    with io.open(path, "r", encoding="utf-8") as f:
-        nb = nbformat.read(f, as_version=4)
+def _load_notebook_module(notebook_stem: str, required_symbols: tuple[str, ...]) -> ModuleType:
+    notebook_path = Path(__file__).with_name(f"{notebook_stem}.ipynb")
+    if not notebook_path.exists():
+        raise FileNotFoundError(f"Notebook file not found at: {notebook_path}")
 
-    mod = types.ModuleType(fullname)
-    sys.modules[fullname] = mod
+    with notebook_path.open("r", encoding="utf-8") as notebook_file:
+        notebook = nbformat.read(notebook_file, as_version=4)
 
-    # Execute all code cells to capture dependencies
-    for cell in nb.cells:
+    module = ModuleType(notebook_stem)
+    sys.modules[notebook_stem] = module
+
+    for cell in notebook.cells:
         if cell.cell_type == "code":
-            exec(cell.source, mod.__dict__)
+            exec(cell.source, module.__dict__)
 
-    # Ensure required names are in module
-    missing_names = [name for name in names if name not in mod.__dict__]
-    if missing_names:
-        raise ImportError(f"Missing definitions in notebook: {missing_names}")
+    missing = [name for name in required_symbols if name not in module.__dict__]
+    if missing:
+        raise ImportError(f"Missing definitions in notebook: {missing}")
 
-    return mod
+    return module
+
+
+def _build_openai_tokenizer(module: ModuleType, file_paths: dict[str, str]):
+    tokenizer_class = module.BPETokenizerSimple
+    tokenizer = tokenizer_class()
+    tokenizer.load_vocab_and_merges_from_openai(
+        vocab_path=file_paths["encoder.json"],
+        bpe_merges_path=file_paths["vocab.bpe"],
+    )
+    return tokenizer
 
 
 @pytest.fixture(scope="module")
-def imported_module():
-    fullname = "bpe-from-scratch"
-    names = ["BPETokenizerSimple", "download_file_if_absent"]
-    return import_definitions_from_notebook(fullname, names)
+def notebook_module() -> ModuleType:
+    return _load_notebook_module(NOTEBOOK_STEM, REQUIRED_SYMBOLS)
 
 
 @pytest.fixture(scope="module")
-def verdict_file(imported_module):
-    """Fixture to handle downloading The Verdict file."""
-    download_file_if_absent = getattr(imported_module, "download_file_if_absent", None)
-
-    verdict_path = download_file_if_absent(
-        url=(
-            "https://raw.githubusercontent.com/rasbt/"
-            "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
-            "the-verdict.txt"
-        ),
+def verdict_path(notebook_module: ModuleType) -> str:
+    return notebook_module.download_file_if_absent(
+        url=VERDICT_URL,
         filename="the-verdict.txt",
-        search_dirs=["ch02/01_main-chapter-code/", "../01_main-chapter-code/", "."]
+        search_dirs=VERDICT_SEARCH_DIRS,
     )
 
-    return verdict_path
-
 
 @pytest.fixture(scope="module")
-def gpt2_files(imported_module):
-    """Fixture to handle downloading GPT-2 files."""
-    download_file_if_absent = getattr(imported_module, "download_file_if_absent", None)
-
-    search_directories = ["ch02/02_bonus_bytepair-encoder/gpt2_model/", "../02_bonus_bytepair-encoder/gpt2_model/", "."]
-    files_to_download = {
-        "https://openaipublic.blob.core.windows.net/gpt-2/models/124M/vocab.bpe": "vocab.bpe",
-        "https://openaipublic.blob.core.windows.net/gpt-2/models/124M/encoder.json": "encoder.json"
-    }
-    paths = {filename: download_file_if_absent(url, filename, search_directories)
-             for url, filename in files_to_download.items()}
-
-    return paths
+def gpt2_asset_paths(notebook_module: ModuleType) -> dict[str, str]:
+    resolved_paths: dict[str, str] = {}
+    for filename, url in GPT2_ASSET_URLS.items():
+        resolved_paths[filename] = notebook_module.download_file_if_absent(
+            url,
+            filename,
+            GPT2_SEARCH_DIRS,
+        )
+    return resolved_paths
 
 
-def test_tokenizer_training(imported_module, verdict_file):
-    BPETokenizerSimple = getattr(imported_module, "BPETokenizerSimple", None)
-    tokenizer = BPETokenizerSimple()
+def test_training_pipeline_creates_expected_vocab(notebook_module: ModuleType, verdict_path: str):
+    tokenizer = notebook_module.BPETokenizerSimple()
 
-    with open(verdict_file, "r", encoding="utf-8") as f:  # added ../01_main-chapter-code/
-        text = f.read()
+    with open(verdict_path, "r", encoding="utf-8") as text_file:
+        corpus_text = text_file.read()
 
-    tokenizer.train(text, vocab_size=1000, allowed_special={"<|endoftext|>"})
-    assert len(tokenizer.vocab) == 1000, "Tokenizer vocabulary size mismatch."
-    assert len(tokenizer.bpe_merges) == 742, "Tokenizer BPE merges count mismatch."
+    tokenizer.train(corpus_text, vocab_size=1000, allowed_special={"<|endoftext|>"})
 
-    input_text = "Jack embraced beauty through art and life."
-    token_ids = tokenizer.encode(input_text)
-    assert token_ids == [424, 256, 654, 531, 302, 311, 256, 296, 97, 465, 121, 595, 841, 116, 287, 466, 256, 326, 972, 46], "Token IDs do not match expected output."
+    assert len(tokenizer.vocab) == 1000
+    assert len(tokenizer.bpe_merges) == 742
 
-    assert tokenizer.decode(token_ids) == input_text, "Decoded text does not match the original input."
+    sample_text = "Jack embraced beauty through art and life."
+    encoded_sample = tokenizer.encode(sample_text)
+    assert encoded_sample == [
+        424,
+        256,
+        654,
+        531,
+        302,
+        311,
+        256,
+        296,
+        97,
+        465,
+        121,
+        595,
+        841,
+        116,
+        287,
+        466,
+        256,
+        326,
+        972,
+        46,
+    ]
+    assert tokenizer.decode(encoded_sample) == sample_text
 
     tokenizer.save_vocab_and_merges(vocab_path="vocab.json", bpe_merges_path="bpe_merges.txt")
-    tokenizer2 = BPETokenizerSimple()
-    tokenizer2.load_vocab_and_merges(vocab_path="vocab.json", bpe_merges_path="bpe_merges.txt")
-    assert tokenizer2.decode(token_ids) == input_text, "Decoded text mismatch after reloading tokenizer."
 
-
-def test_gpt2_tokenizer_openai_simple(imported_module, gpt2_files):
-    BPETokenizerSimple = getattr(imported_module, "BPETokenizerSimple", None)
-
-    tokenizer_gpt2 = BPETokenizerSimple()
-    tokenizer_gpt2.load_vocab_and_merges_from_openai(
-        vocab_path=gpt2_files["encoder.json"], bpe_merges_path=gpt2_files["vocab.bpe"]
+    reloaded_tokenizer = notebook_module.BPETokenizerSimple()
+    reloaded_tokenizer.load_vocab_and_merges(
+        vocab_path="vocab.json",
+        bpe_merges_path="bpe_merges.txt",
     )
-
-    assert len(tokenizer_gpt2.vocab) == 50257, "GPT-2 tokenizer vocabulary size mismatch."
-
-    input_text = "This is some text"
-    token_ids = tokenizer_gpt2.encode(input_text)
-    assert token_ids == [1212, 318, 617, 2420], "Tokenized output does not match expected GPT-2 encoding."
+    assert reloaded_tokenizer.decode(encoded_sample) == sample_text
 
 
-def test_gpt2_tokenizer_openai_edgecases(imported_module, gpt2_files):
-    BPETokenizerSimple = getattr(imported_module, "BPETokenizerSimple", None)
+def test_training_does_not_create_mid_token_space_markers(
+    notebook_module: ModuleType,
+    verdict_path: str,
+):
+    tokenizer = notebook_module.BPETokenizerSimple()
 
-    tokenizer_gpt2 = BPETokenizerSimple()
-    tokenizer_gpt2.load_vocab_and_merges_from_openai(
-        vocab_path=gpt2_files["encoder.json"], bpe_merges_path=gpt2_files["vocab.bpe"]
-    )
-    tik_tokenizer = tiktoken.get_encoding("gpt2")
+    with open(verdict_path, "r", encoding="utf-8") as text_file:
+        tokenizer.train(text_file.read(), vocab_size=1000, allowed_special={"<|endoftext|>"})
 
-    test_cases = [
-        ("Hello,", [15496, 11]),
-        ("Implementations", [3546, 26908, 602]),
-        ("asdf asdfasdf a!!, @aba 9asdf90asdfk", [292, 7568, 355, 7568, 292, 7568, 257, 3228, 11, 2488, 15498, 860, 292, 7568, 3829, 292, 7568, 74]),
-        ("Hello, world. Is this-- a test?", [15496, 11, 995, 13, 1148, 428, 438, 257, 1332, 30])
+    invalid_tokens = [
+        token
+        for token in tokenizer.vocab.values()
+        if "Ġ" in token and token != "Ġ" and not token.startswith("Ġ")
     ]
-
-    errors = []
-
-    for input_text, expected_tokens in test_cases:
-        tik_tokens = tik_tokenizer.encode(input_text)
-        gpt2_tokens = tokenizer_gpt2.encode(input_text)
-
-        print(f"Text: {input_text}")
-        print(f"Expected Tokens: {expected_tokens}")
-        print(f"tiktoken Output: {tik_tokens}")
-        print(f"BPETokenizerSimple Output: {gpt2_tokens}")
-        print("-" * 40)
-
-        if tik_tokens != expected_tokens:
-            errors.append(f"Tiktokenized output does not match expected GPT-2 encoding for '{input_text}'.\n"
-                          f"Expected: {expected_tokens}, Got: {tik_tokens}")
-
-        if gpt2_tokens != expected_tokens:
-            errors.append(f"Tokenized output does not match expected GPT-2 encoding for '{input_text}'.\n"
-                          f"Expected: {expected_tokens}, Got: {gpt2_tokens}")
-
-    if errors:
-        pytest.fail("\n".join(errors))
+    assert invalid_tokens == []
 
 
-def test_gpt2_newline_and_eot_ids(imported_module, gpt2_files):
-    BPETokenizerSimple = getattr(imported_module, "BPETokenizerSimple", None)
-
-    tok = BPETokenizerSimple()
-    tok.load_vocab_and_merges_from_openai(
-        vocab_path=gpt2_files["encoder.json"], bpe_merges_path=gpt2_files["vocab.bpe"]
-    )
-
-    assert "Ċ" in tok.inverse_vocab, "Missing GPT-2 newline glyph 'Ċ' in inverse_vocab"
-    assert "<|endoftext|>" in tok.inverse_vocab, "Missing EOT in inverse_vocab"
-
-    assert tok.inverse_vocab["Ċ"] == 198, "Ċ must map to id 198"
-    assert tok.inverse_vocab["<|endoftext|>"] == 50256, "EOT must be 50256"
-
-    if "\n" not in tok.inverse_vocab:
-        tok.inverse_vocab["\n"] = tok.inverse_vocab["Ċ"]
-    assert tok.inverse_vocab["\n"] == 198, r"'\n' must map to 198 via Ċ"
-
-    assert tok.vocab[198] == "Ċ", "Don't overwrite vocab[198]; keep it 'Ċ'"
-    assert tok.vocab[50256] == "<|endoftext|>", "Don't map <|endoftext|> to anything else"
+def test_openai_vocab_load_matches_basic_gpt2_example(
+    notebook_module: ModuleType,
+    gpt2_asset_paths: dict[str, str],
+):
+    tokenizer = _build_openai_tokenizer(notebook_module, gpt2_asset_paths)
+    assert len(tokenizer.vocab) == 50257
+    assert tokenizer.encode("This is some text") == [1212, 318, 617, 2420]
 
 
-def test_no_eot_aliasing_and_disallowed_logic(imported_module, gpt2_files):
-    BPETokenizerSimple = getattr(imported_module, "BPETokenizerSimple", None)
-    tok = BPETokenizerSimple()
-    tok.load_vocab_and_merges_from_openai(
-        vocab_path=gpt2_files["encoder.json"], bpe_merges_path=gpt2_files["vocab.bpe"]
-    )
-    tik = tiktoken.get_encoding("gpt2")
+def test_openai_vocab_matches_reference_tokenizer_on_edge_cases(
+    notebook_module: ModuleType,
+    gpt2_asset_paths: dict[str, str],
+):
+    tokenizer = _build_openai_tokenizer(notebook_module, gpt2_asset_paths)
+    reference_tokenizer = tiktoken.get_encoding("gpt2")
 
-    text = "Hello<|endoftext|>\nworld"
-    # When not allowed, our encode should raise ValueError like tiktoken
+    expectations = {
+        "Hello,": [15496, 11],
+        "Implementations": [3546, 26908, 602],
+        "asdf asdfasdf a!!, @aba 9asdf90asdfk": [
+            292,
+            7568,
+            355,
+            7568,
+            292,
+            7568,
+            257,
+            3228,
+            11,
+            2488,
+            15498,
+            860,
+            292,
+            7568,
+            3829,
+            292,
+            7568,
+            74,
+        ],
+        "Hello, world. Is this-- a test?": [15496, 11, 995, 13, 1148, 428, 438, 257, 1332, 30],
+    }
+
+    mismatches: list[str] = []
+    for sample_text, expected_token_ids in expectations.items():
+        reference_ids = reference_tokenizer.encode(sample_text)
+        learner_ids = tokenizer.encode(sample_text)
+
+        if reference_ids != expected_token_ids:
+            mismatches.append(
+                f"Reference tokenizer mismatch for {sample_text!r}: expected {expected_token_ids}, got {reference_ids}"
+            )
+        if learner_ids != expected_token_ids:
+            mismatches.append(
+                f"Notebook tokenizer mismatch for {sample_text!r}: expected {expected_token_ids}, got {learner_ids}"
+            )
+
+    if mismatches:
+        pytest.fail("\n".join(mismatches))
+
+
+def test_newline_and_eot_ids_are_preserved(
+    notebook_module: ModuleType,
+    gpt2_asset_paths: dict[str, str],
+):
+    tokenizer = _build_openai_tokenizer(notebook_module, gpt2_asset_paths)
+
+    assert tokenizer.inverse_vocab["Ċ"] == 198
+    assert tokenizer.inverse_vocab["<|endoftext|>"] == 50256
+
+    if "\n" not in tokenizer.inverse_vocab:
+        tokenizer.inverse_vocab["\n"] = tokenizer.inverse_vocab["Ċ"]
+
+    assert tokenizer.inverse_vocab["\n"] == 198
+    assert tokenizer.vocab[198] == "Ċ"
+    assert tokenizer.vocab[50256] == "<|endoftext|>"
+
+
+def test_endoftext_handling_matches_tiktoken(
+    notebook_module: ModuleType,
+    gpt2_asset_paths: dict[str, str],
+):
+    tokenizer = _build_openai_tokenizer(notebook_module, gpt2_asset_paths)
+    reference_tokenizer = tiktoken.get_encoding("gpt2")
+    sample_text = "Hello<|endoftext|>\nworld"
+
     with pytest.raises(ValueError):
-        tok.encode(text)
+        tokenizer.encode(sample_text)
 
-    # When allowed, both tokenizers should match
-    ids_ours = tok.encode(text, allowed_special={"<|endoftext|>"})
-    ids_tik = tik.encode(text, allowed_special={"<|endoftext|>"})
-    assert ids_ours == ids_tik, "Mismatch vs tiktoken with EOT allowed"
-
-
-@pytest.mark.parametrize(
-    "text",
-    [
-        "a\nb",
-        "a\n\nb",
-        "\nHello",
-        "Hello\n",
-        "a\r\nb",
-    ],
-)
-def test_newline_roundtrip_and_equivalence(imported_module, gpt2_files, text):
-    BPETokenizerSimple = getattr(imported_module, "BPETokenizerSimple", None)
-    tok = BPETokenizerSimple()
-    tok.load_vocab_and_merges_from_openai(
-        vocab_path=gpt2_files["encoder.json"], bpe_merges_path=gpt2_files["vocab.bpe"]
-    )
-    tik = tiktoken.get_encoding("gpt2")
-
-    ids_ours = tok.encode(text)
-    ids_tik = tik.encode(text)
-
-    assert ids_ours == ids_tik, f"Mismatch vs tiktoken for: {repr(text)}"
-    # Each "\n" should correspond to id 198
-    expected_lf_count = text.count("\n")
-    assert ids_ours.count(198) == expected_lf_count
-
-    dec = tok.decode(ids_ours)
-    assert dec == text
+    learner_ids = tokenizer.encode(sample_text, allowed_special={"<|endoftext|>"})
+    reference_ids = reference_tokenizer.encode(sample_text, allowed_special={"<|endoftext|>"})
+    assert learner_ids == reference_ids
 
 
-def test_space_newline_space_patterns(imported_module, gpt2_files):
-    BPETokenizerSimple = getattr(imported_module, "BPETokenizerSimple", None)
-    tok = BPETokenizerSimple()
-    tok.load_vocab_and_merges_from_openai(
-        vocab_path=gpt2_files["encoder.json"], bpe_merges_path=gpt2_files["vocab.bpe"]
-    )
-    tik = tiktoken.get_encoding("gpt2")
+@pytest.mark.parametrize("sample_text", ["a\nb", "a\n\nb", "\nHello", "Hello\n", "a\r\nb"])
+def test_newline_cases_roundtrip_cleanly(
+    notebook_module: ModuleType,
+    gpt2_asset_paths: dict[str, str],
+    sample_text: str,
+):
+    tokenizer = _build_openai_tokenizer(notebook_module, gpt2_asset_paths)
+    reference_tokenizer = tiktoken.get_encoding("gpt2")
 
-    samples = [
-        "Hello \nworld",
-        "Hello\n world",
-    ]
-    for s in samples:
-        assert tok.encode(s) == tik.encode(s), f"Mismatch vs tiktoken: {repr(s)}"
+    learner_ids = tokenizer.encode(sample_text)
+    reference_ids = reference_tokenizer.encode(sample_text)
+
+    assert learner_ids == reference_ids
+    assert learner_ids.count(198) == sample_text.count("\n")
+    assert tokenizer.decode(learner_ids) == sample_text
 
 
-def test_multiple_leading_spaces_roundtrip(imported_module, gpt2_files):
-    BPETokenizerSimple = getattr(imported_module, "BPETokenizerSimple", None)
-    tok = BPETokenizerSimple()
-    tok.load_vocab_and_merges_from_openai(
-        vocab_path=gpt2_files["encoder.json"], bpe_merges_path=gpt2_files["vocab.bpe"]
-    )
+def test_space_and_newline_boundary_cases_match_tiktoken(
+    notebook_module: ModuleType,
+    gpt2_asset_paths: dict[str, str],
+):
+    tokenizer = _build_openai_tokenizer(notebook_module, gpt2_asset_paths)
+    reference_tokenizer = tiktoken.get_encoding("gpt2")
 
-    text = "  Hello World."
-    assert tok.decode(tok.encode(text)) == text
+    for sample_text in ["Hello \nworld", "Hello\n world"]:
+        assert tokenizer.encode(sample_text) == reference_tokenizer.encode(sample_text)
+
+
+def test_leading_spaces_survive_roundtrip(
+    notebook_module: ModuleType,
+    gpt2_asset_paths: dict[str, str],
+):
+    tokenizer = _build_openai_tokenizer(notebook_module, gpt2_asset_paths)
+    sample_text = "  Hello World."
+    assert tokenizer.decode(tokenizer.encode(sample_text)) == sample_text
