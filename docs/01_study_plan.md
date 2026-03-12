@@ -1,10 +1,10 @@
-# Recommended Learning Order (Aligned to the Book)
+# My Recommended Learning Order
 
 ## Phase 1: Language Modeling Foundations
 
 **Goal:** Understand what an LLM learns
 
-You should deeply understand:
+I want to deeply understand:
 
 - What a language model predicts
 - Why next-token prediction works
@@ -12,13 +12,13 @@ You should deeply understand:
 
 **Checkpoint:**
 
-- You can explain why predicting the next token leads to emergent language behavior.
+- I can explain why predicting the next token leads to emergent language behavior.
 
 ## Phase 2: Tokenization (Often Underestimated)
 
 **Goal:** Understand how text becomes numbers
 
-Focus on:
+I want to focus on:
 
 - Byte Pair Encoding (BPE)
 - Vocabulary size tradeoffs
@@ -26,13 +26,13 @@ Focus on:
 
 **Checkpoint:**
 
-- You can explain why "unhappiness" becomes multiple tokens and why that matters.
+- I can explain why "unhappiness" becomes multiple tokens and why that matters.
 
 ## Phase 3: Transformer Architecture (Core of the Book)
 
 **Goal:** Master the GPT architecture
 
-Key components:
+Key components I want to revise:
 
 - Token embeddings + positional embeddings
 - Multi-Head Self-Attention
@@ -42,13 +42,13 @@ Key components:
 
 **Checkpoint:**
 
-- You can draw the GPT block from memory and explain data flow through it.
+- I can draw the GPT block from memory and explain data flow through it.
 
 ## Phase 4: Training a GPT-Like Model
 
 **Goal:** Understand how learning happens
 
-You will learn:
+I want to understand:
 
 - Forward vs backward pass
 - Loss curves and instability
@@ -57,7 +57,7 @@ You will learn:
 
 **Checkpoint:**
 
-- You understand why training can diverge and how to diagnose it.
+- I understand why training can diverge and how to diagnose it.
 
 ## Phase 5: Pretraining vs Finetuning
 
@@ -70,19 +70,19 @@ You will learn:
 
 **Checkpoint:**
 
-- You can explain why finetuning is cheap relative to pretraining.
+- I can explain why finetuning is cheap relative to pretraining.
 
 ---
 
-## 4. How You Should Study This Book (Very Important)
+## 4. How I Want to Study This Book
 
-**Do NOT:**
+**I do not want to:**
 
 - Blindly run notebooks
 - Skip math explanations
 - Treat code as “magic”
 
-**DO:**
+**I want to:**
 
 - Rewrite parts of the code yourself
 - Change hyperparameters intentionally
@@ -91,11 +91,11 @@ You will learn:
 
 **Golden Rule:**
 
-- If you cannot explain why a line of code exists, you have not learned it.
+- If I cannot explain why a line of code exists, I have not learned it.
 
 ---
 
-## 5. Suggested Weekly Study Plan (Realistic)
+## 5. Suggested Weekly Study Plan
 
 | Week | Focus |
 | :--- | :--- |
@@ -106,4 +106,4 @@ You will learn:
 | 5 | Pretraining experiments |
 | 6 | Finetuning & evaluation |
 
-*This assumes 1–2 hours/day, which is sustainable.*
+*My assumption here is 1–2 hours/day, which feels sustainable.*
