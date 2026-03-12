@@ -163,7 +163,7 @@ $contentFiles = @(
 )
 
 Write-Host "Zero-Copy Policy Verification" -ForegroundColor Cyan
-Write-Host "=" * 60 -ForegroundColor Cyan
+Write-Host ("=" * 60) -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Source Material Files: $($sourceFiles.Count)" -ForegroundColor Cyan
 Write-Host "Content Files to Check: $($contentFiles.Count)" -ForegroundColor Cyan
@@ -195,12 +195,13 @@ foreach ($sourceFile in $sourceFiles) {
         # Extract common phrases (3+ word sequences that might be copied)
         # This is a simple heuristic - in strict mode, check more carefully
         if ($Strict) {
-            $sentences = $content -split '[.!?]' | Where-Object { $_.Trim().Length -gt 30 }
+            $sentences = @($content -split '[.!?]' | Where-Object { $_.Trim().Length -gt 30 })
             foreach ($sentence in $sentences) {
-                $words = $sentence.Trim() -split '\s+' | Where-Object { $_.Length -gt 3 }
+                $words = @($sentence.Trim() -split '\s+' | Where-Object { $_.Length -gt 3 })
                 if ($words.Count -ge 5) {
-                    # Take first 5-7 words as a potential phrase
-                    $phrase = ($words[0..6] -join ' ').Trim()
+                    # Take first 5-7 words as a potential phrase without indexing past array bounds.
+                    $maxIndex = [Math]::Min(6, $words.Count - 1)
+                    $phrase = ($words[0..$maxIndex] -join ' ').Trim()
                     if ($phrase.Length -gt 20) {
                         $sourcePhrases += $phrase
                     }
@@ -219,7 +220,7 @@ foreach ($sourceFile in $sourceFiles) {
         }
     }
     catch {
-        Write-ZeroCopyWarning "Failed to read source file: $($sourceFile.FullName)"
+        Write-ZeroCopyWarning "Failed to read source file: $($sourceFile.FullName) | $($_.Exception.Message)"
     }
 }
 
@@ -243,8 +244,14 @@ foreach ($contentFile in $contentFiles) {
         # Check for quote matches
         foreach ($sourceQuote in $sourceQuotes) {
             # Check for exact or near-exact matches
-            $quoteWords = $sourceQuote.Quote -split '\s+' | Where-Object { $_.Length -gt 3 }
-            $quotePattern = ($quoteWords[0..([Math]::Min(7, $quoteWords.Count - 1))] -join '\s+')
+            $quoteWords = @($sourceQuote.Quote -split '\s+' | Where-Object { $_.Length -gt 3 })
+            if ($quoteWords.Count -gt 0) {
+                $quotePatternWords = @($quoteWords[0..([Math]::Min(7, $quoteWords.Count - 1))])
+                $quotePattern = ($quotePatternWords | ForEach-Object { [regex]::Escape($_) }) -join '\\s+'
+            }
+            else {
+                $quotePattern = ''
+            }
             
             if ($content -match [regex]::Escape($sourceQuote.Quote)) {
                 $violations += [PSCustomObject]@{
@@ -254,7 +261,7 @@ foreach ($contentFile in $contentFiles) {
                     Quote = $sourceQuote.Quote.Substring(0, [Math]::Min(80, $sourceQuote.Quote.Length))
                 }
             }
-            elseif ($content -match $quotePattern) {
+            elseif ($quotePattern -and ($content -match $quotePattern)) {
                 $warnings += [PSCustomObject]@{
                     File = $contentFile.FullName.Replace($RepoRoot, '').TrimStart('\\')
                     Type = "Potential Quote Match"
@@ -279,12 +286,12 @@ foreach ($contentFile in $contentFiles) {
         }
     }
     catch {
-        Write-ZeroCopyWarning "Failed to read content file: $($contentFile.FullName)"
+        Write-ZeroCopyWarning "Failed to read content file: $($contentFile.FullName) | $($_.Exception.Message)"
     }
 }
 
 # Report results
-Write-Host "=" * 60 -ForegroundColor Cyan
+Write-Host ("=" * 60) -ForegroundColor Cyan
 Write-Host ""
 
 if ($violations.Count -eq 0 -and $warnings.Count -eq 0) {
@@ -317,7 +324,7 @@ if ($warnings.Count -gt 0) {
     }
 }
 
-Write-Host "=" * 60 -ForegroundColor Cyan
+Write-Host ("=" * 60) -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Remember: All content must be transformative, not reformative." -ForegroundColor Cyan
 Write-Host "Even quotes and 'Key Principle' sections must use original phrasing." -ForegroundColor Cyan
