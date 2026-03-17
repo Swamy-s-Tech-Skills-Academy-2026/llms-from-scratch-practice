@@ -1,10 +1,10 @@
 # Bonus Section: Understanding Byte Pair Encoding (BPE)
 
-**Purpose**: Deepening my understanding of BPE tokenization through hands-on exploration
+**Purpose**: Deepening my understanding of BPE tokenization through hands-on exploration.
 
 ## What's in This Folder
 
-This bonus section is where I'm exploring different BPE implementations to understand:
+This bonus section is where I'm exploring different BPE implementations so I can understand:
 
 - How modern tokenizers like tiktoken work
 - Why BPE is used in GPT-2 and similar models
@@ -15,7 +15,7 @@ This bonus section is where I'm exploring different BPE implementations to under
 
 ### 01_understanding_bpe_implementations.ipynb
 
-**What I'm learning**: Comparing different BPE implementations (tiktoken, transformers, original OpenAI code)
+**What I'm learning**: Comparing different BPE implementations (`tiktoken`, `transformers`, and the original OpenAI code).
 
 **Key concepts covered**:
 
@@ -43,20 +43,20 @@ This educational content was synthesized from:
 
 ## Why This is "Bonus" Content
 
-This folder is marked as "bonus" because:
+I treat this folder as "bonus" because:
 
-1. **Core learning is in main chapter** - The essential tokenization concepts are in `01_main-chapter-code/`
-2. **Comparative exploration** - This dives deeper into implementation details and comparisons
-3. **Optional dependencies** - Some experiments require transformers library (not in core deps)
-4. **Performance analysis** - Includes benchmarking which is beyond basic learning needs
+1. **Core learning is in the main chapter** - the essential tokenization concepts are in `01_main-chapter-code/`.
+2. **This is comparative exploration** - I go deeper into implementation details and trade-offs here.
+3. **Some dependencies are optional** - a few comparisons need the `transformers` library, which is not part of the core dependency set.
+4. **Some of this work goes beyond the basics** - benchmarking is useful for intuition, but it is not required for the main learning path.
 
 ## Learning Progression
 
-I recommend following this order:
+The order that makes the most sense to me is:
 
-1. **First**: Complete `../01_main-chapter-code/01_ch02.ipynb` - Basic tokenization fundamentals
-2. **Then**: Work through `01_understanding_bpe_implementations.ipynb` - Compare different BPE tools
-3. **Next** (planned): Implement simple BPE from scratch to understand the algorithm deeply
+1. **First**: complete `../01_main-chapter-code/01_ch02.ipynb` for the basic tokenization fundamentals.
+2. **Then**: work through `01_understanding_bpe_implementations.ipynb` to compare different BPE tools.
+3. **Next**: implement simple BPE from scratch so I understand the merge process more deeply.
 
 ## Dependencies
 
@@ -66,7 +66,7 @@ I recommend following this order:
 - torch, numpy - Standard deps
 
 ### Optional dependencies (for comparisons)
-If you want to run transformers comparisons, install the `bpe-experiments` group:
+If I want to run the `transformers` comparisons, I install the `bpe-experiments` group:
 ```powershell
 uv sync --group bpe-experiments
 ```
@@ -76,7 +76,7 @@ This will install:
 - requests>=2.31.0
 - tqdm>=4.66.0
 
-**Note**: Using `uv sync` with dependency groups is the recommended approach for this repository, ensuring proper environment management.
+**Note**: Using `uv sync` with dependency groups is the cleanest approach in this repository because it keeps the environment setup explicit.
 
 ## My Learning Status
 
@@ -110,4 +110,4 @@ This will install:
 
 **Date created**: January 27, 2026  
 **Last updated**: January 27, 2026  
-**Status**: Active learning in progress 🚀
+**Status**: Active learning in progress

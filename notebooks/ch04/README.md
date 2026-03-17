@@ -4,29 +4,26 @@
 
 ## Focus
 
-Building the complete GPT architecture from the ground up — FeedForward blocks, multi-head
-attention, layer normalization, and the full Transformer stack. Bonus notebooks explore the
-inference optimizations that make production LLMs possible: KV Caching, Grouped Query
-Attention, Multi-head Latent Attention, Sliding Window Attention, Mixture of Experts, and
-DeltaNet.
+This chapter is where I'm assembling the full GPT architecture from the ground up: feed-forward
+blocks, multi-head attention, layer normalization, and the full transformer stack. The bonus
+notebooks are my way of exploring the inference ideas that show up in modern LLM systems: KV
+cache, grouped query attention, multi-head latent attention, sliding window attention, mixture
+of experts, and DeltaNet.
 
 ## Learning Goals
 
-- Understand the architecture of GPT-2/GPT-3 — how FeedForward blocks, softmax prediction
-  heads, and GELU activations fit together
-- Estimate model size (parameter count) and GPU memory requirements before training
-- Build intuition for KV Cache — why naive autoregressive decoding is quadratic and how caching
-  solves it
-- Understand how Grouped Query Attention (GQA) reduces KV cache memory with a trade-off in
-  head expressiveness
-- Explore Multi-head Latent Attention (MLA) — DeepSeek's approach to compressing KV
-  representations into a shared latent space
-- Implement Sliding Window Attention masks and understand how they limit context length per
-  layer while keeping compute linear
-- Trace a Mixture of Experts (MoE) router: Top-K gating, load balancing, and sparse
-  activation patterns
-- Understand DeltaNet's gating mechanism and how selective state updates differ from
-  full softmax attention
+- Understand the architecture of GPT-2 and GPT-3 style models, especially how feed-forward
+  blocks, output heads, and GELU activations fit together.
+- Estimate model size and GPU memory requirements before training.
+- Build intuition for KV cache and why naive autoregressive decoding becomes quadratic.
+- Understand how grouped query attention reduces KV cache memory with a trade-off in head
+  expressiveness.
+- Explore multi-head latent attention as one route to compressing KV representations.
+- Implement sliding window attention masks and see how they keep per-layer compute bounded.
+- Trace a mixture-of-experts router through Top-K gating, sparse dispatch, and load-balancing
+  questions.
+- Understand how DeltaNet uses gating and selective state updates instead of full softmax
+  attention.
 
 ## Notebooks
 

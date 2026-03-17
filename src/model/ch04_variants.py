@@ -5,10 +5,10 @@ from __future__ import annotations
 import math
 
 import torch
-from torch import Tensor
 import torch.nn as nn
+from torch import Tensor
 
-from .ch04_core import GPTConfig, GELU
+from .ch04_core import GELU, GPTConfig
 
 
 def estimate_mha_kv_cache_bytes(
@@ -189,9 +189,15 @@ class GroupedQueryAttention(nn.Module):
 
     def forward(self, x: Tensor) -> Tensor:
         batch_size, seq_len, _ = x.shape
-        queries = self.query(x).view(batch_size, seq_len, self.n_heads, self.head_dim).transpose(1, 2)
-        keys = self.key(x).view(batch_size, seq_len, self.n_kv_groups, self.head_dim).transpose(1, 2)
-        values = self.value(x).view(batch_size, seq_len, self.n_kv_groups, self.head_dim).transpose(1, 2)
+        queries = (
+            self.query(x).view(batch_size, seq_len, self.n_heads, self.head_dim).transpose(1, 2)
+        )
+        keys = (
+            self.key(x).view(batch_size, seq_len, self.n_kv_groups, self.head_dim).transpose(1, 2)
+        )
+        values = (
+            self.value(x).view(batch_size, seq_len, self.n_kv_groups, self.head_dim).transpose(1, 2)
+        )
 
         keys = keys.repeat_interleave(self.group_size, dim=1)
         values = values.repeat_interleave(self.group_size, dim=1)

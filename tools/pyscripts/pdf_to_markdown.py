@@ -1,8 +1,18 @@
-"""
-PDF to Markdown Converter
-Extracts text content from PDF files and formats as markdown.
+"""Single-PDF convenience converter.
+
+This script keeps a simple one-file-in, one-file-out workflow for quick extraction.
+Unlike `pdf_to_md.py`, it is not intended for recursive staging runs. It exists for
+ad hoc conversions where I want an output path next to the source PDF or at an
+explicit destination.
+
+Safety rule: if the resolved output would land under `source-material/`, the script
+refuses to write unless I opt in explicitly. That keeps the repo's read-only archive
+policy intact.
 """
 
+from __future__ import annotations
+
+import argparse
 import sys
 from pathlib import Path
 
@@ -17,6 +27,14 @@ try:
     HAS_PYPDF = True
 except ImportError:
     HAS_PYPDF = False
+
+
+def _is_within(child: Path, parent: Path) -> bool:
+    try:
+        child.resolve().relative_to(parent.resolve())
+        return True
+    except Exception:
+        return False
 
 
 def extract_with_pymupdf(pdf_path: Path) -> str:
@@ -92,20 +110,44 @@ def pdf_to_markdown(pdf_path: str, output_path: str | None = None) -> str:
     return full_content
 
 
+def build_arg_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Convert one PDF to Markdown using a simple convenience workflow."
+    )
+    parser.add_argument("pdf_file", type=Path, help="Path to the input PDF file")
+    parser.add_argument(
+        "output_file",
+        nargs="?",
+        type=Path,
+        default=None,
+        help="Optional output Markdown path. Default: next to the input PDF with the same stem.",
+    )
+    parser.add_argument(
+        "--allow-source-material-output",
+        action="store_true",
+        help="Allow writing under source-material/. Not recommended.",
+    )
+    return parser
+
+
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python pdf_to_markdown.py <pdf_file> [output_file]")
-        print("  If output_file is omitted, creates <pdf_stem>.md in the same folder as the PDF.")
-        print("\nAvailable libraries:")
-        print(f"  PyMuPDF: {'✓' if HAS_PYMUPDF else '✗'}")
-        print(f"  pypdf: {'✓' if HAS_PYPDF else '✗'}")
+    parser = build_arg_parser()
+    args = parser.parse_args()
+
+    workspace_root = Path(__file__).resolve().parents[1]
+    source_material_dir = workspace_root / "source-material"
+    output_path = args.output_file or (args.pdf_file.parent / f"{args.pdf_file.stem}.md")
+
+    if _is_within(output_path, source_material_dir) and not args.allow_source_material_output:
+        print(
+            "Refusing to write output under source-material/. "
+            "Pass --allow-source-material-output if you really want this.",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
-    pdf_path = sys.argv[1]
-    output_path = sys.argv[2] if len(sys.argv) > 2 else None
-
     try:
-        pdf_to_markdown(pdf_path, output_path)
+        pdf_to_markdown(str(args.pdf_file), str(output_path))
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
