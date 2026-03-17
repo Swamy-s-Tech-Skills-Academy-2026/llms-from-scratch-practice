@@ -171,8 +171,17 @@ See `.cursor/rules/08_source-material-rules.mdc` for complete guidelines.
 # Navigate to project
 cd D:\STSA-2026\llms-from-scratch-practice
 
-# Sync dependencies (creates .venv automatically)
+# Sync base + dev dependencies (recommended for all work)
 uv sync --group dev
+
+# Also install tools group (PDF/PPTX extraction scripts in tools/pyscripts/)
+uv sync --group dev --group tools
+
+# Also install BPE experiments group (ch02 bonus BPE notebooks)
+uv sync --group dev --group bpe-experiments
+
+# Install ALL groups in one command (dev + tools + bpe-experiments)
+uv sync --all-groups
 
 # Activate virtual environment (optional - uv run works without activation)
 .venv\Scripts\Activate.ps1
