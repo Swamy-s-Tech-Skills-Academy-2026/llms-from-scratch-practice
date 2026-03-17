@@ -45,8 +45,8 @@
 
 ## Learning Path Integration
 
-- **Phase 1**: Language modeling foundations
-- **Phase 2**: Tokenization (current focus)
-- **Phase 3**: Transformer architecture
-- **Phase 4**: Training loops
-- **Phase 5**: Pretraining and finetuning
+- **Phase 1**: Language modeling foundations ✅
+- **Phase 2**: Tokenization ✅
+- **Phase 3**: Transformer architecture ✅ (ch04 complete: GPT, KV-cache, GQA, MLA, SWA, MoE, DeltaNet)
+- **Phase 4**: Training loops ⏳
+- **Phase 5**: Pretraining and finetuning ⏳

@@ -15,7 +15,8 @@ This is an **educational learning workspace** for building a GPT-style Large Lan
 - ✅ Dependencies configured (pyproject.toml with uv)
 - ✅ Basic source code structure in place
 - ✅ Chapter 2 notebook started (tokenization)
-- ⏳ Model architecture implementation (in progress)
+- ✅ Model architecture implementation (ch04 complete: GPT, KV-cache, GQA, MLA, SWA, MoE, DeltaNet)
+- ✅ Tests for model components (test_ch04_model_components.py)
 - ⏳ Training loop implementation (planned)
 - ⏳ Evaluation and generation (planned)
 
