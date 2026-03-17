@@ -53,9 +53,14 @@ This document captures the **current layout** of the repo and the **target struc
 │   └── ch04/
 ├── src/                           # Reusable Python modules (engine room)
 │   ├── __init__.py
-│   └── main.py
-├── tests/                         # CI smoke tests
-│   └── test_smoke.py
+│   ├── main.py
+│   └── model/
+│       ├── __init__.py            # Re-exports all public symbols
+│       ├── ch04_core.py           # GPTConfig, LayerNorm, GELU, FeedForward, CausalSelfAttention, TransformerBlock, GPTModel, generate_greedy
+│       └── ch04_variants.py       # CachedCausalSelfAttention, GQA, MLA, SWA, SparseMoE, memory estimators
+├── tests/                         # CI smoke tests and unit tests
+│   ├── test_smoke.py
+│   └── test_ch04_model_components.py
 ├── pyproject.toml                 # Project dependencies (uv)
 ├── .python-version                # Python version pin (3.12)
 ├── README.md                      # Entry point for the repo

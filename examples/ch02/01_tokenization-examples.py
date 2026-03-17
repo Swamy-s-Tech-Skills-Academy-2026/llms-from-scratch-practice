@@ -22,7 +22,6 @@ from __future__ import annotations
 
 import tiktoken
 
-
 # ---------------------------------------------------------------------------
 # Helper
 # ---------------------------------------------------------------------------
@@ -160,8 +159,8 @@ def example_token_count_comparison() -> None:
     phrases = [
         "The quick brown fox",
         "the quick brown fox",  # lowercase
-        "TheQuickBrownFox",     # camelCase — likely more tokens
-        "T h e q u i c k",     # spaced — many more tokens
+        "TheQuickBrownFox",  # camelCase — likely more tokens
+        "T h e q u i c k",  # spaced — many more tokens
     ]
 
     for phrase in phrases:

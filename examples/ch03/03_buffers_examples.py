@@ -17,11 +17,11 @@ Reference: notebooks/ch03/03_understanding-buffers/understanding-buffers.ipynb
 import torch
 import torch.nn as nn
 
-
 # ─────────────────────────────────────────────────────────────
 # Approach A: Mask stored as a plain Python attribute
 #             (breaks when calling .to(device) or .cuda())
 # ─────────────────────────────────────────────────────────────
+
 
 class AttentionWithPlainTensor(nn.Module):
     """
@@ -47,6 +47,7 @@ class AttentionWithPlainTensor(nn.Module):
 # ─────────────────────────────────────────────────────────────
 # Approach B: Mask stored via register_buffer (correct approach)
 # ─────────────────────────────────────────────────────────────
+
 
 class AttentionWithBuffer(nn.Module):
     """
@@ -79,6 +80,7 @@ class AttentionWithBuffer(nn.Module):
 # Approach C: Non-persistent buffer
 # ─────────────────────────────────────────────────────────────
 
+
 class AttentionWithNonPersistentBuffer(nn.Module):
     """
     For tensors that can be recomputed cheaply (e.g., RoPE sin/cos tables),
@@ -106,6 +108,7 @@ class AttentionWithNonPersistentBuffer(nn.Module):
 # ─────────────────────────────────────────────────────────────
 # Demo helpers
 # ─────────────────────────────────────────────────────────────
+
 
 def demo_state_dict_visibility(seq_len: int = 8) -> None:
     """
