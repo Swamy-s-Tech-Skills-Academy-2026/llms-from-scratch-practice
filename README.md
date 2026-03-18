@@ -81,17 +81,34 @@ uv init
 This repository already includes `pyproject.toml`, so you can skip this step here.
 
 ### 3. Sync Dependencies
+
+| Group | What it includes | When to install |
+|:------|:----------------|:----------------|
+| *(base)* | `numpy`, `torch`, `tiktoken` | Always — core learning dependencies |
+| `dev` | pytest, black, isort, flake8, jupyter, ipykernel, matplotlib, nbformat | Recommended for all development and notebook work |
+| `tools` | pypdf, pymupdf, python-pptx | Only if using extraction scripts in `tools/pyscripts/` |
+| `bpe-experiments` | transformers, requests, tqdm | Only if running BPE comparison experiments (ch02 bonus) |
+
 ```powershell
-# 1. Install base runtime dependencies
+# 1. Install base runtime dependencies only
 uv sync
 
-# 2. Install dev tools (recommended for this repo)
+# 2. Install dev tools (recommended — needed for tests, notebooks, CI)
 uv sync --group dev
 
-# 3. Install all groups (including BPE experiments)
+# 3. Install tools group (only if using PDF/PPTX extraction scripts)
+uv sync --group dev --group tools
+
+# 4. Install BPE experiments group (only for ch02 bonus BPE notebooks)
 uv sync --group dev --group bpe-experiments
 
-# 4. Troubleshooting: Use copy mode if you see "Failed to hardlink files"
+# 5. Install everything at once
+uv sync --group dev --group tools --group bpe-experiments
+
+# 6. Install ALL groups (shorthand — equivalent to option 5)
+uv sync --all-groups
+
+# 7. Troubleshooting: Use copy mode if you see "Failed to hardlink files"
 uv sync --link-mode=copy
 ```
 

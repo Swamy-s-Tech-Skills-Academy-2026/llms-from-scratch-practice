@@ -19,7 +19,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 # ─────────────────────────────────────────────────────────────
 # Config
 # ─────────────────────────────────────────────────────────────
@@ -33,9 +32,7 @@ NUM_HEADS = 4
 HEAD_DIM = D_MODEL // NUM_HEADS  # 32
 
 
-def make_qkv(
-    batch: int, seq: int, d_model: int
-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+def make_qkv(batch: int, seq: int, d_model: int) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     """Create random Q, K, V tensors for attention experiments."""
     q = torch.randn(batch, seq, d_model)
     k = torch.randn(batch, seq, d_model)
@@ -46,6 +43,7 @@ def make_qkv(
 # ─────────────────────────────────────────────────────────────
 # Approach 1 : Naive loop over heads
 # ─────────────────────────────────────────────────────────────
+
 
 class NaiveMultiHeadAttention(nn.Module):
     """
@@ -79,7 +77,7 @@ class NaiveMultiHeadAttention(nn.Module):
             v_h = v[:, :, start:end]
 
             # Scaled dot-product attention for this single head
-            scale = self.head_dim ** -0.5
+            scale = self.head_dim**-0.5
             scores = torch.bmm(q_h, k_h.transpose(1, 2)) * scale  # (B, T, T)
             weights = torch.softmax(scores, dim=-1)
             head_out = torch.bmm(weights, v_h)  # (B, T, head_dim)
@@ -93,6 +91,7 @@ class NaiveMultiHeadAttention(nn.Module):
 # ─────────────────────────────────────────────────────────────
 # Approach 2 : Vectorised (stacked heads, single matmul)
 # ─────────────────────────────────────────────────────────────
+
 
 class VectorisedMultiHeadAttention(nn.Module):
     """
@@ -122,7 +121,7 @@ class VectorisedMultiHeadAttention(nn.Module):
         v = self.w_v(x).view(batch, seq, self.num_heads, self.head_dim).transpose(1, 2)
         # q, k, v are now (B, H, T, d_h)
 
-        scale = self.head_dim ** -0.5
+        scale = self.head_dim**-0.5
         scores = torch.matmul(q, k.transpose(-2, -1)) * scale  # (B, H, T, T)
         weights = torch.softmax(scores, dim=-1)
         out = torch.matmul(weights, v)  # (B, H, T, d_h)
@@ -135,6 +134,7 @@ class VectorisedMultiHeadAttention(nn.Module):
 # ─────────────────────────────────────────────────────────────
 # Approach 3 : PyTorch scaled_dot_product_attention (SDPA)
 # ─────────────────────────────────────────────────────────────
+
 
 class SDPAMultiHeadAttention(nn.Module):
     """
@@ -169,6 +169,7 @@ class SDPAMultiHeadAttention(nn.Module):
 # ─────────────────────────────────────────────────────────────
 # Demo runner
 # ─────────────────────────────────────────────────────────────
+
 
 def run_forward_pass(model: nn.Module, x: torch.Tensor, label: str) -> None:
     """Time one forward pass and print the output shape."""

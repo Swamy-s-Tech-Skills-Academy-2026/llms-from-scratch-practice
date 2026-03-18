@@ -22,7 +22,6 @@ from __future__ import annotations
 import torch
 from torch.utils.data import DataLoader, Dataset
 
-
 # ---------------------------------------------------------------------------
 # Helper
 # ---------------------------------------------------------------------------
@@ -154,7 +153,7 @@ def example_dataloader_batch() -> None:
     # Grab first batch
     x_batch, y_batch = next(iter(loader))
 
-    print(f"x_batch shape: {x_batch.shape}")   # (batch_size, max_length)
+    print(f"x_batch shape: {x_batch.shape}")  # (batch_size, max_length)
     print(f"y_batch shape: {y_batch.shape}")
     print(f"\nx_batch:\n{x_batch}")
     print(f"\ny_batch:\n{y_batch}")

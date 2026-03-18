@@ -1,6 +1,7 @@
+import time
+
 import torch
 import torch.nn as nn
-import time
 
 
 def main():
@@ -18,9 +19,7 @@ def main():
         def __init__(self, emb_dim):
             super().__init__()
             self.layers = nn.Sequential(
-                nn.Linear(emb_dim, 4 * emb_dim),
-                nn.GELU(),
-                nn.Linear(4 * emb_dim, emb_dim)
+                nn.Linear(emb_dim, 4 * emb_dim), nn.GELU(), nn.Linear(4 * emb_dim, emb_dim)
             )
 
         def forward(self, x):

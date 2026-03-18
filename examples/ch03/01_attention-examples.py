@@ -78,16 +78,16 @@ def example_single_query_attention() -> None:
     # Pick x^(2) as our query token
     x_2 = INPUTS[1]  # shape: (3,)
 
-    query_2 = x_2 @ W_query      # shape: (d_out,)
-    keys = INPUTS @ W_key         # shape: (6, d_out)
-    values = INPUTS @ W_value     # shape: (6, d_out)
+    query_2 = x_2 @ W_query  # shape: (d_out,)
+    keys = INPUTS @ W_key  # shape: (6, d_out)
+    values = INPUTS @ W_value  # shape: (6, d_out)
 
     # Raw attention scores: one scalar per key
     raw_scores = query_2 @ keys.T  # shape: (6,)
 
     # Scale by 1/sqrt(d_k) to keep variance in check
     d_k = query_2.shape[-1]
-    scaled_scores = raw_scores / (d_k ** 0.5)
+    scaled_scores = raw_scores / (d_k**0.5)
 
     attention_weights_2 = F.softmax(scaled_scores, dim=-1)
     context_vec_2 = attention_weights_2 @ values  # shape: (d_out,)
@@ -128,7 +128,7 @@ class SimpleSelfAttention(nn.Module):
 
         d_k = keys.shape[-1]
         # Attention matrix: (seq_len, seq_len)
-        scores = (queries @ keys.T) / (d_k ** 0.5)
+        scores = (queries @ keys.T) / (d_k**0.5)
         weights = F.softmax(scores, dim=-1)
         return weights @ values  # (seq_len, d_out)
 
@@ -168,8 +168,14 @@ class CausalAttention(nn.Module):
     are saved/restored in state_dict — without being trainable parameters.
     """
 
-    def __init__(self, d_in: int, d_out: int, context_length: int,
-                 dropout: float = 0.0, qkv_bias: bool = False) -> None:
+    def __init__(
+        self,
+        d_in: int,
+        d_out: int,
+        context_length: int,
+        dropout: float = 0.0,
+        qkv_bias: bool = False,
+    ) -> None:
         super().__init__()
         self.d_out = d_out
         self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)
@@ -189,12 +195,10 @@ class CausalAttention(nn.Module):
         values = self.W_value(x)
 
         d_k = keys.shape[-1]
-        scores = (queries @ keys.transpose(-2, -1)) / (d_k ** 0.5)
+        scores = (queries @ keys.transpose(-2, -1)) / (d_k**0.5)
 
         # Apply causal mask: fill future positions with -inf so softmax → 0
-        scores = scores.masked_fill(
-            self.mask[:seq_len, :seq_len].bool(), float("-inf")
-        )
+        scores = scores.masked_fill(self.mask[:seq_len, :seq_len].bool(), float("-inf"))
         weights = F.softmax(scores, dim=-1)
         weights = self.dropout(weights)
         return weights @ values
@@ -238,13 +242,13 @@ class MultiHeadAttentionWrapper(nn.Module):
     the weight-split approach at scale, but easier to reason about.
     """
 
-    def __init__(self, d_in: int, d_out: int, context_length: int,
-                 num_heads: int, dropout: float = 0.0) -> None:
+    def __init__(
+        self, d_in: int, d_out: int, context_length: int, num_heads: int, dropout: float = 0.0
+    ) -> None:
         super().__init__()
         # Each head projects to d_out dimensions; final output is num_heads * d_out
         self.heads = nn.ModuleList(
-            [CausalAttention(d_in, d_out, context_length, dropout)
-             for _ in range(num_heads)]
+            [CausalAttention(d_in, d_out, context_length, dropout) for _ in range(num_heads)]
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -257,14 +261,13 @@ def example_multihead_attention() -> None:
     section("4. Multi-Head Attention (wrapper approach)")
 
     torch.manual_seed(42)
-    batch = INPUTS.unsqueeze(0)   # (1, 6, 3)
-    d_in, d_out_per_head = 3, 1   # 2 heads × 1 dim each → 2 total output dims
+    batch = INPUTS.unsqueeze(0)  # (1, 6, 3)
+    d_in, d_out_per_head = 3, 1  # 2 heads × 1 dim each → 2 total output dims
     num_heads = 2
     ctx_len = 6
 
     mha = MultiHeadAttentionWrapper(
-        d_in, d_out_per_head, context_length=ctx_len,
-        num_heads=num_heads, dropout=0.0
+        d_in, d_out_per_head, context_length=ctx_len, num_heads=num_heads, dropout=0.0
     )
 
     with torch.no_grad():
@@ -272,12 +275,14 @@ def example_multihead_attention() -> None:
 
     expected_d_out = num_heads * d_out_per_head
     print(f"Input shape : {batch.shape}")
-    print(f"Output shape: {out.shape}")   # (1, 6, 2)
+    print(f"Output shape: {out.shape}")  # (1, 6, 2)
     print(f"Context vectors:\n{out[0]}")
 
-    assert out.shape == (1, 6, expected_d_out), (
-        f"Expected (1, 6, {expected_d_out}), got {out.shape}"
-    )
+    assert out.shape == (
+        1,
+        6,
+        expected_d_out,
+    ), f"Expected (1, 6, {expected_d_out}), got {out.shape}"
     print(f"\n✓ Output shape correct: (batch=1, seq=6, d_out={expected_d_out})")
 
 
@@ -302,8 +307,8 @@ def example_shape_cheatsheet() -> None:
     with torch.no_grad():
         q = W_q(x)
         k = W_k(x)
-        scores = q @ k.transpose(-2, -1)   # (batch, seq_len, seq_len)
-        weights = F.softmax(scores / (d_out ** 0.5), dim=-1)
+        scores = q @ k.transpose(-2, -1)  # (batch, seq_len, seq_len)
+        weights = F.softmax(scores / (d_out**0.5), dim=-1)
 
     print(f"x          : {tuple(x.shape)}       (batch, seq_len, d_in)")
     print(f"queries    : {tuple(q.shape)}       (batch, seq_len, d_out)")

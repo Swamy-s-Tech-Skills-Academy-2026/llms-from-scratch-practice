@@ -10,7 +10,7 @@ def main():
     mask = torch.tril(torch.ones(seq_len, seq_len))
 
     for i in range(seq_len):
-        mask[i, :max(0, i - window_size + 1)] = 0
+        mask[i, : max(0, i - window_size + 1)] = 0
 
     print("--- SWA Mask Example (W=3) ---")
     print(mask)
