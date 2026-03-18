@@ -168,6 +168,14 @@ See `.cursor/rules/08_source-material-rules.mdc` for complete guidelines.
 - [ ] **Citation**: Specific definitions, theorems, and formulas are cited
 - [ ] **Understanding**: Content demonstrates comprehension, not just rephrasing
 
+### Markdown & Link Checks
+- Use `markdownlint-cli2` for markdown linting.
+- Use **Docker-based Lychee** for link checks (do not rely on local/global Lychee binaries):
+
+```powershell
+docker run --rm -v "${PWD}:/workspace" -w /workspace lycheeverse/lychee --config /workspace/.lychee.toml /workspace
+```
+
 ## 🚀 Environment Setup
 
 **Python Environment (Windows PowerShell):**

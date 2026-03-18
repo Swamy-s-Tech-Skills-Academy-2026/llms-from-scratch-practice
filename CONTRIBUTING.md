@@ -34,3 +34,8 @@ Optional: only one chapter, e.g. `uv run python tools/clear_notebook_outputs.py 
 
 - Follow `.cursor/rules/` (zero-copy, source-material read-only, educational tone).
 - Python in `src/` should pass CI: `black`, `isort`, `flake8`, `pytest`.
+- For markdown link checking, run Lychee via Docker:
+
+```powershell
+docker run --rm -v "${PWD}:/workspace" -w /workspace lycheeverse/lychee --config /workspace/.lychee.toml /workspace
+```
