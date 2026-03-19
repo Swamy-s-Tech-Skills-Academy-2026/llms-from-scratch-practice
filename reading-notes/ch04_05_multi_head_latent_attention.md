@@ -9,9 +9,9 @@ GQA works by forcing multiple attention heads to explicitly share the exact same
 My takeaway on how MLA is different: Instead of arbitrary grouping, MLA **compresses** the Key and Value tensors into a shared, lower-dimensional "latent space" before caching them.
 
 ## The MLA Mechanism
-1. **During Inference:** I take the full high-dimensional $K$ and $V$ tensors and project them down to a smaller `latent_dim` using a down-projection MLP.
+1. **During Inference:** I take the full high-dimensional $K$ and $V$ tensors and project them down to a smaller `latent_dim` using a down-projection (a single linear layer).
 2. **Caching:** I only store this much smaller compressed vector in my KV Cache. 
-3. **During Generation:** When I need to compute attention scores, I read the compressed vector from the cache and use an up-projection MLP to restore $K$ and $V$ back to their original size `embed_dim`. 
+3. **During Generation:** When I need to compute attention scores, I read the compressed vector from the cache and use an up-projection (a single linear layer) to restore $K$ and $V$ back to their original size `embed_dim`. 
 
 ## The Trade-Off
 This changes the dynamics! 

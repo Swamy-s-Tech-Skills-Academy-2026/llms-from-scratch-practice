@@ -9,7 +9,7 @@ def main():
     Example script demonstrating the shell of a GPT layer.
     This fulfills the simulation/practice component of the 3-Layer Architect.
     """
-    print("Testing a single simple FeedForward network...\\n")
+    print("Testing a single simple FeedForward network...\n")
 
     # Define simple parameters
     emb_dim = 768
@@ -39,7 +39,7 @@ def main():
 
     print(f"Shape of FeedForward output: {mock_output.shape}")
     print(f"Processed in {(end_time - start_time) * 1000:.2f} ms")
-    print("\\nThis perfectly preserves the tensor dimensions!")
+    print("\nThis perfectly preserves the tensor dimensions!")
 
 
 if __name__ == "__main__":

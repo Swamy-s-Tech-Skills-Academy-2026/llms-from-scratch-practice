@@ -70,7 +70,7 @@ When this document says planned, it means design intent only, not current filesy
 │   └── model/
 │       ├── __init__.py            # Re-exports all public symbols
 │       ├── ch04_core.py           # GPTConfig, LayerNorm, GELU, FeedForward, CausalSelfAttention, TransformerBlock, GPTModel, generate_greedy
-│       └── ch04_variants.py       # CachedCausalSelfAttention, GQA, MLA, SWA, SparseMoE, memory estimators
+│       └── ch04_variants.py       # CachedCausalSelfAttention, GroupedQueryAttention, MultiHeadLatentAttention, SlidingWindowSelfAttention, SparseMoEFeedForward, memory estimators
 ├── tests/                         # CI smoke tests and unit tests
 │   ├── test_smoke.py
 │   └── test_ch04_model_components.py

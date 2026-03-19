@@ -9,12 +9,16 @@ on:
     branches: [main]
     paths:
       - 'src/**'
+      - 'tests/**'
+      - 'examples/**'
       - 'pyproject.toml'
       - '.github/workflows/ci-python.yml'
   pull_request:
     branches: [main]
     paths:
       - 'src/**'
+      - 'tests/**'
+      - 'examples/**'
       - 'pyproject.toml'
       - '.github/workflows/ci-python.yml'
 
@@ -39,25 +43,17 @@ jobs:
         run: uv sync --group dev
 
       - name: Check formatting with Black
-        run: |
-          if [ -d "src" ] && [ "$(ls -A src)" ]; then
-             uv run black --check --diff src
-          fi
+        run: uv run black --check --diff src tests examples
 
       - name: Check import sorting with isort
-        run: |
-          if [ -d "src" ] && [ "$(ls -A src)" ]; then
-             uv run isort --check-only --diff src
-          fi
+        run: uv run isort --check-only --diff src tests examples
 
       - name: Lint with flake8
         run: |
-          if [ -d "src" ] && [ "$(ls -A src)" ]; then
-             # Stop the build if there are Python syntax errors or undefined names
-             uv run flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics
-             # Check for style violations
-             uv run flake8 src --count --max-complexity=10 --max-line-length=100 --statistics
-          fi
+          # Stop the build if there are Python syntax errors or undefined names
+          uv run flake8 src tests examples --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Check for style violations
+          uv run flake8 src tests examples --count --max-complexity=10 --max-line-length=100 --statistics
 
       - name: Run tests with pytest
         run: |
