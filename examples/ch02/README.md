@@ -1,7 +1,5 @@
 # Practice Examples: Chapter 2 — Working with Text Data
 
-## Three-Layer Architecture — Layer 3: Practice
-
 ## What's Here
 
 These are my personal practice scripts for Chapter 2. The goal is to be able to reproduce these patterns from memory — not just run them once.
@@ -20,6 +18,8 @@ uv run python examples/ch02/02_dataloader-examples.py
 ```
 
 ## Alignment with Other Layers
+
+This chapter is the practice layer in the repo's three-layer learning pattern.
 
 | Layer | File |
 | :--- | :--- |

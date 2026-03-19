@@ -1,7 +1,5 @@
 # Practice Examples: Chapter 3 — Attention Mechanisms
 
-## Three-Layer Architecture — Layer 3: Practice
-
 ## What's Here
 
 These are my personal practice scripts for Chapter 3. I rebuild each attention variant from memory until the shapes and math feel natural.
@@ -22,6 +20,8 @@ uv run python examples/ch03/03_buffers_examples.py
 ```
 
 ## Alignment with Other Layers
+
+This chapter is the practice layer in the repo's three-layer learning pattern.
 
 | Layer | Location |
 | :--- | :--- |

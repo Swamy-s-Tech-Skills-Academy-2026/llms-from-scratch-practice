@@ -1,7 +1,5 @@
 # Practice Examples: Chapter 4 — Implementing a GPT Model from Scratch
 
-## Three-Layer Architecture — Layer 3: Practice
-
 ## What's Here
 
 These are my personal practice scripts for Chapter 4 and its bonus topics. The goal is to
@@ -34,6 +32,8 @@ uv run python examples/ch04/08_deltanet_examples.py
 ```
 
 ## Alignment with Other Layers
+
+This chapter is the practice layer in the repo's three-layer learning pattern.
 
 | Layer | Location |
 | :--- | :--- |
