@@ -115,7 +115,7 @@ def main() -> int:
     parser = build_arg_parser()
     args = parser.parse_args()
 
-    workspace_root = Path(__file__).resolve().parents[1]
+    workspace_root = Path(__file__).resolve().parents[2]
     source_material_dir = workspace_root / "source-material"
 
     output_dir: Path

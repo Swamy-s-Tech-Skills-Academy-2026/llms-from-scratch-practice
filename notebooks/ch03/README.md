@@ -1,6 +1,6 @@
 # Chapter 3: Coding Attention Mechanisms
 
-**Phase 3: Transformer Architecture**
+## Phase 3: Transformer Architecture
 
 ## Focus
 This chapter is where I'm building intuition for the core mechanism that makes Transformers work: **self-attention**.

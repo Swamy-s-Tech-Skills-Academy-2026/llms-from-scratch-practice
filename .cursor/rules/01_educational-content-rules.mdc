@@ -23,6 +23,10 @@ globs: *.md, *.ipynb
 - **Never copy-paste** from `source-material/` - it's a staging area for reference only
 - See `08_source-material-rules.mdc` for detailed source material handling guidelines
 
+### Figures and notebook outputs
+- **No hotlinked or copied book figures**: Do not embed `<img src="...">` or image files from the book or companion CDNs. Use text placeholders (e.g. “see book for diagram”) or **your own** diagrams only.
+- **Clear outputs before push** (recommended): Strip code-cell outputs so notebooks do not commit large base64 blobs (matplotlib PNGs, etc.). Run “Restart & Clear Output” in Jupyter or see `CONTRIBUTING.md`.
+
 ### Code Quality
 - **Python**: Follow PEP 8 style guide, use type hints where appropriate, include comprehensive docstrings
 - **Meaningful Variable Names**: Use descriptive names (e.g., `token_embeddings` instead of `te`, `attention_weights` instead of `aw`)

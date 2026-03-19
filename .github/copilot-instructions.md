@@ -65,6 +65,10 @@ For each topic/algorithm, create and keep three aligned artifacts:
 
 ## Notebook Guidelines
 
+### Figures and notebook outputs
+- **No hotlinked or copied book figures**: Do not embed `<img src="...">` or image files from the book or companion CDNs. Use text placeholders (e.g. "see book for diagram") or **your own** diagrams only.
+- **Clear outputs before push** (recommended): Strip code-cell outputs so notebooks do not commit large base64 blobs (matplotlib PNGs, etc.). Run "Restart & Clear Output" in Jupyter or see `CONTRIBUTING.md`.
+
 - **Structure**: Use clear headers and logical flow (Import → Load Data → Process → Analyze → Visualize → Conclusion)
 - **Markdown Cells**: Explain the concept before writing code
 - **Math Notation**: Use LaTeX for mathematical expressions (e.g., `$P(x|y) = \frac{P(y|x)P(x)}{P(y)}$`)
@@ -163,6 +167,14 @@ See `.cursor/rules/08_source-material-rules.mdc` for complete guidelines.
 - [ ] **Originality Check**: Content is synthesized, not copied from source material
 - [ ] **Citation**: Specific definitions, theorems, and formulas are cited
 - [ ] **Understanding**: Content demonstrates comprehension, not just rephrasing
+
+### Markdown & Link Checks
+- Use `markdownlint-cli2` for markdown linting.
+- Use **Docker-based Lychee** for link checks (do not rely on local/global Lychee binaries):
+
+```powershell
+docker run --rm -v "${PWD}:/workspace" -w /workspace lycheeverse/lychee --config /workspace/.lychee.toml /workspace
+```
 
 ## 🚀 Environment Setup
 

@@ -271,6 +271,11 @@ By completing this repository, I expect to be able to:
 
 ---
 
+## 🤝 Contributing (forks / collaborators)
+
+- **Figures**: No hotlinked or copied book images — text placeholders or your own diagrams only. See [CONTRIBUTING.md](CONTRIBUTING.md).
+- **Notebooks**: Prefer **cleared outputs** before commit (avoids huge binary blobs in git). Details in [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## 📌 Notes
 
 - This repository will evolve iteratively.

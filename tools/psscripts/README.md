@@ -71,6 +71,12 @@ Zero-copy policy verification for markdown content across the learning workspace
 #### `Run-MarkdownLintAndLychee.ps1`
 
 Runs Markdown lint (`markdownlint-cli2`) and link checking (Lychee) using repo `.lychee.toml`.
+Lychee runs in Docker via `lycheeverse/lychee`.
+
+**Requirements:**
+
+- Node.js (`npx`) for `markdownlint-cli2`
+- Docker Desktop (or Docker Engine) for Lychee link checks
 
 **Usage:**
 
@@ -146,6 +152,9 @@ Exports all Mermaid diagram source files (`.mmd`) to PNG format with consistent 
 # Run checks independently
 .\tools\psscripts\Run-MarkdownLintAndLychee.ps1 -MarkdownOnly
 .\tools\psscripts\Run-MarkdownLintAndLychee.ps1 -LycheeOnly
+
+# Optional direct Lychee via Docker
+docker run --rm -v "${PWD}:/workspace" -w /workspace lycheeverse/lychee --config /workspace/.lychee.toml /workspace
 ```
 
 ---

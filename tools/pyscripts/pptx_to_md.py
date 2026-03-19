@@ -300,7 +300,7 @@ def main() -> int:
     if not input_pptx.exists():
         raise SystemExit(f"Input file not found: {input_pptx}")
 
-    workspace_root = Path(__file__).resolve().parents[1]
+    workspace_root = Path(__file__).resolve().parents[2]
     source_material_dir = workspace_root / "source-material"
 
     output_md: Path

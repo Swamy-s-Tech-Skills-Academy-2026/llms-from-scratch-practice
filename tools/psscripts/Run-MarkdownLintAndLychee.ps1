@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   - Markdown lint: Uses `npx markdownlint-cli2` over README/docs/src/tools by default.
-  - Lychee: Uses the repository `.lychee.toml` configuration.
+  - Lychee: Runs via Docker using the repository `.lychee.toml` configuration.
 
   This script intentionally excludes `source-material/` by default (it is a staging area).
 
@@ -123,33 +123,16 @@ if (-not $SkipMarkdownLint) {
 $lycheeExitCode = 0
 if (-not $SkipLychee) {
   Write-Host "==> Running lychee" -ForegroundColor Yellow
+  Assert-CommandExists -Name "docker"
 
   $lycheeConfigPath = Join-Path $repoRoot ".lychee.toml"
   if (-not (Test-Path $lycheeConfigPath)) {
     throw "Missing lychee config: $lycheeConfigPath"
   }
 
-  # Prefer local lychee if installed; otherwise fall back to docker.
-  if (Get-Command "lychee" -ErrorAction SilentlyContinue) {
-    & lychee --config $lycheeConfigPath @LycheeArgs $repoRoot
-    $lycheeExitCode = $LASTEXITCODE
-  } else {
-    # Prefer Docker CLI if available; otherwise use Podman.
-    $containerCmd = $null
-    if (Get-Command "docker" -ErrorAction SilentlyContinue) {
-      $containerCmd = "docker"
-    } elseif (Get-Command "podman" -ErrorAction SilentlyContinue) {
-      $containerCmd = "podman"
-    }
-
-    if (-not $containerCmd) {
-      throw "Neither 'lychee' nor a container runtime ('docker' or 'podman') was found on PATH. Install lychee or Docker/Podman to run link checks."
-    }
-
-    # Mount repo into /workspace and run lychee against that folder.
-    & $containerCmd run --rm -v "${repoRoot}:/workspace" lycheeverse/lychee --config /workspace/.lychee.toml @LycheeArgs /workspace
-    $lycheeExitCode = $LASTEXITCODE
-  }
+  # Standardized repository behavior: always run Lychee in Docker.
+  & docker run --rm -v "${repoRoot}:/workspace" -w /workspace lycheeverse/lychee --config /workspace/.lychee.toml @LycheeArgs /workspace
+  $lycheeExitCode = $LASTEXITCODE
 
   if ($lycheeExitCode -ne 0) {
     Write-Host "lychee: FAILED (exit $lycheeExitCode)" -ForegroundColor Red
