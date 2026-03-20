@@ -21,9 +21,12 @@ uv run python examples/ch02/02_dataloader-examples.py
 
 This chapter is the practice layer in the repo's three-layer learning pattern.
 
-| Layer | File |
+| Layer | Files |
 | :--- | :--- |
-| Theory      | `reading-notes/ch02_decoder_only_transformer_flow.md` |
+| Theory      | `reading-notes/ch02_01_decoder_only_transformer_flow.md` (overview) |
+|             | `reading-notes/ch02_02_byte_pair_encoding.md` (BPE) |
+|             | `reading-notes/ch02_03_embeddings_vs_matmul.md` (embedding vs linear) |
+|             | `reading-notes/ch02_04_dataloader_intuition.md` (sliding-window) |
 | Implementation | `notebooks/ch02/01_main-chapter-code/01_ch02.ipynb` |
 | Practice    | This folder |
 

@@ -44,7 +44,10 @@ When this document says planned, it means design intent only, not current filesy
 │       └── exercise-solutions.ipynb
 ├── reading-notes/                 # Synthesized theory notes (Swamy's voice)
 │   ├── ch01_reading-strategy.md              # Ch01: personal reading strategy
-│   ├── ch02_decoder_only_transformer_flow.md # Ch02: decoder-only data flow
+│   ├── ch02_01_decoder_only_transformer_flow.md # Ch02: decoder-only data flow
+│   ├── ch02_02_byte_pair_encoding.md            # Ch02: BPE algorithm deep dive
+│   ├── ch02_03_embeddings_vs_matmul.md          # Ch02: embedding vs linear equivalence
+│   ├── ch02_04_dataloader_intuition.md          # Ch02: sliding-window dataloader
 │   ├── ch03_attention_mechanisms.md          # Ch03: self-attention, causal mask, MHA
 │   ├── ch04_01_gpt_model_architecture.md    # Ch04: GPT architecture
 │   ├── ch04_02_performance_analysis.md      # Ch04: performance

@@ -444,3 +444,6 @@ uv.lock
 
 # Source Material
 source-material/
+# Generated BPE tokenizer artifacts (produced by notebooks/ch02/05_bpe-from-scratch/tests.py)
+notebooks/ch02/bpe_merges.txt
+notebooks/ch02/vocab.json
