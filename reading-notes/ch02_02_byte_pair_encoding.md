@@ -20,11 +20,41 @@ BPE is the smart middle ground — it starts at characters and learns to merge t
 
 Each merge is recorded in a **merge table**. At inference time, the same merges are applied to new text in the same order — that's how tokenisation is deterministic.
 
+## BPE algorithm flowchart
+
+```mermaid
+flowchart TD
+    A["Corpus split into individual characters\ne.g. h-e-l-l-o Ġw-o-r-l-d"] --> B["Count all adjacent pairs\nacross the full corpus"]
+    B --> C["Pick the most frequent pair"]
+    C --> D["Merge pair → assign new token ID\nRecord rule in merge table"]
+    D --> E{"num_merges\nreached?"}
+    E -->|"No — keep going"| B
+    E -->|"Yes"| F["Merge table is complete\nApply in recorded order at inference\nfor deterministic tokenisation"]
+```
+
+My insight: the order of merges is critical. At inference, I apply the same merges in the same sequence — that's what makes tokenisation reproducible.
+
 ## What I Noticed About tiktoken's GPT-2 Tokeniser
 
 - GPT-2 uses a vocabulary of **50,257** tokens (50,000 BPE + 256 byte tokens + 1 `<|endoftext|>` special token).
 - The 256 raw byte tokens ensure the tokeniser can **handle any arbitrary Unicode input** — even if a substring was never seen during vocabulary training.
 - Merges are applied greedily (left-to-right), which explains why the same word tokenises differently depending on its context (spacing before a word triggers different byte-level rules).
+
+## GPT-2 vocabulary composition
+
+```mermaid
+flowchart LR
+    A["256 byte tokens\nbase coverage — any Unicode\ncharacter expressible"]
+    B["50,000 BPE merges\nlearned from training corpus\nfrequent subwords and full words"]
+    C["1 special token\n‹|endoftext|› signals\ndocument boundaries"]
+    D["GPT-2 Vocabulary\n50,257 tokens total"]
+
+    A --> D
+    B --> D
+    C --> D
+```
+
+The 256 byte base tokens are the safety net: no matter how exotic the input, the model can always fall back to byte-level representation.
 
 ## My Takeaway: BPE Balances Vocabulary Size and Coverage
 

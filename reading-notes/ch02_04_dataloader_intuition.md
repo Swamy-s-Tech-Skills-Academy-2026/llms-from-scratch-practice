@@ -25,6 +25,33 @@ stride=1:
 
 With `stride=1`, almost every possible `context_length` window appears as a training sample. With `stride=context_length`, windows are non-overlapping — fewer samples, more unique contexts.
 
+## Sliding window visualised
+
+```mermaid
+flowchart TD
+    C["Corpus: t₀ t₁ t₂ t₃ t₄ t₅ t₆ t₇ ...  context_length = 4"]
+
+    C --> S1
+    C --> S2
+
+    subgraph S1["stride = 1  — maximum overlap"]
+        direction TB
+        A1["Sample 0   x = [t₀ t₁ t₂ t₃]   →   y = [t₁ t₂ t₃ t₄]"]
+        A2["Sample 1   x = [t₁ t₂ t₃ t₄]   →   y = [t₂ t₃ t₄ t₅]"]
+        A3["Sample 2   x = [t₂ t₃ t₄ t₅]   →   y = [t₃ t₄ t₅ t₆]"]
+        A4["...  N − context_length samples total"]
+    end
+
+    subgraph S2["stride = context_length = 4  — no overlap"]
+        direction TB
+        B1["Sample 0   x = [t₀ t₁ t₂ t₃]   →   y = [t₁ t₂ t₃ t₄]"]
+        B2["Sample 1   x = [t₄ t₅ t₆ t₇]   →   y = [t₅ t₆ t₇ t₈]"]
+        B3["...  N ÷ context_length samples total"]
+    end
+```
+
+My key observation: regardless of stride, the target is always the input shifted one step right. That single-token shift is the entire autoregressive training signal.
+
 ## My Takeaways
 
 - **stride=1** maximises data utilisation but consecutive batches are nearly identical — this can hurt training if not carefully shuffled.
@@ -39,6 +66,28 @@ The dataloader operates on **token IDs**, not raw text. The pipeline is:
 3. Sliding window dataloader builds `(x, y)` pairs from that tensor
 
 My confusion before: I thought "tokens" and "words" were interchangeable. They're not — a single word can map to 2-3 tokens, and punctuation has its own tokens. The window size of 256/512/1024 is in **tokens**, not words.
+
+## Full text-to-batch pipeline
+
+```mermaid
+flowchart TD
+    A["Raw text corpus\ne.g. the-verdict.txt  5,145 tokens"]
+    B["tiktoken.encode()\nGPT-2 BPE tokeniser"]
+    C["Token IDs\nflat list of integers\nlen = num_tokens"]
+    D["GPTDatasetV1\nsliding window\ncontext_length, stride"]
+    E["input_ids   shape: seq_len\ntarget_ids  shape: seq_len\none pair per window"]
+    F["DataLoader\nbatch_size, shuffle, drop_last"]
+    G["Batch tensors\nX shape: batch × seq_len\nY shape: batch × seq_len"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+```
+
+This pipeline runs once at dataset creation — the sliding window pairs are pre-computed and stored, then the DataLoader serves them in random order during training.
 
 ## What I Still Need to Practice
 

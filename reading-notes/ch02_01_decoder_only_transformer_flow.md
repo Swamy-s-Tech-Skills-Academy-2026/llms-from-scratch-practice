@@ -39,6 +39,30 @@ flowchart TD
     H --> I["Output text"]
 ```
 
+## Tensor shape flow through the embedding step
+
+Tracking tensor shapes helps me avoid shape errors later. Every arrow below is a PyTorch operation:
+
+```mermaid
+flowchart LR
+    A["Token IDs\nshape: batch × seq_len"]
+    B["Token Embedding Table\nshape: vocab_size × emb_dim\nlearned weights"]
+    C["Token Embeddings\nshape: batch × seq_len × emb_dim"]
+    D["Position Indices\n0, 1, ..., seq_len − 1"]
+    E["Positional Embedding Table\nshape: context_len × emb_dim\nlearned weights"]
+    F["Positional Embeddings\nshape: seq_len × emb_dim"]
+    G["Input Embeddings  ✓\nshape: batch × seq_len × emb_dim\ntoken + positional, elementwise sum"]
+
+    A -->|"row lookup"| C
+    B --> C
+    D -->|"row lookup"| F
+    E --> F
+    C -->|"elementwise +"| G
+    F -->|"broadcast over batch"| G
+```
+
+My note on broadcasting: the positional table has no batch dimension — PyTorch broadcasts it across all items in the batch automatically. Position 0 gets the same positional vector regardless of which sentence it is in.
+
 ## Why this matters for me
 
 - It explains why embedding layers are central in Chapter 2.
