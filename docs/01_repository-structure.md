@@ -1,6 +1,19 @@
 # Repository Structure & Design Philosophy
 
-This document captures the **current layout** of the repo and the **target structure** we will grow into as implementation work starts.
+This document captures the current layout of the repo and the target structure we may grow into.
+
+## Current vs Planned Status
+
+| Area | Status | Notes |
+| :--- | :--- | :--- |
+| `examples/` | Implemented | Chapter-based practice scripts for ch02-ch04 |
+| `notebooks/` | Implemented | Chapter-based implementation notebooks for ch02-ch04 |
+| `reading-notes/` | Implemented | Chapter-aligned synthesized theory notes |
+| `src/model/` | Implemented | Core ch04 modules and advanced variants |
+| `src/config/`, `src/tokenization/`, `src/training/`, `src/evaluation/`, `src/utils/` | Planned | Not implemented yet; retained as future modular target |
+| `data/` | Planned | Not currently part of the repository layout |
+
+When this document says planned, it means design intent only, not current filesystem state.
 
 ---
 
@@ -57,7 +70,7 @@ This document captures the **current layout** of the repo and the **target struc
 │   └── model/
 │       ├── __init__.py            # Re-exports all public symbols
 │       ├── ch04_core.py           # GPTConfig, LayerNorm, GELU, FeedForward, CausalSelfAttention, TransformerBlock, GPTModel, generate_greedy
-│       └── ch04_variants.py       # CachedCausalSelfAttention, GQA, MLA, SWA, SparseMoE, memory estimators
+│       └── ch04_variants.py       # CachedCausalSelfAttention, GroupedQueryAttention, MultiHeadLatentAttention, SlidingWindowSelfAttention, SparseMoEFeedForward, memory estimators
 ├── tests/                         # CI smoke tests and unit tests
 │   ├── test_smoke.py
 │   └── test_ch04_model_components.py
@@ -71,7 +84,7 @@ This document captures the **current layout** of the repo and the **target struc
 
 ## 🎯 Target Layout (Planned)
 
-As the code evolves, we will introduce a modular `src/` layout similar to:
+As the code evolves, we may introduce a modular `src/` layout similar to:
 
 ```text
 .
@@ -147,4 +160,4 @@ src/
 2. **Traceability**: The structure mirrors the learning path.
 3. **Simplicity**: Modules are organized to support reuse.
 
-As the project grows, this structure may evolve.
+As the project grows, this structure may evolve. Current implementation remains the source of truth.

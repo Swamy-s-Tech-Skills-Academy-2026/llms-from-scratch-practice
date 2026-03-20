@@ -15,6 +15,7 @@ from src.model import (
     estimate_mha_kv_cache_bytes,
     estimate_mla_kv_cache_bytes,
     estimate_swa_kv_cache_bytes,
+    generate_greedy,
 )
 
 
@@ -89,3 +90,14 @@ def test_memory_estimators_have_expected_ordering() -> None:
     assert mla_bytes < mha_bytes
     assert swa_bytes < mha_bytes
     assert deltanet_bytes > 0
+
+
+def test_generate_greedy_output_length() -> None:
+    config = tiny_config()
+    model = GPTModel(config)
+    model.eval()
+    prompt = torch.randint(0, config.vocab_size, (1, 3))
+    max_new = 5
+    output = generate_greedy(model, prompt, max_new_tokens=max_new)
+    # Output should be the prompt tokens plus max_new_tokens new tokens
+    assert output.shape == (1, 3 + max_new)

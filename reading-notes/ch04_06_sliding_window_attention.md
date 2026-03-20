@@ -13,7 +13,7 @@ Standard Multi-Head Attention (MHA) is *global*. Every single token attends to e
 
 ## Hybrid Architectures
 I learned that Google's Gemma models use SWA brilliantly:
-- **Gemma 2:** Uses a 1:1 ratio. Every alternating layer alternates between Local SWA and Global MHA.
+- **Gemma 2:** Uses a 1:1 ratio. Layers alternate between Local SWA and Global MHA.
 - **Gemma 3:** Pushes this further to a 5:1 ratio (5 SWA layers for every 1 Global layer) and shrinks the window size to 1024. 
 - *Why does this work?* It turns out that local context is sufficient for immediate grammar/syntax, while only a few global layers are needed to integrate the overarching conversational topic. 
 

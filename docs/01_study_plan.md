@@ -74,7 +74,7 @@ I want to understand:
 
 ---
 
-## 4. How I Want to Study This Book
+## How I Want to Study This Book
 
 **I do not want to:**
 
@@ -84,7 +84,7 @@ I want to understand:
 
 **I want to:**
 
-- Rewrite parts of the code yourself
+- Rewrite parts of the code myself
 - Change hyperparameters intentionally
 - Break the model and fix it
 - Add logging and visualizations
@@ -95,7 +95,7 @@ I want to understand:
 
 ---
 
-## 5. Suggested Weekly Study Plan
+## Suggested Weekly Study Plan
 
 | Week | Focus |
 | :--- | :--- |

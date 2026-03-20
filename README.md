@@ -245,8 +245,14 @@ A solid foundation will significantly improve comprehension of:
 
 ```text
 .
-├── docs/               # Study notes and structure docs
-├── src/                # Implementation code
+├── examples/           # Synthesized practice scripts (ch02, ch03, ch04)
+├── notebooks/          # Synthesized learning notebooks (ch02, ch03, ch04)
+├── reading-notes/      # Synthesized theory notes (ch01–ch04)
+├── source-material/    # READ-ONLY staging area (raw author content)
+├── src/                # Reusable Python modules (GPT components)
+├── tests/              # Pytest smoke tests and unit tests
+├── tools/              # Utility scripts (PDF/PPTX extraction)
+├── docs/               # Study plans, structure docs, reviews, reference
 ├── README.md           # This file
 └── LICENSE
 ```
